@@ -1,0 +1,108 @@
+import {
+  createAppContainer
+
+} from 'react-navigation';
+import CustomDrawerNavigation from '../components/CustomDrawerNavigation'
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import {
+  createStackNavigator
+
+} from 'react-navigation-stack';
+
+import CategoriesScreen from '../screens/CategoriesScreen';
+import AddSubParam from '../screens/AddSubParam';
+import DivisionParam from '../screens/DivisionParam';
+import MulticationParam from '../screens/MulticationParam';
+import PercentageParam from '../screens/PercentageParam';
+import TableParam from '../screens/TableParam';
+import AddOperation from '../screens/AddOperation';
+import AddParam from '../screens/AddParam';
+import CubeRootParam from '../screens/CubeRootParam';
+import DecimalAddParam from '../screens/DecimalAddParam';
+import LongMultiplicationParam from '../screens/LongMultiplicationParam';
+import SquareRootParam from '../screens/SquareRootParam';
+
+
+
+
+
+const AbacusNavigator = createStackNavigator({
+  Home: CategoriesScreen,
+  AddParam: AddParam,
+  DecimalAddParam: DecimalAddParam,
+  LongMultiplicationParam: LongMultiplicationParam,
+  SquareRootParam: SquareRootParam,
+  AddSubParam: AddSubParam,
+  DivisionParam: DivisionParam,
+  MulticationParam: MulticationParam,
+  PercentageParam: PercentageParam,
+  CubeRootParam: CubeRootParam,
+  TableParam: TableParam,
+  AddOperation: AddOperation
+
+
+});
+const MainNavigator = createDrawerNavigator(
+  {
+
+    Home: {
+      screen: AbacusNavigator,
+      navigationOptions: {
+        title: 'Home'
+      }
+    },
+
+    AddSub: {
+      screen: AddSubParam,
+      navigationOptions: {
+        title: 'Add/Sub'
+      }
+    },
+
+    Division: {
+      screen: DivisionParam,
+      navigationOptions: {
+        title: 'Division'
+      }
+    },
+
+    Multiply: {
+      screen: MulticationParam,
+      navigationOptions: {
+        title: 'Multiply'
+      }
+    },
+
+    Percentage: {
+      screen: PercentageParam,
+      navigationOptions: {
+        title: 'Percentage'
+      }
+    },
+
+    Root: {
+      screen: CubeRootParam,
+      navigationOptions: {
+        title: 'Root'
+      }
+    },
+
+    Table: {
+      screen: CubeRootParam,
+      navigationOptions: {
+        title: 'Table'
+      }
+    },
+
+
+  },
+  {
+    drawerPosition: 'left',
+    contentComponent: CustomDrawerNavigation,
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle'
+  }
+);
+
+export default createAppContainer(MainNavigator);
