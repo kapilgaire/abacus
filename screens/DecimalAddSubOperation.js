@@ -12,79 +12,38 @@ import {
 import Colors from '../constants/Colors'
 
 
-export default class AddOperation extends React.Component {
+export default class DecimalAddSubOperation extends React.Component {
 
     constructor(props) {
         super(props);
-        this.params = this.props.navigation.state.params;
         this.state = {
             NumberHolder: 0,
             answer: 0,
-            userAns: 0,
-
+            userAns: 0
         };
     }
 
     generateRandomNumber
         = () => {
-            console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-            + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
 
-
-
-        let max = 0;
-        let min = 0;
-        let random = 0;
-
-
-        if (this.params.NumOfDigit == 1) {
-            min = 0;
-            max = 9;
-        } else if (this.params.NumOfDigit == 2) {
-            min = 10;
-            max = 99;
-        } else if (this.params.NumOfDigit == 3) {
-            min = 100;
-            max = 999;
-        } else if (this.params.NumOfDigit == 4) {
-            min = 1000;
-            max = 9999;
-        } else if (this.params.NumOfDigit == 5) {
-            min = 10000;
-            max = 99999;
-        } else if (this.params.NumOfDigit == 6) {
-            min = 100000;
-            max = 999999;
-        } else if (this.params.NumOfDigit == 7) {
-            min = 1000000;
-            max = 9999999;
-        } else if (this.params.NumOfDigit == 8) {
-            min = 10000000;
-            max = 99999999;
-        } else if (this.params.NumOfDigit == 9) {
-            min = 100000000;
-            max = 999999999;
-        }
-
-        random = Math.floor(Math.random() * (+max - +min) + +min);
-
-        return random;
-
+            const max = 0;
+            const min = 9;
+            let random = Math.floor(Math.random() * (+max - +min) + +min);
+            return random;
 
         }
 
     showRandomNumber() {
 
         let num = [];
-
-        num.length = this.params.NumOfSum;
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        num.length = 5;
+        for (let i = 0; i < 5; i++) {
             num[i] = this.generateRandomNumber();
             setTimeout(() => {
 
                 this.setState({ NumberHolder: num[i] });
 
-            }, i * this.params.TimeInSeconds * 1000);
+            }, i * 1000);
 
         }
 

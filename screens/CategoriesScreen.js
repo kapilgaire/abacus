@@ -47,7 +47,7 @@ const CategoriesScreen = props => {
           <View style={styles.grid}>
             <Text style={styles.title}>Addition</Text>
             <Image source={require('../assets/plus.png')} style={styles.categoryImg}
-
+  
             />
 
           </View>

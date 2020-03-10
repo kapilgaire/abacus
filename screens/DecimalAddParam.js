@@ -11,68 +11,20 @@ import {
 } from 'react-native';
 import Colors from '../constants/Colors'
 
-const DecimalAddParam = props => {
+export default class DecimalAddParam extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
 
+      numOfDigigt: 0,
+      numOfSum: 0,
+      timeInSeconds: 0
+    };
+  }
 
-
-  return (
-    <TouchableWithoutFeedback onPress={() => {
-      Keyboard.dismiss();
-    }}>
-      <View style={styles.screen}>
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Number of digit"
-            placeholderTextColor="#003f5c"
-            keyboardType="number-pad"
-            maxLength={6}
-          />
-        </View>
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Number of Sum"
-            placeholderTextColor="#003f5c"
-            keyboardType="number-pad"
-            maxLength={6}
-          />
-        </View>
-
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Time in Seconds"
-            placeholderTextColor="#003f5c"
-            keyboardType="number-pad"
-            maxLength={6}
-          />
-        </View>
-
-        <TouchableOpacity style={styles.startBtn} onPress={() => {
-
-          props.navigation.navigate({
-            routeName: 'AddOperation'
-
-          });
-        }}>
-          <Text style={styles.startText}>START</Text>
-        </TouchableOpacity>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
-
-DecimalAddParam.navigationOptions = navigationData => {
-  const catId = navigationData.navigation.getParam('categoryId');
-  // const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
-
-  console.log("title " + catId);
-
-
-  return {
-    headerTitle: catId,
+  static navigationOptions = {
+    headerTitle: 'Decimal Add sub',
     headerStyle: {
 
       backgroundColor: Colors.primaryColor
@@ -80,7 +32,68 @@ DecimalAddParam.navigationOptions = navigationData => {
     headerTintColor: 'white'
   };
 
-};
+  render() {
+    return (
+      <TouchableWithoutFeedback onPress={() => {
+        Keyboard.dismiss();
+      }}>
+        <View style={styles.screen}>
+          <View style={styles.inputView} >
+            <TextInput
+              style={styles.inputText}
+              placeholder="Number of digit"
+              placeholderTextColor="#003f5c"
+              keyboardType="number-pad"
+              maxLength={6}
+              onChangeText={numOfDigigt => this.setState({ numOfDigigt })}
+              value={this.state.numOfDigigt}
+            />
+          </View>
+          <View style={styles.inputView} >
+            <TextInput
+              style={styles.inputText}
+              placeholder="Number of Sum"
+              placeholderTextColor="#003f5c"
+              keyboardType="number-pad"
+              maxLength={6}
+              onChangeText={numOfSum => this.setState({ numOfSum })}
+              value={this.state.numOfSum}
+            />
+          </View>
+
+          <View style={styles.inputView} >
+            <TextInput
+              style={styles.inputText}
+              placeholder="Time in Seconds"
+              placeholderTextColor="#003f5c"
+              keyboardType="number-pad"
+              maxLength={6}
+              onChangeText={timeInSeconds => this.setState({ timeInSeconds })}
+              value={this.state.timeInSeconds}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.startBtn} onPress={() => {
+
+            this.props.navigation.navigate({
+              routeName: 'AddOperation',
+              params: {
+                NumOfDigit: this.state.numOfDigigt,
+                NumOfSum: this.state.numOfSum,
+                TimeInSeconds: this.state.timeInSeconds
+
+              }
+
+            });
+          }}>
+            <Text style={styles.startText}>START</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  }
+}
+
 
 const styles = StyleSheet.create({
   screen: {
@@ -115,4 +128,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DecimalAddParam;

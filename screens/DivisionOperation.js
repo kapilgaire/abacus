@@ -1,4 +1,4 @@
-import React, {  Component } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -12,137 +12,115 @@ import {
 import Colors from '../constants/Colors'
 
 
-export default class AddOperation extends React.Component {
+export default class DivisionOperation extends React.Component {
 
     constructor(props) {
         super(props);
+        global.wrongCounter = 0;
+        global.righCounter = 0;
         this.params = this.props.navigation.state.params;
         this.state = {
-            NumberHolder: 0,
-            answer: 0,
+            timer: 0,
+            right: 0,
+            wrong: 0,
+            firstNo: 0,
+            secondNo: 0,
             userAns: 0,
+            prevQues: ''
 
         };
     }
 
-    generateRandomNumber
-        = () => {
-            console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-            + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
-
-
-
-        let max = 0;
-        let min = 0;
-        let random = 0;
-
-
-        if (this.params.NumOfDigit == 1) {
-            min = 0;
-            max = 9;
-        } else if (this.params.NumOfDigit == 2) {
-            min = 10;
-            max = 99;
-        } else if (this.params.NumOfDigit == 3) {
-            min = 100;
-            max = 999;
-        } else if (this.params.NumOfDigit == 4) {
-            min = 1000;
-            max = 9999;
-        } else if (this.params.NumOfDigit == 5) {
-            min = 10000;
-            max = 99999;
-        } else if (this.params.NumOfDigit == 6) {
-            min = 100000;
-            max = 999999;
-        } else if (this.params.NumOfDigit == 7) {
-            min = 1000000;
-            max = 9999999;
-        } else if (this.params.NumOfDigit == 8) {
-            min = 10000000;
-            max = 99999999;
-        } else if (this.params.NumOfDigit == 9) {
-            min = 100000000;
-            max = 999999999;
-        }
-
-        random = Math.floor(Math.random() * (+max - +min) + +min);
-
-        return random;
-
-
-        }
-
-    showRandomNumber() {
-
-        let num = [];
-
-        num.length = this.params.NumOfSum;
-        for (let i = 0; i < this.params.NumOfSum; i++) {
-            num[i] = this.generateRandomNumber();
+    startTimer() {
+        for (let i = 0; i <= this.params.TimeToFinish; i++) {
             setTimeout(() => {
 
-                this.setState({ NumberHolder: num[i] });
+                this.setState({ timer: i });
 
-            }, i * this.params.TimeInSeconds * 1000);
-
+            }, i * 1000);
         }
-
-        this.doSum(num)
     }
 
-    doSum = (num) => {
+    generateRandomNo() {
 
-        let sum = 0;
-        for (let i = 0; i < num.length; i++) {
+        let max1 = this.params.HighNoToDiv;
+        let min1 = this.params.LowNoToDiv;
 
-            sum = sum + num[i];
-        }
+        let max2 = this.params.HighNoDivBy;
+        let min2 = this.params.LowNoDivBy;
 
-        this.setState({ answer: sum });
+        let firstRandom = Math.floor(Math.random() * (+max1 - +min1) + +min1);
 
-        return sum;
-    }
+        let secondRandom = Math.floor(Math.random() * (+max2 - +min2) + +min2);
 
-    checkAnswer() {
-        console.log("ans " + this.state.answer);
-        console.log("user ans" + this.state.userAns);
+        this.setState({ firstNo: firstRandom });
 
+        this.setState({ secondNo: secondRandom });
 
 
-        if (this.state.answer == this.state.userAns) {
-            console.log(true);
-            ToastAndroid.show('True', ToastAndroid.LONG);
 
-        } else {
-            console.log(false);
-            ToastAndroid.show('False', ToastAndroid.LONG);
-
-        }
     }
 
     componentDidMount() {
 
-        this.showRandomNumber();
+        this.startTimer();
+
+        this.generateRandomNo();
+
+    }
+
+    checkAnswer() {
+
+
+        let ans = this.state.firstNo / this.state.secondNo;
+
+        this.setState({ prevQues: this.state.firstNo + " / " + this.state.secondNo + "=" + ans })
+
+        if (ans == this.state.userAns) {
+            righCounter++;
+            this.setState({ right: righCounter });
+        } else {
+            wrongCounter++;
+            this.setState({ wrong: wrongCounter });
+        }
+
+
+
+        this.generateRandomNo();
     }
 
 
     static navigationOptions = {
-        headerTitle: 'Addition',
+        headerTitle: 'Division',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor
         },
         headerTintColor: 'white'
     };
+
     render() {
+
+        console.log(" time" + this.params.TimeToFinish);
+
+
         return (
             <TouchableWithoutFeedback onPress={() => {
                 Keyboard.dismiss();
             }}>
                 <View style={styles.screen}>
 
-                    <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    <Text style={styles.textStyle}>{this.state.timer + '/' + this.params.TimeToFinish}</Text>
+
+                    <Text style={styles.textStyle}>{'Right :' + this.state.right}</Text>
+
+                    <Text style={styles.textStyle}>{'Wrong :' + this.state.wrong}</Text>
+
+                    <Text style={styles.textStyle}>{this.state.prevQues}</Text>
+
+                    <Text style={styles.textStyle}>{this.state.firstNo + ' / ' + this.state.secondNo}</Text>
+
+
 
                     <View style={styles.inputView} >
                         <TextInput
@@ -169,7 +147,6 @@ export default class AddOperation extends React.Component {
 
                         >CHECK ANS</Text>
                     </TouchableOpacity>
-                    <Text style={styles.randumNum}>{this.state.answer}</Text>
 
 
                     <TouchableOpacity style={styles.startBtn}>
@@ -212,9 +189,11 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
 
-    randumNum: {
+
+
+    textStyle: {
         color: "black",
-        fontSize: 36,
+        fontSize: 28,
         alignContent: "center",
         textAlign: "center",
         marginBottom: 8

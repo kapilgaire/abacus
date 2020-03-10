@@ -1,4 +1,4 @@
-import React, {  Component } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -12,7 +12,7 @@ import {
 import Colors from '../constants/Colors'
 
 
-export default class AddOperation extends React.Component {
+export default class DecimalAddOperation extends React.Component {
 
     constructor(props) {
         super(props);
@@ -27,49 +27,50 @@ export default class AddOperation extends React.Component {
 
     generateRandomNumber
         = () => {
+
+
             console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-            + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
+                + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
 
 
 
-        let max = 0;
-        let min = 0;
-        let random = 0;
+            let max = 0;
+            let min = 0;
+            let random = 0;
 
 
-        if (this.params.NumOfDigit == 1) {
-            min = 0;
-            max = 9;
-        } else if (this.params.NumOfDigit == 2) {
-            min = 10;
-            max = 99;
-        } else if (this.params.NumOfDigit == 3) {
-            min = 100;
-            max = 999;
-        } else if (this.params.NumOfDigit == 4) {
-            min = 1000;
-            max = 9999;
-        } else if (this.params.NumOfDigit == 5) {
-            min = 10000;
-            max = 99999;
-        } else if (this.params.NumOfDigit == 6) {
-            min = 100000;
-            max = 999999;
-        } else if (this.params.NumOfDigit == 7) {
-            min = 1000000;
-            max = 9999999;
-        } else if (this.params.NumOfDigit == 8) {
-            min = 10000000;
-            max = 99999999;
-        } else if (this.params.NumOfDigit == 9) {
-            min = 100000000;
-            max = 999999999;
-        }
+            if (this.params.NumOfDigit == 1) {
+                min = 0;
+                max = 9;
+            } else if (this.params.NumOfDigit == 2) {
+                min = 10;
+                max = 99;
+            } else if (this.params.NumOfDigit == 3) {
+                min = 100;
+                max = 999;
+            } else if (this.params.NumOfDigit == 4) {
+                min = 1000;
+                max = 9999;
+            } else if (this.params.NumOfDigit == 5) {
+                min = 10000;
+                max = 99999;
+            } else if (this.params.NumOfDigit == 6) {
+                min = 100000;
+                max = 999999;
+            } else if (this.params.NumOfDigit == 7) {
+                min = 1000000;
+                max = 9999999;
+            } else if (this.params.NumOfDigit == 8) {
+                min = 10000000;
+                max = 99999999;
+            } else if (this.params.NumOfDigit == 9) {
+                min = 100000000;
+                max = 999999999;
+            }
 
-        random = Math.floor(Math.random() * (+max - +min) + +min);
+            random = Math.floor(Math.random() * (+max - +min) + +min);
 
-        return random;
-
+            return random;
 
         }
 
@@ -128,14 +129,16 @@ export default class AddOperation extends React.Component {
 
 
     static navigationOptions = {
-        headerTitle: 'Addition',
+        headerTitle: 'Decimal Add/Sub',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor
         },
         headerTintColor: 'white'
     };
+    
     render() {
+
         return (
             <TouchableWithoutFeedback onPress={() => {
                 Keyboard.dismiss();
