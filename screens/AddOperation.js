@@ -1,4 +1,4 @@
-import React, {  Component } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -6,10 +6,10 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Keyboard,
-    ToastAndroid
+    Keyboard
 } from 'react-native';
 import Colors from '../constants/Colors'
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 
 export default class AddOperation extends React.Component {
@@ -20,55 +20,78 @@ export default class AddOperation extends React.Component {
         this.state = {
             NumberHolder: 0,
             answer: 0,
-            userAns: 0,
+            userAns: '',
+            showAnswer: false,
+            showContent: false
 
         };
     }
 
+    dispAnswer() {
+
+        if (this.state.showAnswer == false) {
+            this.setState({ showAnswer: true })
+        }
+        // this.setState(previousState => ({ showAnswer: !previousState.showAnswer }))
+    }
+
+    dispContent() {
+
+        // if (this.state.showContent == false) {
+        //     this.setState({ showContent: true })
+        // }
+        // 
+
+        setTimeout(() => {
+
+            this.setState({ showContent: true });
+
+        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000);
+    }
     generateRandomNumber
         = () => {
-            console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-            + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
+            // console.log("num of digit" + this.params.NumOfDigit + " num of sum "
+            //     + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
 
 
 
-        let max = 0;
-        let min = 0;
-        let random = 0;
+            let max = 0;
+            let min = 0;
+            let random = 0;
 
 
-        if (this.params.NumOfDigit == 1) {
-            min = 0;
-            max = 9;
-        } else if (this.params.NumOfDigit == 2) {
-            min = 10;
-            max = 99;
-        } else if (this.params.NumOfDigit == 3) {
-            min = 100;
-            max = 999;
-        } else if (this.params.NumOfDigit == 4) {
-            min = 1000;
-            max = 9999;
-        } else if (this.params.NumOfDigit == 5) {
-            min = 10000;
-            max = 99999;
-        } else if (this.params.NumOfDigit == 6) {
-            min = 100000;
-            max = 999999;
-        } else if (this.params.NumOfDigit == 7) {
-            min = 1000000;
-            max = 9999999;
-        } else if (this.params.NumOfDigit == 8) {
-            min = 10000000;
-            max = 99999999;
-        } else if (this.params.NumOfDigit == 9) {
-            min = 100000000;
-            max = 999999999;
-        }
+            if (this.params.NumOfDigit == 1) {
+                min = 0;
+                max = 9;
+            } else if (this.params.NumOfDigit == 2) {
+                min = 10;
+                max = 99;
+            } else if (this.params.NumOfDigit == 3) {
+                min = 100;
+                max = 999;
+            } else if (this.params.NumOfDigit == 4) {
+                min = 1000;
+                max = 9999;
+            } else if (this.params.NumOfDigit == 5) {
+                min = 10000;
+                max = 99999;
+            } else if (this.params.NumOfDigit == 6) {
+                min = 100000;
+                max = 999999;
+            } else if (this.params.NumOfDigit == 7) {
+                min = 1000000;
+                max = 9999999;
+            } else if (this.params.NumOfDigit == 8) {
+                min = 10000000;
+                max = 99999999;
+            } else if (this.params.NumOfDigit == 9) {
+                min = 100000000;
+                max = 999999999;
+            }
 
-        random = Math.floor(Math.random() * (+max - +min) + +min);
+            random = Math.floor(Math.random() * (+max - +min) + +min);
 
-        return random;
+            return random;
 
 
         }
@@ -78,13 +101,15 @@ export default class AddOperation extends React.Component {
         let num = [];
 
         num.length = this.params.NumOfSum;
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 0; i <this.params.NumOfSum; i++) {
             num[i] = this.generateRandomNumber();
             setTimeout(() => {
 
                 this.setState({ NumberHolder: num[i] });
 
             }, i * this.params.TimeInSeconds * 1000);
+
+
 
         }
 
@@ -108,15 +133,19 @@ export default class AddOperation extends React.Component {
         console.log("ans " + this.state.answer);
         console.log("user ans" + this.state.userAns);
 
+        this.dispAnswer();
 
 
-        if (this.state.answer == this.state.userAns) {
-            console.log(true);
-            ToastAndroid.show('True', ToastAndroid.LONG);
+        if (this.state.userAns == '') {
+            this.refs.toast.show('Empty', DURATION.LENGTH_LONG);
+
+        } else if (this.state.answer == this.state.userAns) {
+            this.refs.toast.show('True', DURATION.LENGTH_LONG);
+
 
         } else {
-            console.log(false);
-            ToastAndroid.show('False', ToastAndroid.LONG);
+
+            this.refs.toast.show('False', DURATION.LENGTH_LONG);
 
         }
     }
@@ -124,6 +153,8 @@ export default class AddOperation extends React.Component {
     componentDidMount() {
 
         this.showRandomNumber();
+
+        this.dispContent();
     }
 
 
@@ -144,37 +175,46 @@ export default class AddOperation extends React.Component {
 
                     <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
 
-                    <View style={styles.inputView} >
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Enter Your answer"
-                            placeholderTextColor="#003f5c"
-                            keyboardType="number-pad"
-                            maxLength={9}
-                            onChangeText={(userAns) => this.setState({ userAns })}
-                            value={this.setState.userAns}
-                        />
-                    </View>
+                    {
+                        this.state.showContent ? <View style={styles.inputView} >
+                            <TextInput
+                                style={styles.inputText}
+                                placeholder="Enter Your answer"
+                                placeholderTextColor="#003f5c"
+                                keyboardType="number-pad"
+                                maxLength={9}
+                                onChangeText={(userAns) => this.setState({ userAns })}
+                                value={this.setState.userAns}
+                            />
+                        </View> : null
+                    }
+
+                    {
+                        this.state.showContent ? <TouchableOpacity style={styles.startBtn}
+
+                            onPress={() => {
+                                this.checkAnswer()
+
+                            }}
+                        >
+                            <Text style={styles.startText}>CHECK ANS</Text>
+                        </TouchableOpacity> : null
+                    }
+
+                    {
+                        this.state.showAnswer ? <Text style={styles.randumNum}>{this.state.answer}</Text> : null
+                    }
+
+                    {
+                        this.state.showContent ? <TouchableOpacity style={styles.startBtn}  >
+                            <Text style={styles.startText}>START AGAIN</Text>
+                        </TouchableOpacity> : null
+                    }
 
 
 
-                    <TouchableOpacity style={styles.startBtn}
+                    <Toast ref="toast" />
 
-                        onPress={() => {
-                            this.checkAnswer()
-
-                        }}
-                    >
-                        <Text style={styles.startText}
-
-                        >CHECK ANS</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.randumNum}>{this.state.answer}</Text>
-
-
-                    <TouchableOpacity style={styles.startBtn}>
-                        <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -188,9 +228,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'flex-start',
-
-        margin: 8
-
+        backgroundColor: Colors.bgColor,
+        padding: 8
     },
     inputView: {
         backgroundColor: "#FAFAFA",
@@ -213,7 +252,7 @@ const styles = StyleSheet.create({
     },
 
     randumNum: {
-        color: "black",
+        color: "white",
         fontSize: 36,
         alignContent: "center",
         textAlign: "center",

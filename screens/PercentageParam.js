@@ -92,7 +92,6 @@ PercentageParam.navigationOptions = navigationData => {
   const catId = navigationData.navigation.getParam('categoryId');
   // const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 
-  console.log("title " + catId);
 
 
   return {
@@ -110,8 +109,9 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'flex-start',
+    backgroundColor: Colors.bgColor,
 
-    margin: 8
+    padding: 8
 
   },
   inputView: {

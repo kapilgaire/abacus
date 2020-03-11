@@ -10,6 +10,7 @@ import {
   Keyboard
 } from 'react-native';
 import Colors from '../constants/Colors'
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 export default class DecimalAddParam extends React.Component {
 
@@ -17,9 +18,9 @@ export default class DecimalAddParam extends React.Component {
     super(props);
     this.state = {
 
-      numOfDigigt: 0,
-      numOfSum: 0,
-      timeInSeconds: 0
+      numOfDigigt: '',
+      numOfSum: '',
+      timeInSeconds: ''
     };
   }
 
@@ -31,6 +32,29 @@ export default class DecimalAddParam extends React.Component {
     },
     headerTintColor: 'white'
   };
+  GoToNextScreen() {
+    if (this.state.numOfDigigt == '') {
+
+      this.refs.toast.show('Enter Number of Digit', DURATION.LENGTH_LONG);
+    } else if (this.state.numOfSum == '') {
+      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
+
+    } else if (this.state.timeInSeconds == '') {
+      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
+
+    } else {
+      this.props.navigation.navigate({
+        routeName: 'AddOperation',
+        params: {
+          NumOfDigit: this.state.numOfDigigt,
+          NumOfSum: this.state.numOfSum,
+          TimeInSeconds: this.state.timeInSeconds
+
+        }
+
+      });
+    }
+  }
 
   render() {
     return (
@@ -75,19 +99,12 @@ export default class DecimalAddParam extends React.Component {
 
           <TouchableOpacity style={styles.startBtn} onPress={() => {
 
-            this.props.navigation.navigate({
-              routeName: 'AddOperation',
-              params: {
-                NumOfDigit: this.state.numOfDigigt,
-                NumOfSum: this.state.numOfSum,
-                TimeInSeconds: this.state.timeInSeconds
-
-              }
-
-            });
+            this.GoToNextScreen();
           }}>
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
+          <Toast ref="toast" />
+
         </View>
       </TouchableWithoutFeedback>
     );
@@ -99,8 +116,8 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'flex-start',
-
-    margin: 8
+    backgroundColor: Colors.bgColor,
+    padding: 8
 
   },
   inputView: {

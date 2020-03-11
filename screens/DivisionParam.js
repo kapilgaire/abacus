@@ -140,8 +140,8 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'flex-start',
-
-    margin: 8
+    backgroundColor: Colors.bgColor,
+    padding: 8
 
   },
   inputView: {

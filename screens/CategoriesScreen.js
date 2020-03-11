@@ -100,6 +100,25 @@ const CategoriesScreen = props => {
         <TouchableCmp
 
           onPress={() => {
+
+            props.navigation.navigate({
+              routeName: 'DecimalAddParam',
+              params: {
+                categoryId: "Decimal Add/Sub"
+              }
+            });
+          }}>
+
+          <View style={styles.grid} >
+            <Text style={styles.title}>Mix Add/Sub</Text>
+            <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
+
+          </View>
+        </TouchableCmp>
+
+        <TouchableCmp
+
+          onPress={() => {
             props.navigation.navigate({
               routeName: 'MulticationParam',
               params: {
