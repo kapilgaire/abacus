@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native'; import Colors from '../constants/Colors'
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 export default class MulticationParam extends React.Component {
 
@@ -16,12 +17,12 @@ export default class MulticationParam extends React.Component {
     super(props);
     this.state = {
 
-      lowNoToMul: 0,
-      highNoToMul: 0,
-      lowNoMulBy: 0,
-      highNoMulBy: 0,
-      numOfSum: 0,
-      timeToFinish: 0
+      lowNoToMul: '',
+      highNoToMul: '',
+      lowNoMulBy: '',
+      highNoMulBy: '',
+      numOfSum: '',
+      timeToFinish: ''
 
     };
   }
@@ -34,6 +35,42 @@ export default class MulticationParam extends React.Component {
     },
     headerTintColor: 'white'
   };
+
+  GoToNextScreen() {
+    if (this.state.lowNoToMul == '') {
+
+      this.refs.toast.show('Enter lowest no. to Multiply',DURATION.LENGTH_LONG);
+    } else if (this.state.highNoToMul == '') {
+      this.refs.toast.show('Enter highest no. to Multiply',DURATION.LENGTH_LONG);
+
+    } else if (this.state.lowNoMulBy == '') {
+      this.refs.toast.show('Enter Lowest no. to Multiply by ',DURATION.LENGTH_LONG);
+
+    } else if (this.state.highNoMulBy == '') {
+      this.refs.toast.show('Enter Highest no. to Multiply by ',DURATION.LENGTH_LONG);
+
+    } else if (this.state.numOfSum == '') {
+      this.refs.toast.show('Enter no. of sum',DURATION.LENGTH_LONG);
+
+    } else if (this.state.timeToFinish == '') {
+      this.refs.toast.show('Enter Time to finish',DURATION.LENGTH_LONG);
+
+    } else {
+      this.props.navigation.navigate({
+        routeName: 'MultiplicationOperation',
+        params: {
+          LowNoToMul: this.state.lowNoToMul,
+          HighNoToMul: this.state.highNoToMul,
+          LowNoMulBy: this.state.lowNoMulBy,
+          HighNoMulBy: this.state.highNoMulBy,
+          NumOfSum: this.state.numOfSum,
+          TimeToFinish: this.state.timeToFinish
+
+        }
+
+      });
+    }
+  }
 
   render() {
     return (
@@ -115,23 +152,13 @@ export default class MulticationParam extends React.Component {
 
             onPress={() => {
 
-              this.props.navigation.navigate({
-                routeName: 'MultiplicationOperation',
-                params: {
-                  LowNoToMul: this.state.lowNoToMul,
-                  HighNoToMul: this.state.highNoToMul,
-                  LowNoMulBy: this.state.lowNoMulBy,
-                  HighNoMulBy: this.state.highNoMulBy,
-                  NumOfSum: this.state.numOfSum,
-                  TimeToFinish: this.state.timeToFinish
-
-                }
-
-              });
+              this.GoToNextScreen();
             }}
           >
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
+          <Toast ref="toast" />
+
         </View>
       </TouchableWithoutFeedback>
     );

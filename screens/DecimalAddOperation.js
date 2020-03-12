@@ -10,6 +10,8 @@ import {
     ToastAndroid
 } from 'react-native';
 import Colors from '../constants/Colors'
+import Toast, { DURATION } from 'react-native-easy-toast';
+
 
 
 export default class DecimalAddOperation extends React.Component {
@@ -20,17 +22,35 @@ export default class DecimalAddOperation extends React.Component {
         this.state = {
             NumberHolder: 0,
             answer: 0,
-            userAns: 0,
+            userAns: '',
+            showAnswer: false,
+            showContent: false
 
         };
+    }
+    dispAnswer() {
+
+        if (this.state.showAnswer == false) {
+            this.setState({ showAnswer: true })
+        }
+    }
+    dispContent() {
+
+
+
+        setTimeout(() => {
+
+            this.setState({ showContent: true });
+
+        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000);
     }
 
     generateRandomNumber
         = () => {
 
 
-            console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-                + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
+            //console.log("num of digit" + this.params.NumOfDigit + " num of sum "
+              //  + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
 
 
 
@@ -106,18 +126,19 @@ export default class DecimalAddOperation extends React.Component {
     }
 
     checkAnswer() {
-        console.log("ans " + this.state.answer);
-        console.log("user ans" + this.state.userAns);
+        this.dispAnswer();
 
 
+        if (this.state.userAns == '') {
+            this.refs.toast.show('Empty', DURATION.LENGTH_LONG);
 
-        if (this.state.answer == this.state.userAns) {
-            console.log(true);
-            ToastAndroid.show('True', ToastAndroid.LONG);
+        } else if (this.state.answer == this.state.userAns) {
+            this.refs.toast.show('True', DURATION.LENGTH_LONG);
+
 
         } else {
-            console.log(false);
-            ToastAndroid.show('False', ToastAndroid.LONG);
+
+            this.refs.toast.show('False', DURATION.LENGTH_LONG);
 
         }
     }
@@ -125,6 +146,8 @@ export default class DecimalAddOperation extends React.Component {
     componentDidMount() {
 
         this.showRandomNumber();
+
+        this.dispContent();
     }
 
 
@@ -136,7 +159,7 @@ export default class DecimalAddOperation extends React.Component {
         },
         headerTintColor: 'white'
     };
-    
+
     render() {
 
         return (
@@ -147,37 +170,34 @@ export default class DecimalAddOperation extends React.Component {
 
                     <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
 
-                    <View style={styles.inputView} >
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Enter Your answer"
-                            placeholderTextColor="#003f5c"
-                            keyboardType="number-pad"
-                            maxLength={9}
-                            onChangeText={(userAns) => this.setState({ userAns })}
-                            value={this.setState.userAns}
-                        />
-                    </View>
+                    {this.state.showContent ?
+                        <View style={styles.inputView} >
+                            <TextInput
+                                style={styles.inputText}
+                                placeholder="Enter Your answer"
+                                placeholderTextColor="#003f5c"
+                                keyboardType="number-pad"
+                                maxLength={9}
+                                onChangeText={(userAns) => this.setState({ userAns })}
+                                value={this.setState.userAns}
+                            />
+                        </View> : null}
 
 
 
-                    <TouchableOpacity style={styles.startBtn}
+                    {this.state.showContent ? <TouchableOpacity style={styles.startBtn} onPress={() => { this.checkAnswer() }}>
+                        <Text style={styles.startText}>CHECK ANS</Text>
+                    </TouchableOpacity> : null}
 
-                        onPress={() => {
-                            this.checkAnswer()
-
-                        }}
-                    >
-                        <Text style={styles.startText}
-
-                        >CHECK ANS</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.randumNum}>{this.state.answer}</Text>
+                    {this.state.showAnswer ? <Text style={styles.randumNum}>{this.state.answer}</Text> : null}
 
 
-                    <TouchableOpacity style={styles.startBtn}>
+                    {this.state.showContent ? <TouchableOpacity style={styles.startBtn}>
                         <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> : null}
+
+
+                    <Toast ref="toast" />
                 </View>
             </TouchableWithoutFeedback>
         );

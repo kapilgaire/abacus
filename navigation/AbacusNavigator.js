@@ -18,14 +18,18 @@ import TableParam from '../screens/TableParam';
 import AddParam from '../screens/AddParam';
 import CubeRootParam from '../screens/CubeRootParam';
 import DecimalAddParam from '../screens/DecimalAddParam';
-import LongMultiplicationParam from '../screens/LongMultiplicationParam';
+import LongMulticationParam from '../screens/LongMultiplicationParam';
 import SquareRootParam from '../screens/SquareRootParam';
+import MixAddSubParam from '../screens/MixAddSubParam';
 
 import AddOperation from '../screens/AddOperation';
 import AddSubOperation from '../screens/AddSubOperation';
 import DecimalAddOperation from '../screens/DecimalAddOperation';
 import MultiplicationOperation from '../screens/MultiplicationOperation';
 import DivisionOperation from '../screens/DivisionOperation';
+import MixAddSubOperation from '../screens/MixAddSubOperation';
+import LongMultiOperation from '../screens/LongMultiOperation';
+
 
 
 
@@ -36,7 +40,7 @@ const AbacusNavigator = createStackNavigator({
   Home: CategoriesScreen,
   AddParam: AddParam,
   DecimalAddParam: DecimalAddParam,
-  LongMultiplicationParam: LongMultiplicationParam,
+  LongMulticationParam: LongMulticationParam,
   SquareRootParam: SquareRootParam,
   AddSubParam: AddSubParam,
   DivisionParam: DivisionParam,
@@ -44,11 +48,14 @@ const AbacusNavigator = createStackNavigator({
   PercentageParam: PercentageParam,
   CubeRootParam: CubeRootParam,
   TableParam: TableParam,
+  MixAddSubParam: MixAddSubParam,
   AddOperation: AddOperation,
   AddSubOperation: AddSubOperation,
   DecimalAddOperation: DecimalAddOperation,
   MultiplicationOperation: MultiplicationOperation,
-  DivisionOperation: DivisionOperation
+  DivisionOperation: DivisionOperation,
+  MixAddSubOperation: MixAddSubOperation,
+  LongMultiOperation: LongMultiOperation
 
 
 });

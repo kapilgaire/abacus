@@ -9,18 +9,20 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native'; import Colors from '../constants/Colors'
+import Toast, { DURATION } from 'react-native-easy-toast';
+
 
 export default class DivisionParam extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      highNoToDiv: 0,
-      lowNoToDiv: 0,
-      highNoDivBy: 0,
-      lowNoDivBy: 0,
-      numOfSum: 0,
-      timeToFinish: 0
+      highNoToDiv: '',
+      lowNoToDiv: '',
+      highNoDivBy: '',
+      lowNoDivBy: '',
+      numOfSum: '',
+      timeToFinish: ''
 
     };
   }
@@ -34,6 +36,41 @@ export default class DivisionParam extends React.Component {
     headerTintColor: 'white'
   };
 
+  GoToNextScreen() {
+    if (this.state.lowNoToDiv == '') {
+
+      this.refs.toast.show('Enter lowest no. to Divide',DURATION.LENGTH_LONG);
+    } else if (this.state.highNoToDiv == '') {
+      this.refs.toast.show('Enter highest no. to Divide',DURATION.LENGTH_LONG);
+
+    } else if (this.state.lowNoDivBy == '') {
+      this.refs.toast.show('Enter Lowest no. to divide vy ',DURATION.LENGTH_LONG);
+
+    } else if (this.state.highNoDivBy == '') {
+      this.refs.toast.show('Enter Highest no. to divide by ',DURATION.LENGTH_LONG);
+
+    } else if (this.state.numOfSum == '') {
+      this.refs.toast.show('Enter no. of sum',DURATION.LENGTH_LONG);
+
+    } else if (this.state.timeToFinish == '') {
+      this.refs.toast.show('Enter Time to finish',DURATION.LENGTH_LONG);
+
+    } else {
+      this.props.navigation.navigate({
+        routeName: 'DivisionOperation',
+        params: {
+          LowNoToDiv: this.state.lowNoToDiv,
+          HighNoToDiv: this.state.highNoToDiv,
+          LowNoDivBy: this.state.lowNoDivBy,
+          HighNoDivBy: this.state.highNoDivBy,
+          NumOfSum: this.state.numOfSum,
+          TimeToFinish: this.state.timeToFinish
+
+        }
+
+      });
+    }
+  }
   render() {
     return (
       <TouchableWithoutFeedback onPress={() => {
@@ -112,23 +149,13 @@ export default class DivisionParam extends React.Component {
 
             onPress={() => {
 
-              this.props.navigation.navigate({
-                routeName: 'DivisionOperation',
-                params: {
-                  LowNoToDiv: this.state.lowNoToDiv,
-                  HighNoToDiv: this.state.highNoToDiv,
-                  LowNoDivBy: this.state.lowNoDivBy,
-                  HighNoDivBy: this.state.highNoDivBy,
-                  NumOfSum: this.state.numOfSum,
-                  TimeToFinish: this.state.timeToFinish
-
-                }
-
-              });
+             this.GoToNextScreen();
             }}
           >
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
+          <Toast ref="toast" />
+
         </View></TouchableWithoutFeedback>
     );
   }

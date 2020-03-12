@@ -12,8 +12,7 @@ import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
 
 
-
-export default class AddSubOperation extends React.Component {
+export default class MixAddSubOperation extends React.Component {
 
     constructor(props) {
         super(props);
@@ -34,9 +33,10 @@ export default class AddSubOperation extends React.Component {
             this.setState({ showAnswer: true })
         }
     }
+
     dispContent() {
 
-
+        
 
         setTimeout(() => {
 
@@ -44,13 +44,10 @@ export default class AddSubOperation extends React.Component {
 
         }, this.params.NumOfSum * this.params.TimeInSeconds * 1000);
     }
-
     generateRandomNumber
         = () => {
-
-
-            //console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-            //  + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
+            // console.log("num of digit" + this.params.NumOfDigit + " num of sum "
+            //     + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
 
 
 
@@ -92,6 +89,7 @@ export default class AddSubOperation extends React.Component {
 
             return random;
 
+
         }
 
     showRandomNumber() {
@@ -99,13 +97,15 @@ export default class AddSubOperation extends React.Component {
         let num = [];
 
         num.length = this.params.NumOfSum;
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 0; i <this.params.NumOfSum; i++) {
             num[i] = this.generateRandomNumber();
             setTimeout(() => {
 
                 this.setState({ NumberHolder: num[i] });
 
             }, i * this.params.TimeInSeconds * 1000);
+
+
 
         }
 
@@ -129,7 +129,6 @@ export default class AddSubOperation extends React.Component {
         //console.log("ans " + this.state.answer);
         //console.log("user ans" + this.state.userAns);
 
-
         this.dispAnswer();
 
 
@@ -152,21 +151,18 @@ export default class AddSubOperation extends React.Component {
         this.showRandomNumber();
 
         this.dispContent();
-
     }
 
 
     static navigationOptions = {
-        headerTitle: 'Add/Sub',
+        headerTitle: 'Mix Add/Sub',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor
         },
         headerTintColor: 'white'
     };
-
     render() {
-
         return (
             <TouchableWithoutFeedback onPress={() => {
                 Keyboard.dismiss();
@@ -175,8 +171,8 @@ export default class AddSubOperation extends React.Component {
 
                     <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
 
-                    {this.state.showContent ?
-                        <View style={styles.inputView} >
+                    {
+                        this.state.showContent ? <View style={styles.inputView} >
                             <TextInput
                                 style={styles.inputText}
                                 placeholder="Enter Your answer"
@@ -186,23 +182,35 @@ export default class AddSubOperation extends React.Component {
                                 onChangeText={(userAns) => this.setState({ userAns })}
                                 value={this.setState.userAns}
                             />
-                        </View> : null}
+                        </View> : null
+                    }
 
+                    {
+                        this.state.showContent ? <TouchableOpacity style={styles.startBtn}
 
+                            onPress={() => {
+                                this.checkAnswer()
 
-                    {this.state.showContent ? <TouchableOpacity style={styles.startBtn} onPress={() => { this.checkAnswer() }}>
-                        <Text style={styles.startText}>CHECK ANS</Text>
-                    </TouchableOpacity> : null}
+                            }}
+                        >
+                            <Text style={styles.startText}>CHECK ANS</Text>
+                        </TouchableOpacity> : null
+                    }
 
-                    {this.state.showAnswer ? <Text style={styles.randumNum}>{this.state.answer}</Text> : null}
+                    {
+                        this.state.showAnswer ? <Text style={styles.randumNum}>{this.state.answer}</Text> : null
+                    }
 
+                    {
+                        this.state.showContent ? <TouchableOpacity style={styles.startBtn}  >
+                            <Text style={styles.startText}>START AGAIN</Text>
+                        </TouchableOpacity> : null
+                    }
 
-                    {this.state.showContent ? <TouchableOpacity style={styles.startBtn}>
-                        <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity> : null}
 
 
                     <Toast ref="toast" />
+
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -218,7 +226,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         backgroundColor: Colors.bgColor,
         padding: 8
-
     },
     inputView: {
         backgroundColor: "#FAFAFA",

@@ -7,12 +7,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+
 } from 'react-native';
-import Colors from '../constants/Colors'
+
+import Colors from '../constants/Colors';
 import Toast, { DURATION } from 'react-native-easy-toast';
 
-export default class DecimalAddParam extends React.Component {
+export default class MixAddSubParam extends React.Component {
 
   constructor(props) {
     super(props);
@@ -24,27 +26,29 @@ export default class DecimalAddParam extends React.Component {
     };
   }
 
+
   static navigationOptions = {
-    headerTitle: 'Decimal Add sub',
+    headerTitle: 'Mix Add/sub',
     headerStyle: {
 
       backgroundColor: Colors.primaryColor
     },
     headerTintColor: 'white'
   };
+
   GoToNextScreen() {
     if (this.state.numOfDigigt == '') {
 
-      this.refs.toast.show('Enter Number of Digit', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Digit',DURATION.LENGTH_LONG);
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Sum',DURATION.LENGTH_LONG);
 
     } else if (this.state.timeInSeconds == '') {
-      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time ',DURATION.LENGTH_LONG);
 
     } else {
       this.props.navigation.navigate({
-        routeName: 'DecimalAddOperation',
+        routeName: 'MixAddSubOperation',
         params: {
           NumOfDigit: this.state.numOfDigigt,
           NumOfSum: this.state.numOfSum,
@@ -57,6 +61,7 @@ export default class DecimalAddParam extends React.Component {
   }
 
   render() {
+
     return (
       <TouchableWithoutFeedback onPress={() => {
         Keyboard.dismiss();
@@ -71,6 +76,7 @@ export default class DecimalAddParam extends React.Component {
               maxLength={6}
               onChangeText={numOfDigigt => this.setState({ numOfDigigt })}
               value={this.state.numOfDigigt}
+
             />
           </View>
           <View style={styles.inputView} >
@@ -99,10 +105,12 @@ export default class DecimalAddParam extends React.Component {
 
           <TouchableOpacity style={styles.startBtn} onPress={() => {
 
+
             this.GoToNextScreen();
           }}>
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
+
           <Toast ref="toast" />
 
         </View>

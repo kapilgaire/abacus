@@ -130,8 +130,8 @@ export default class AddOperation extends React.Component {
     }
 
     checkAnswer() {
-        console.log("ans " + this.state.answer);
-        console.log("user ans" + this.state.userAns);
+        //console.log("ans " + this.state.answer);
+        //console.log("user ans" + this.state.userAns);
 
         this.dispAnswer();
 

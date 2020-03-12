@@ -98,16 +98,12 @@ const CategoriesScreen = props => {
         </TouchableCmp>
 
         <TouchableCmp
+        onPress={() => {
 
-          onPress={() => {
-
-            props.navigation.navigate({
-              routeName: 'DecimalAddParam',
-              params: {
-                categoryId: "Decimal Add/Sub"
-              }
-            });
-          }}>
+          props.navigation.navigate({
+            routeName: 'MixAddSubParam'
+          });
+        }}>
 
           <View style={styles.grid} >
             <Text style={styles.title}>Mix Add/Sub</Text>
@@ -136,10 +132,8 @@ const CategoriesScreen = props => {
         <TouchableCmp
           onPress={() => {
             props.navigation.navigate({
-              routeName: 'LongMulticationParam',
-              params: {
-                categoryId: "Long Multiplication"
-              }
+              routeName: 'LongMulticationParam'
+              
             });
           }}
         >
