@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -7,72 +7,28 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard
-} from 'react-native';import Colors from '../constants/Colors'
+  Keyboard,
 
-const TableParam = props => {
+} from 'react-native';
 
+import Colors from '../constants/Colors';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
-  const [enteredValue, setEnteredValue] = useState('');
+export default class TableParam extends React.Component {
 
-  const numberInputhandler = inputText => {
-    setEnteredValue(inputText.replace(/[^0-9]/g, ''))
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
 
-  return (
-    <TouchableWithoutFeedback onPress={() => {
-      Keyboard.dismiss();
-    }}>
-      <View style={styles.screen}>
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Enter table of"
-            placeholderTextColor="#003f5c"
-            keyboardType="number-pad"
-            maxLength={6}
-           
-          />
-        </View>
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Number of Sum"
-            placeholderTextColor="#003f5c"
-            keyboardType="number-pad"
-            maxLength={6}
-           
-          />
-        </View>
-
-        <View style={styles.inputView} >
-          <TextInput
-            style={styles.inputText}
-            placeholder="Time in Seconds"
-            placeholderTextColor="#003f5c"
-            keyboardType="number-pad"
-            maxLength={6}
-           
-          />
-        </View>
-
-        <TouchableOpacity style={styles.startBtn}>
-          <Text style={styles.startText}>START</Text>
-        </TouchableOpacity>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
-
-TableParam.navigationOptions = navigationData => {
-  const catId = navigationData.navigation.getParam('categoryId');
-  // const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
-
-  console.log("title " + catId);
+      mulTable: '',
+      numOfSum: '',
+      timeInSeconds: ''
+    };
+  }
 
 
-  return {
-    headerTitle: catId,
+  static navigationOptions = {
+    headerTitle: 'Table',
     headerStyle: {
 
       backgroundColor: Colors.primaryColor
@@ -80,7 +36,89 @@ TableParam.navigationOptions = navigationData => {
     headerTintColor: 'white'
   };
 
-};
+  GoToNextScreen() {
+    if (this.state.mulTable == '') {
+
+      this.refs.toast.show('Enter Table of',DURATION.LENGTH_LONG);
+    } else if (this.state.numOfSum == '') {
+      this.refs.toast.show('Enter Number of Sum',DURATION.LENGTH_LONG);
+
+    } else if (this.state.timeInSeconds == '') {
+      this.refs.toast.show('Enter Time ',DURATION.LENGTH_LONG);
+
+    } else {
+      this.props.navigation.navigate({
+        routeName: 'TableOperation',
+        params: {
+          MulTable: this.state.mulTable,
+          NumOfSum: this.state.numOfSum,
+          TimeInSeconds: this.state.timeInSeconds
+
+        }
+
+      });
+    }
+  }
+
+  render() {
+
+    return (
+      <TouchableWithoutFeedback onPress={() => {
+        Keyboard.dismiss();
+      }}>
+        <View style={styles.screen}>
+          <View style={styles.inputView} >
+            <TextInput
+              style={styles.inputText}
+              placeholder="Enter Table Of"
+              placeholderTextColor="#003f5c"
+              keyboardType="number-pad"
+              maxLength={6}
+              onChangeText={mulTable => this.setState({ mulTable })}
+              value={this.state.mulTable}
+
+            />
+          </View>
+          <View style={styles.inputView} >
+            <TextInput
+              style={styles.inputText}
+              placeholder="Number of Sum"
+              placeholderTextColor="#003f5c"
+              keyboardType="number-pad"
+              maxLength={6}
+              onChangeText={numOfSum => this.setState({ numOfSum })}
+              value={this.state.numOfSum}
+            />
+          </View>
+
+          <View style={styles.inputView} >
+            <TextInput
+              style={styles.inputText}
+              placeholder="Time in Seconds"
+              placeholderTextColor="#003f5c"
+              keyboardType="number-pad"
+              maxLength={6}
+              onChangeText={timeInSeconds => this.setState({ timeInSeconds })}
+              value={this.state.timeInSeconds}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.startBtn} onPress={() => {
+
+
+            this.GoToNextScreen();
+          }}>
+            <Text style={styles.startText}>START</Text>
+          </TouchableOpacity>
+
+          <Toast ref="toast" />
+
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  }
+}
+
 
 const styles = StyleSheet.create({
   screen: {
@@ -115,4 +153,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TableParam;

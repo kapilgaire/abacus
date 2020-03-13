@@ -46,7 +46,7 @@ export default class CubeRootParam extends React.Component {
 
     } else {
       this.props.navigation.navigate({
-        routeName: 'AddOperation',
+        routeName: 'CubeRootOperation',
         params: {
           NumOfDigit: this.state.numOfDigigt,
           NumOfSum: this.state.numOfSum,

@@ -20,7 +20,8 @@ export default class MixAddSubParam extends React.Component {
     super(props);
     this.state = {
 
-      numOfDigigt: '',
+      enterToDigit: '',
+      enterFromDigit: '',
       numOfSum: '',
       timeInSeconds: ''
     };
@@ -37,9 +38,12 @@ export default class MixAddSubParam extends React.Component {
   };
 
   GoToNextScreen() {
-    if (this.state.numOfDigigt == '') {
+    if (this.state.enterToDigit == '') {
 
-      this.refs.toast.show('Enter Number of Digit',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter To Digit',DURATION.LENGTH_LONG);
+    } else if (this.state.enterFromDigit == '') {
+      this.refs.toast.show('Enter From Digit',DURATION.LENGTH_LONG);
+
     } else if (this.state.numOfSum == '') {
       this.refs.toast.show('Enter Number of Sum',DURATION.LENGTH_LONG);
 
@@ -50,7 +54,8 @@ export default class MixAddSubParam extends React.Component {
       this.props.navigation.navigate({
         routeName: 'MixAddSubOperation',
         params: {
-          NumOfDigit: this.state.numOfDigigt,
+          EnterToDigit: this.state.enterToDigit,
+          EnterFromDigit: this.state.enterFromDigit,
           NumOfSum: this.state.numOfSum,
           TimeInSeconds: this.state.timeInSeconds
 
@@ -70,15 +75,27 @@ export default class MixAddSubParam extends React.Component {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Number of digit"
+              placeholder="Enter from digit"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
               maxLength={6}
-              onChangeText={numOfDigigt => this.setState({ numOfDigigt })}
-              value={this.state.numOfDigigt}
+              onChangeText={enterFromDigit => this.setState({ enterFromDigit })}
+              value={this.state.enterFromDigit}
 
             />
           </View>
+
+          <View style={styles.inputView} >
+            <TextInput
+              style={styles.inputText}
+              placeholder="Enter to digit"
+              placeholderTextColor="#003f5c"
+              keyboardType="number-pad"
+              maxLength={6}
+              onChangeText={enterToDigit => this.setState({ enterToDigit })}
+              value={this.state.enterToDigit}
+
+            /></View>
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}

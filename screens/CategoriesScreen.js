@@ -38,16 +38,13 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'AddParam',
-              params: {
-                categoryId: "Addition"
-              }
+              routeName: 'AddParam'
             });
           }}>
           <View style={styles.grid}>
             <Text style={styles.title}>Addition</Text>
             <Image source={require('../assets/plus.png')} style={styles.categoryImg}
-  
+
             />
 
           </View>
@@ -58,10 +55,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'AddSubParam',
-              params: {
-                categoryId: "Add/Sub"
-              }
+              routeName: 'AddSubParam'
 
             });
 
@@ -83,10 +77,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'DecimalAddParam',
-              params: {
-                categoryId: "Decimal Add/Sub"
-              }
+              routeName: 'DecimalAddParam'
             });
           }}>
 
@@ -98,12 +89,12 @@ const CategoriesScreen = props => {
         </TouchableCmp>
 
         <TouchableCmp
-        onPress={() => {
+          onPress={() => {
 
-          props.navigation.navigate({
-            routeName: 'MixAddSubParam'
-          });
-        }}>
+            props.navigation.navigate({
+              routeName: 'MixAddSubParam'
+            });
+          }}>
 
           <View style={styles.grid} >
             <Text style={styles.title}>Mix Add/Sub</Text>
@@ -116,10 +107,7 @@ const CategoriesScreen = props => {
 
           onPress={() => {
             props.navigation.navigate({
-              routeName: 'MulticationParam',
-              params: {
-                categoryId: "Multiply"
-              }
+              routeName: 'MulticationParam'
             });
           }}>
           <View style={styles.grid} >
@@ -133,7 +121,7 @@ const CategoriesScreen = props => {
           onPress={() => {
             props.navigation.navigate({
               routeName: 'LongMulticationParam'
-              
+
             });
           }}
         >
@@ -149,10 +137,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'DivisionParam',
-              params: {
-                categoryId: "Division"
-              }
+              routeName: 'DivisionParam'
             });
           }}
 
@@ -168,10 +153,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'SquareRootParam',
-              params: {
-                categoryId: "Square Root"
-              }
+              routeName: 'SquareRootParam'
             });
           }}
 
@@ -188,10 +170,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'CubeRootParam',
-              params: {
-                categoryId: "Cube Root"
-              }
+              routeName: 'CubeRootParam'
             });
           }}
         >
@@ -208,10 +187,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'TableParam',
-              params: {
-                categoryId: "Table Practice"
-              }
+              routeName: 'TableParam'
             });
           }}>
           <View style={styles.grid} >
@@ -226,10 +202,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName: 'PercentageParam',
-              params: {
-                categoryId: "Percentage"
-              }
+              routeName: 'PercentageParam'
             });
           }}
         >
@@ -240,13 +213,11 @@ const CategoriesScreen = props => {
           </View>
         </TouchableCmp>
 
-        <TouchableCmp
-
-          onPress={() => {
-
-           
-          }}
-        >
+        <TouchableCmp onPress={() => {
+          props.navigation.navigate({
+            routeName: 'MyStopwatch'
+          });
+        }}>
           <View style={styles.grid} >
             <Text style={styles.title}>Stopwatch</Text>
             <Image source={require('../assets/browser.png')} style={styles.categoryImg} />
@@ -257,7 +228,7 @@ const CategoriesScreen = props => {
         <TouchableCmp
           onPress={() => {
 
-          
+
           }}
 
         >
@@ -295,7 +266,6 @@ const CategoriesScreen = props => {
               message: 'Check this new app'
             })
 
-            // console.log("Share ");
           }}
 
         >

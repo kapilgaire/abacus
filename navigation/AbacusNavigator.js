@@ -29,7 +29,11 @@ import MultiplicationOperation from '../screens/MultiplicationOperation';
 import DivisionOperation from '../screens/DivisionOperation';
 import MixAddSubOperation from '../screens/MixAddSubOperation';
 import LongMultiOperation from '../screens/LongMultiOperation';
-
+import SquareRootOperation from '../screens/SquareRootOperation';
+import CubeRootOperation from '../screens/CubeRootOperation';
+import TableOperation from '../screens/TableOperation';
+import PercentageOperation from '../screens/PercentageOperation';
+import MyStopwatch from '../screens/MyStopwatch';
 
 
 
@@ -55,7 +59,12 @@ const AbacusNavigator = createStackNavigator({
   MultiplicationOperation: MultiplicationOperation,
   DivisionOperation: DivisionOperation,
   MixAddSubOperation: MixAddSubOperation,
-  LongMultiOperation: LongMultiOperation
+  LongMultiOperation: LongMultiOperation,
+  SquareRootOperation: SquareRootOperation,
+  CubeRootOperation: CubeRootOperation,
+  TableOperation: TableOperation,
+  PercentageOperation: PercentageOperation,
+  MyStopwatch: MyStopwatch
 
 
 });

@@ -47,7 +47,7 @@ export default class SquareRootParam extends React.Component {
 
     } else {
       this.props.navigation.navigate({
-        routeName: 'AddOperation',
+        routeName: 'SquareRootOperation',
         params: {
           NumOfDigit: this.state.numOfDigigt,
           NumOfSum: this.state.numOfSum,

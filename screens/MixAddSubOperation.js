@@ -51,39 +51,12 @@ export default class MixAddSubOperation extends React.Component {
 
 
 
-            let max = 0;
-            let min = 0;
+            let max = this.params.EnterFromDigit;
+            let min = this.params.EnterToDigit;
             let random = 0;
 
 
-            if (this.params.NumOfDigit == 1) {
-                min = 0;
-                max = 9;
-            } else if (this.params.NumOfDigit == 2) {
-                min = 10;
-                max = 99;
-            } else if (this.params.NumOfDigit == 3) {
-                min = 100;
-                max = 999;
-            } else if (this.params.NumOfDigit == 4) {
-                min = 1000;
-                max = 9999;
-            } else if (this.params.NumOfDigit == 5) {
-                min = 10000;
-                max = 99999;
-            } else if (this.params.NumOfDigit == 6) {
-                min = 100000;
-                max = 999999;
-            } else if (this.params.NumOfDigit == 7) {
-                min = 1000000;
-                max = 9999999;
-            } else if (this.params.NumOfDigit == 8) {
-                min = 10000000;
-                max = 99999999;
-            } else if (this.params.NumOfDigit == 9) {
-                min = 100000000;
-                max = 999999999;
-            }
+            
 
             random = Math.floor(Math.random() * (+max - +min) + +min);
 
