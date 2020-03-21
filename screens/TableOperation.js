@@ -12,16 +12,18 @@ import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
 
 
-export default class SquareRootOperation extends React.Component {
+export default class TableOperation extends React.Component {
 
     constructor(props) {
         super(props);
 
-        global._numOfSum = 0;
+        global.sumCounter = 0;
         this.params = this.props.navigation.state.params;
         this.state = {
             timer: 0,
-            tableAns: 0
+            tableAns: 0,
+            restartFlag: false,
+            btnStatus: false
 
 
         };
@@ -41,25 +43,62 @@ export default class SquareRootOperation extends React.Component {
 
         this.startTimer();
         this.generateTable();
+        this.disableTask();
+
 
 
     }
 
     generateTable() {
 
-        if (_numOfSum != this.params.NumOfSum) {
-            _numOfSum++;
+        if (this.params.NumOfSum != sumCounter) {
 
-            this.setState({ tableAns: this.params.MulTable * _numOfSum })
+            sumCounter++
+
+            this.setState({ tableAns: this.params.MulTable * sumCounter })
+
         } else {
-            this.refs.toast.show('Number of step is complted', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
 
         }
+    }
+
+    disableTask() {
+
+        setTimeout(() => {
+
+            this.setState({ restartFlag: true });
+
+        }, this.params.TimeInSeconds * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ btnStatus: true });
+
+        }, this.params.TimeInSeconds * 1000);
+
+
 
     }
 
 
+    restart() {
 
+        sumCounter = 0;
+
+
+        this.setState({ restartFlag: false })
+
+
+        this.setState({ btnStatus: false })
+
+        this.startTimer();
+
+        this.generateTable();
+
+        this.disableTask();
+
+    }
 
     static navigationOptions = {
         headerTitle: 'Table',
@@ -72,7 +111,7 @@ export default class SquareRootOperation extends React.Component {
 
     render() {
 
-        console.log(" time" + this.params.TimeToFinish);
+        // console.log(" time" + this.params.TimeToFinish);
 
 
         return (
@@ -85,17 +124,23 @@ export default class SquareRootOperation extends React.Component {
 
 
 
-                    <Text style={styles.textStyle}>{this.params.MulTable + " X " + _numOfSum + "=" + this.state.tableAns}</Text>
+                    <Text style={styles.textStyle}>{this.params.MulTable + " X " + sumCounter + "=" + this.state.tableAns}</Text>
 
 
-                    <TouchableOpacity style={styles.startBtn} onPress={() => { this.generateTable() }}>
+                    <TouchableOpacity
+                        disabled={this.state.btnStatus}
+
+                        style={styles.startBtn} onPress={() => { this.generateTable() }}>
                         <Text style={styles.startText}>Next</Text>
                     </TouchableOpacity>
 
+                    {
+                        this.state.restartFlag ? <TouchableOpacity onPress={() => this.restart()}
+                            style={styles.startBtn}>
+                            <Text style={styles.startText}>START AGAIN</Text>
+                        </TouchableOpacity> : null
+                    }
 
-                    <TouchableOpacity style={styles.startBtn}>
-                        <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity>
                     <Toast ref="toast" />
 
                 </View>

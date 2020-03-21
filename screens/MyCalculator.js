@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    TextInput,
     StyleSheet,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    TouchableHighlight,
-    Keyboard,
-    Button
+    TouchableOpacity
 } from 'react-native';
 import Colors from '../constants/Colors'
 

@@ -6,18 +6,19 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Keyboard,
-    ToastAndroid
+    Keyboard
 } from 'react-native';
 import Colors from '../constants/Colors'
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 
-export default class AddSubOperation extends React.Component {
+export default class MultiplicationOperation extends React.Component {
 
     constructor(props) {
         super(props);
         global.wrongCounter = 0;
         global.righCounter = 0;
+        global.sumCounter = 0;
         this.params = this.props.navigation.state.params;
         this.state = {
             timer: 0,
@@ -26,7 +27,10 @@ export default class AddSubOperation extends React.Component {
             firstNo: 0,
             secondNo: 0,
             userAns: 0,
-            prevQues: ''
+            prevQues: '',
+            textInputStatus: true,
+            restartFlag: false,
+            btnStatus: false
 
         };
     }
@@ -39,6 +43,29 @@ export default class AddSubOperation extends React.Component {
 
             }, i * 1000);
         }
+    }
+
+    disableTask() {
+        setTimeout(() => {
+
+            this.setState({ textInputStatus: false });
+
+        }, this.params.TimeToFinish * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ restartFlag: true });
+
+        }, this.params.TimeToFinish * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ btnStatus: true });
+
+        }, this.params.TimeToFinish * 1000);
+
+
+
     }
 
     generateRandomNo() {
@@ -67,26 +94,37 @@ export default class AddSubOperation extends React.Component {
 
         this.generateRandomNo();
 
+        this.disableTask();
+
     }
+
+
 
     checkAnswer() {
 
+        if (this.params.NumOfSum != sumCounter) {
 
-        let ans = this.state.firstNo * this.state.secondNo;
+            sumCounter++
 
-        this.setState({ prevQues: this.state.firstNo + " X " + this.state.secondNo + "=" + ans })
+            let ans = this.state.firstNo * this.state.secondNo;
 
-        if (ans == this.state.userAns) {
-            righCounter++;
-            this.setState({ right: righCounter });
+            this.setState({ prevQues: this.state.firstNo + " X " + this.state.secondNo + "=" + ans })
+
+            if (ans == this.state.userAns) {
+                righCounter++;
+                this.setState({ right: righCounter });
+            } else {
+                wrongCounter++;
+                this.setState({ wrong: wrongCounter });
+            }
+
+
+
+            this.generateRandomNo();
         } else {
-            wrongCounter++;
-            this.setState({ wrong: wrongCounter });
+            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+
         }
-
-
-
-        this.generateRandomNo();
     }
 
 
@@ -99,9 +137,37 @@ export default class AddSubOperation extends React.Component {
         headerTintColor: 'white'
     };
 
+    restart() {
+        wrongCounter = 0;
+        righCounter = 0;
+        sumCounter = 0;
+
+        this.setState({ wrong: 0 });
+        this.setState({ right: 0 });
+
+        this.setState({ prevQues: "" })
+
+
+        this.setState({ textInputStatus: true })
+
+
+
+        this.setState({ restartFlag: false })
+
+
+        this.setState({ btnStatus: false })
+
+        this.startTimer();
+
+        this.generateRandomNo();
+
+        this.disableTask();
+
+    }
+
     render() {
 
-        console.log(" time" + this.params.TimeToFinish);
+        // console.log(" time" + this.params.TimeToFinish);
 
 
         return (
@@ -128,6 +194,7 @@ export default class AddSubOperation extends React.Component {
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
+                            editable={this.state.textInputStatus}
                             maxLength={9}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
@@ -142,6 +209,8 @@ export default class AddSubOperation extends React.Component {
                             this.checkAnswer()
 
                         }}
+
+                        disabled={this.state.btnStatus}
                     >
                         <Text style={styles.startText}
 
@@ -149,9 +218,18 @@ export default class AddSubOperation extends React.Component {
                     </TouchableOpacity>
 
 
-                    <TouchableOpacity style={styles.startBtn}>
-                        <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity>
+
+
+
+                    {
+                        this.state.restartFlag ? <TouchableOpacity onPress={() => this.restart()}
+                            style={styles.startBtn}>
+                            <Text style={styles.startText}>START AGAIN</Text>
+                        </TouchableOpacity> : null
+                    }
+
+                    <Toast ref="toast" />
+
                 </View>
             </TouchableWithoutFeedback>
         );

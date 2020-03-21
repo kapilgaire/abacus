@@ -36,7 +36,7 @@ export default class MixAddSubOperation extends React.Component {
 
     dispContent() {
 
-        
+
 
         setTimeout(() => {
 
@@ -56,7 +56,7 @@ export default class MixAddSubOperation extends React.Component {
             let random = 0;
 
 
-            
+
 
             random = Math.floor(Math.random() * (+max - +min) + +min);
 
@@ -70,7 +70,7 @@ export default class MixAddSubOperation extends React.Component {
         let num = [];
 
         num.length = this.params.NumOfSum;
-        for (let i = 0; i <this.params.NumOfSum; i++) {
+        for (let i = 0; i < this.params.NumOfSum; i++) {
             num[i] = this.generateRandomNumber();
             setTimeout(() => {
 
@@ -117,6 +117,19 @@ export default class MixAddSubOperation extends React.Component {
             this.refs.toast.show('False', DURATION.LENGTH_LONG);
 
         }
+    }
+
+    restart() {
+        this.setState({ showContent: false });
+
+        this.setState({ showAnswer: false })
+
+
+        this.showRandomNumber();
+
+        this.dispContent();
+
+
     }
 
     componentDidMount() {
@@ -175,7 +188,8 @@ export default class MixAddSubOperation extends React.Component {
                     }
 
                     {
-                        this.state.showContent ? <TouchableOpacity style={styles.startBtn}  >
+                        this.state.showContent ? <TouchableOpacity onPress={() => { this.restart() }}
+                            style={styles.startBtn}  >
                             <Text style={styles.startText}>START AGAIN</Text>
                         </TouchableOpacity> : null
                     }

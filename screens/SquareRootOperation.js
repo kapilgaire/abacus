@@ -6,8 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Keyboard,
-    ToastAndroid
+    Keyboard
 } from 'react-native';
 import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
@@ -19,7 +18,8 @@ export default class SquareRootOperation extends React.Component {
         super(props);
         global.wrongCounter = 0;
         global.righCounter = 0;
-        global._numOfSum = 0;
+        global.sumCounter = 0;
+
         this.params = this.props.navigation.state.params;
         this.state = {
             timer: 0,
@@ -27,7 +27,10 @@ export default class SquareRootOperation extends React.Component {
             wrong: 0,
             square: 0,
             userAns: 0,
-            prevQues: ''
+            prevQues: '',
+            textInputStatus: true,
+            restartFlag: false,
+            btnStatus: false
 
         };
     }
@@ -49,41 +52,35 @@ export default class SquareRootOperation extends React.Component {
         let random = 0;
 
 
-        if (_numOfSum != this.params.NumOfSum) {
-            _numOfSum++;
-            if (this.params.NumOfDigit == 1) {
-                min = 1;
-                max = 9;
-            } else if (this.params.NumOfDigit == 2) {
-                min = 10;
-                max = 99;
-            } else if (this.params.NumOfDigit == 3) {
-                min = 100;
-                max = 999;
-            } else if (this.params.NumOfDigit == 4) {
-                min = 1000;
-                max = 9999;
-            } else if (this.params.NumOfDigit == 5) {
-                min = 10000;
-                max = 99999;
-            } else if (this.params.NumOfDigit == 6) {
-                min = 100000;
-                max = 999999;
-            } else if (this.params.NumOfDigit == 7) {
-                min = 1000000;
-                max = 9999999;
-            } else if (this.params.NumOfDigit == 8) {
-                min = 10000000;
-                max = 99999999;
-            } else if (this.params.NumOfDigit == 9) {
-                min = 100000000;
-                max = 999999999;
-            }
-        } else {
-            this.refs.toast.show('Number of step is complted', DURATION.LENGTH_LONG);
-
-
+        if (this.params.NumOfDigit == 1) {
+            min = 1;
+            max = 9;
+        } else if (this.params.NumOfDigit == 2) {
+            min = 10;
+            max = 99;
+        } else if (this.params.NumOfDigit == 3) {
+            min = 100;
+            max = 999;
+        } else if (this.params.NumOfDigit == 4) {
+            min = 1000;
+            max = 9999;
+        } else if (this.params.NumOfDigit == 5) {
+            min = 10000;
+            max = 99999;
+        } else if (this.params.NumOfDigit == 6) {
+            min = 100000;
+            max = 999999;
+        } else if (this.params.NumOfDigit == 7) {
+            min = 1000000;
+            max = 9999999;
+        } else if (this.params.NumOfDigit == 8) {
+            min = 10000000;
+            max = 99999999;
+        } else if (this.params.NumOfDigit == 9) {
+            min = 100000000;
+            max = 999999999;
         }
+
         random = Math.floor(Math.random() * (+max - +min) + +min);
 
         let sqr = Math.pow(random, 2);
@@ -96,33 +93,63 @@ export default class SquareRootOperation extends React.Component {
 
     }
 
+    disableTask() {
+        setTimeout(() => {
+
+            this.setState({ textInputStatus: false });
+
+        }, this.params.TimeInSeconds * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ restartFlag: true });
+
+        }, this.params.TimeInSeconds * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ btnStatus: true });
+
+        }, this.params.TimeInSeconds * 1000);
+
+
+
+    }
     componentDidMount() {
 
         this.startTimer();
 
         this.generateRandomNo();
 
+        this.disableTask();
+
     }
 
     checkAnswer() {
 
+        if (this.params.NumOfSum != sumCounter) {
 
-        let ans = Math.sqrt(this.state.square) ;
+            sumCounter++
+            let ans = Math.sqrt(this.state.square);
 
 
-        this.setState({ prevQues: "\u221A "+this.state.square + " = " + ans })
+            this.setState({ prevQues: "\u221A " + this.state.square + " = " + ans })
 
-        if (ans == this.state.userAns) {
-            righCounter++;
-            this.setState({ right: righCounter });
+            if (ans == this.state.userAns) {
+                righCounter++;
+                this.setState({ right: righCounter });
+            } else {
+                wrongCounter++;
+                this.setState({ wrong: wrongCounter });
+            }
+
+
+
+            this.generateRandomNo();
         } else {
-            wrongCounter++;
-            this.setState({ wrong: wrongCounter });
+            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+
         }
-
-
-
-        this.generateRandomNo();
     }
 
 
@@ -135,6 +162,33 @@ export default class SquareRootOperation extends React.Component {
         headerTintColor: 'white'
     };
 
+    restart() {
+        wrongCounter = 0;
+        righCounter = 0;
+        sumCounter = 0;
+
+        this.setState({ wrong: 0 });
+        this.setState({ right: 0 });
+
+        this.setState({ prevQues: "" })
+
+
+        this.setState({ textInputStatus: true })
+
+
+
+        this.setState({ restartFlag: false })
+
+
+        this.setState({ btnStatus: false })
+
+        this.startTimer();
+
+        this.generateRandomNo();
+
+        this.disableTask();
+
+    }
     render() {
 
         console.log(" time" + this.params.TimeToFinish);
@@ -165,6 +219,7 @@ export default class SquareRootOperation extends React.Component {
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
                             maxLength={9}
+                            editable={this.state.textInputStatus}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
                         />
@@ -178,16 +233,21 @@ export default class SquareRootOperation extends React.Component {
                             this.checkAnswer()
 
                         }}
+                        disabled={this.state.btnStatus}
+
                     >
                         <Text style={styles.startText}
 
                         >CHECK ANS</Text>
                     </TouchableOpacity>
 
+                    {
+                        this.state.restartFlag ? <TouchableOpacity onPress={() => this.restart()}
+                            style={styles.startBtn}>
+                            <Text style={styles.startText}>START AGAIN</Text>
+                        </TouchableOpacity> : null
+                    }
 
-                    <TouchableOpacity style={styles.startBtn}>
-                        <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity>
                     <Toast ref="toast" />
 
                 </View>
@@ -218,7 +278,7 @@ const styles = StyleSheet.create({
 
     startBtn: {
 
-        backgroundColor: Colors.primaryColor,
+        backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
         alignItems: "center",

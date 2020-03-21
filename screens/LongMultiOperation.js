@@ -10,6 +10,7 @@ import {
     ToastAndroid
 } from 'react-native';
 import Colors from '../constants/Colors'
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 
 export default class LongMultiOperation extends React.Component {
@@ -18,6 +19,8 @@ export default class LongMultiOperation extends React.Component {
         super(props);
         global.wrongCounter = 0;
         global.righCounter = 0;
+        global.sumCounter = 0;
+
         this.params = this.props.navigation.state.params;
         this.state = {
             timer: 0,
@@ -26,7 +29,10 @@ export default class LongMultiOperation extends React.Component {
             firstNo: 0,
             secondNo: 0,
             userAns: 0,
-            prevQues: ''
+            prevQues: '',
+            textInputStatus: true,
+            restartFlag: false,
+            btnStatus: false
 
         };
     }
@@ -60,6 +66,28 @@ export default class LongMultiOperation extends React.Component {
 
 
     }
+    disableTask() {
+        setTimeout(() => {
+
+            this.setState({ textInputStatus: false });
+
+        }, this.params.TimeToFinish * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ restartFlag: true });
+
+        }, this.params.TimeToFinish * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ btnStatus: true });
+
+        }, this.params.TimeToFinish * 1000);
+
+
+
+    }
 
     componentDidMount() {
 
@@ -67,26 +95,61 @@ export default class LongMultiOperation extends React.Component {
 
         this.generateRandomNo();
 
+        this.disableTask();
+
     }
 
     checkAnswer() {
 
+        if (this.params.NumOfSum != sumCounter) {
 
-        let ans = this.state.firstNo * this.state.secondNo;
+            sumCounter++
+            let ans = this.state.firstNo * this.state.secondNo;
 
-        this.setState({ prevQues: this.state.firstNo + " X " + this.state.secondNo + "=" + ans })
+            this.setState({ prevQues: this.state.firstNo + " X " + this.state.secondNo + "=" + ans })
 
-        if (ans == this.state.userAns) {
-            righCounter++;
-            this.setState({ right: righCounter });
+            if (ans == this.state.userAns) {
+                righCounter++;
+                this.setState({ right: righCounter });
+            } else {
+                wrongCounter++;
+                this.setState({ wrong: wrongCounter });
+            }
+
+
+
+            this.generateRandomNo();
         } else {
-            wrongCounter++;
-            this.setState({ wrong: wrongCounter });
+            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+
         }
+    }
+    restart() {
+        wrongCounter = 0;
+        righCounter = 0;
+        sumCounter = 0;
+
+        this.setState({ wrong: 0 });
+        this.setState({ right: 0 });
+
+        this.setState({ prevQues: "" })
 
 
+        this.setState({ textInputStatus: true })
+
+
+
+        this.setState({ restartFlag: false })
+
+
+        this.setState({ btnStatus: false })
+
+        this.startTimer();
 
         this.generateRandomNo();
+
+        this.disableTask();
+
     }
 
 
@@ -129,6 +192,7 @@ export default class LongMultiOperation extends React.Component {
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
                             maxLength={9}
+                            editable={this.state.textInputStatus}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
                         />
@@ -142,16 +206,22 @@ export default class LongMultiOperation extends React.Component {
                             this.checkAnswer()
 
                         }}
+                        disabled={this.state.btnStatus}
+
                     >
                         <Text style={styles.startText}
 
                         >CHECK ANS</Text>
                     </TouchableOpacity>
 
+                    {
+                        this.state.restartFlag ? <TouchableOpacity onPress={() => this.restart()}
+                            style={styles.startBtn}>
+                            <Text style={styles.startText}>START AGAIN</Text>
+                        </TouchableOpacity> : null
+                    }
 
-                    <TouchableOpacity style={styles.startBtn}>
-                        <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity>
+                    <Toast ref="toast" />
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -180,7 +250,7 @@ const styles = StyleSheet.create({
 
     startBtn: {
 
-        backgroundColor: Colors.primaryColor,
+        backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
         alignItems: "center",

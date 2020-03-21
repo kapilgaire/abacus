@@ -150,6 +150,19 @@ export default class AddOperation extends React.Component {
         }
     }
 
+    restart(){
+        this.setState({ showContent: false });
+
+        this.setState({ showAnswer: false })
+
+
+        this.showRandomNumber();
+
+        this.dispContent();
+
+
+    }
+
     componentDidMount() {
 
         this.showRandomNumber();
@@ -206,7 +219,7 @@ export default class AddOperation extends React.Component {
                     }
 
                     {
-                        this.state.showContent ? <TouchableOpacity style={styles.startBtn}  >
+                        this.state.showContent ? <TouchableOpacity onPress={()=>{ this.restart()}} style={styles.startBtn}  >
                             <Text style={styles.startText}>START AGAIN</Text>
                         </TouchableOpacity> : null
                     }

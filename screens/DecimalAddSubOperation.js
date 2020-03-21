@@ -79,7 +79,18 @@ export default class DecimalAddSubOperation extends React.Component {
 
         }
     }
+    restart() {
+        this.setState({ showContent: false });
 
+        this.setState({ showAnswer: false })
+
+
+        this.showRandomNumber();
+
+        this.dispContent();
+
+
+    }
     componentDidMount() {
 
         this.showRandomNumber();
@@ -131,7 +142,7 @@ export default class DecimalAddSubOperation extends React.Component {
                     <Text style={styles.randumNum}>{this.state.answer}</Text>
 
 
-                    <TouchableOpacity style={styles.startBtn}>
+                    <TouchableOpacity onPress={() => { this.restart() }} style={styles.startBtn}>
                         <Text style={styles.startText}>START AGAIN</Text>
                     </TouchableOpacity>
                 </View>

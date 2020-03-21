@@ -19,7 +19,7 @@ export default class CubeRootOperation extends React.Component {
         super(props);
         global.wrongCounter = 0;
         global.righCounter = 0;
-        global._numOfSum = 0;
+        global.sumCounter = 0;
         this.params = this.props.navigation.state.params;
         this.state = {
             timer: 0,
@@ -27,7 +27,10 @@ export default class CubeRootOperation extends React.Component {
             wrong: 0,
             square: 0,
             userAns: 0,
-            prevQues: ''
+            prevQues: '',
+            textInputStatus: true,
+            restartFlag: false,
+            btnStatus: false
 
         };
     }
@@ -95,18 +98,43 @@ export default class CubeRootOperation extends React.Component {
 
 
     }
+    disableTask() {
+        setTimeout(() => {
 
+            this.setState({ textInputStatus: false });
+
+        }, this.params.TimeInSeconds * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ restartFlag: true });
+
+        }, this.params.TimeInSeconds * 1000);
+
+        setTimeout(() => {
+
+            this.setState({ btnStatus: true });
+
+        }, this.params.TimeInSeconds * 1000);
+
+
+
+    }
     componentDidMount() {
 
         this.startTimer();
 
         this.generateRandomNo();
+        this.disableTask();
+
 
     }
 
     checkAnswer() {
 
+        if (this.params.NumOfSum != sumCounter) {
 
+            sumCounter++
         let ans = Math.cbrt(this.state.square) ;
 
 
@@ -123,6 +151,13 @@ export default class CubeRootOperation extends React.Component {
 
 
         this.generateRandomNo();
+
+
+        this.generateRandomNo();
+    } else {
+        this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+
+    }
     }
 
 
@@ -135,6 +170,33 @@ export default class CubeRootOperation extends React.Component {
         headerTintColor: 'white'
     };
 
+    restart() {
+        wrongCounter = 0;
+        righCounter = 0;
+        sumCounter = 0;
+
+        this.setState({ wrong: 0 });
+        this.setState({ right: 0 });
+
+        this.setState({ prevQues: "" })
+
+
+        this.setState({ textInputStatus: true })
+
+
+
+        this.setState({ restartFlag: false })
+
+
+        this.setState({ btnStatus: false })
+
+        this.startTimer();
+
+        this.generateRandomNo();
+
+        this.disableTask();
+
+    }
     render() {
 
         console.log(" time" + this.params.TimeToFinish);
@@ -164,6 +226,8 @@ export default class CubeRootOperation extends React.Component {
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
+                            editable={this.state.textInputStatus}
+
                             maxLength={9}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
@@ -178,16 +242,21 @@ export default class CubeRootOperation extends React.Component {
                             this.checkAnswer()
 
                         }}
+                        disabled={this.state.btnStatus}
+
                     >
                         <Text style={styles.startText}
 
                         >CHECK ANS</Text>
                     </TouchableOpacity>
 
+                    {
+                        this.state.restartFlag ? <TouchableOpacity onPress={() => this.restart()}
+                            style={styles.startBtn}>
+                            <Text style={styles.startText}>START AGAIN</Text>
+                        </TouchableOpacity> : null
+                    }
 
-                    <TouchableOpacity style={styles.startBtn}>
-                        <Text style={styles.startText}>START AGAIN</Text>
-                    </TouchableOpacity>
                     <Toast ref="toast" />
 
                 </View>
