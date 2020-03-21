@@ -34,6 +34,7 @@ import CubeRootOperation from '../screens/CubeRootOperation';
 import TableOperation from '../screens/TableOperation';
 import PercentageOperation from '../screens/PercentageOperation';
 import MyStopwatch from '../screens/MyStopwatch';
+import MyCalculator from '../screens/MyCalculator';
 
 
 
@@ -64,7 +65,8 @@ const AbacusNavigator = createStackNavigator({
   CubeRootOperation: CubeRootOperation,
   TableOperation: TableOperation,
   PercentageOperation: PercentageOperation,
-  MyStopwatch: MyStopwatch
+  MyStopwatch: MyStopwatch,
+  MyCalculator:MyCalculator
 
 
 });

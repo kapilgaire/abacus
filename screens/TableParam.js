@@ -139,13 +139,13 @@ const styles = StyleSheet.create({
 
   startBtn: {
 
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.bgColor,
     borderRadius: 5,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 10
+    marginTop: 8,
+    marginBottom: 8
   },
 
   startText: {

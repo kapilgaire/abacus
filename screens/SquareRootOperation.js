@@ -52,7 +52,7 @@ export default class SquareRootOperation extends React.Component {
         if (_numOfSum != this.params.NumOfSum) {
             _numOfSum++;
             if (this.params.NumOfDigit == 1) {
-                min = 0;
+                min = 1;
                 max = 9;
             } else if (this.params.NumOfDigit == 2) {
                 min = 10;

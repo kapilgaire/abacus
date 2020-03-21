@@ -26,7 +26,7 @@ export default class DecimalAddSubOperation extends React.Component {
     generateRandomNumber
         = () => {
 
-            const max = 0;
+            const max = 1;
             const min = 9;
             let random = Math.floor(Math.random() * (+max - +min) + +min);
             return random;

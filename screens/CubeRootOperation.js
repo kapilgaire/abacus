@@ -52,7 +52,7 @@ export default class CubeRootOperation extends React.Component {
         if (_numOfSum != this.params.NumOfSum) {
             _numOfSum++;
             if (this.params.NumOfDigit == 1) {
-                min = 0;
+                min = 1;
                 max = 9;
             } else if (this.params.NumOfDigit == 2) {
                 min = 10;
@@ -218,13 +218,13 @@ const styles = StyleSheet.create({
 
     startBtn: {
 
-        backgroundColor: Colors.primaryColor,
+        backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 40,
-        marginBottom: 10
+        marginTop: 8,
+        marginBottom: 8
     },
 
 

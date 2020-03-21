@@ -60,7 +60,7 @@ export default class DecimalAddOperation extends React.Component {
 
 
             if (this.params.NumOfDigit == 1) {
-                min = 0;
+                min = 1;
                 max = 9;
             } else if (this.params.NumOfDigit == 2) {
                 min = 10;
@@ -226,18 +226,18 @@ const styles = StyleSheet.create({
 
     startBtn: {
 
-        backgroundColor: Colors.primaryColor,
+        backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 40,
-        marginBottom: 10
+        marginTop: 8,
+        marginBottom: 8
     },
 
     randumNum: {
         color: "white",
-        fontSize: 36,
+        fontSize: 72,
         alignContent: "center",
         textAlign: "center",
         marginBottom: 8

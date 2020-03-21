@@ -228,6 +228,9 @@ const CategoriesScreen = props => {
         <TouchableCmp
           onPress={() => {
 
+            props.navigation.navigate({
+              routeName:'MyCalculator'
+            });
 
           }}
 
