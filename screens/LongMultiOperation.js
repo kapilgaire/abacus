@@ -6,8 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Keyboard,
-    ToastAndroid
+    Keyboard
 } from 'react-native';
 import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
@@ -55,9 +54,30 @@ export default class LongMultiOperation extends React.Component {
         let max2 = this.params.HighNoMulBy;
         let min2 = this.params.LowNoMulBy;
 
-        let firstRandom = Math.floor(Math.random() * (+max1 - +min1) + +min1);
+        let firstRandom = 0
+        let secondRandom = 0
 
-        let secondRandom = Math.floor(Math.random() * (+max2 - +min2) + +min2);
+        if (sumCounter == 0) {
+            firstRandom = Math.floor(Math.random() * (+max1 - +min1) + +min1);
+            secondRandom = Math.floor(Math.random() * (+max2 - +min2) + +min2);
+        } else {
+
+
+            // console.log('sec ' + secondRandom);
+
+            firstRandom = this.state.firstNo
+
+            secondRandom = this.state.secondNo
+
+            firstRandom = firstRandom * secondRandom
+
+            secondRandom = Math.floor(Math.random() * (+max2 - +min2) + +min2);
+
+            // console.log('first ' + firstRandom);
+
+
+        }
+
 
         this.setState({ firstNo: firstRandom });
 
@@ -122,7 +142,15 @@ export default class LongMultiOperation extends React.Component {
         } else {
             this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
 
+            this.disable()
         }
+    }
+
+    disable(){
+        this.setState({ textInputStatus: false });
+        this.setState({ restartFlag: true });
+
+
     }
     restart() {
         wrongCounter = 0;
@@ -164,7 +192,7 @@ export default class LongMultiOperation extends React.Component {
 
     render() {
 
-        console.log(" time" + this.params.TimeToFinish);
+        // console.log(" time" + this.params.TimeToFinish);
 
 
         return (
@@ -191,7 +219,6 @@ export default class LongMultiOperation extends React.Component {
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
-                            maxLength={9}
                             editable={this.state.textInputStatus}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
@@ -221,7 +248,9 @@ export default class LongMultiOperation extends React.Component {
                         </TouchableOpacity> : null
                     }
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+                    />
                 </View>
             </TouchableWithoutFeedback>
         );

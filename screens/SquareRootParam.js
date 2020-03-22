@@ -38,12 +38,12 @@ export default class SquareRootParam extends React.Component {
   GoToNextScreen() {
     if (this.state.numOfDigigt == '') {
 
-      this.refs.toast.show('Enter Lenght of Root',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Lenght of Root', DURATION.LENGTH_LONG);
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter Number of Sum',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
 
     } else if (this.state.timeInSeconds == '') {
-      this.refs.toast.show('Enter Time ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
 
     } else {
       this.props.navigation.navigate({
@@ -72,7 +72,7 @@ export default class SquareRootParam extends React.Component {
               placeholder="Length of square root"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={1}
               onChangeText={numOfDigigt => this.setState({ numOfDigigt })}
               value={this.state.numOfDigigt}
 
@@ -84,7 +84,7 @@ export default class SquareRootParam extends React.Component {
               placeholder="Number of Sum"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfSum => this.setState({ numOfSum })}
               value={this.state.numOfSum}
             />
@@ -95,8 +95,8 @@ export default class SquareRootParam extends React.Component {
               style={styles.inputText}
               placeholder="Time in Seconds"
               placeholderTextColor="#003f5c"
-              keyboardType="number-pad"
-              maxLength={6}
+              keyboardType="numeric"
+              maxLength={9}
               onChangeText={timeInSeconds => this.setState({ timeInSeconds })}
               value={this.state.timeInSeconds}
             />
@@ -110,7 +110,9 @@ export default class SquareRootParam extends React.Component {
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
 
-          <Toast ref="toast" />
+          <Toast ref="toast"
+            position='center'
+          />
 
         </View>
       </TouchableWithoutFeedback>

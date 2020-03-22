@@ -80,48 +80,7 @@ const MainNavigator = createDrawerNavigator(
       }
     },
 
-    AddSub: {
-      screen: AddSubParam,
-      navigationOptions: {
-        title: 'Add/Sub'
-      }
-    },
-
-    Division: {
-      screen: DivisionParam,
-      navigationOptions: {
-        title: 'Division'
-      }
-    },
-
-    Multiply: {
-      screen: MulticationParam,
-      navigationOptions: {
-        title: 'Multiply'
-      }
-    },
-
-    Percentage: {
-      screen: PercentageParam,
-      navigationOptions: {
-        title: 'Percentage'
-      }
-    },
-
-    Root: {
-      screen: CubeRootParam,
-      navigationOptions: {
-        title: 'Root'
-      }
-    },
-
-    Table: {
-      screen: CubeRootParam,
-      navigationOptions: {
-        title: 'Table'
-      }
-    },
-
+  
 
   },
   {

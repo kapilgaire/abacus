@@ -100,7 +100,12 @@ export default class AddSubOperation extends React.Component {
 
         num.length = this.params.NumOfSum;
         for (let i = 0; i < this.params.NumOfSum; i++) {
-            num[i] = this.generateRandomNumber();
+            if (i % 2 == 0) {
+                num[i] = this.generateRandomNumber()* -1;
+            } else {
+                num[i] = this.generateRandomNumber();
+
+            }
             setTimeout(() => {
 
                 this.setState({ NumberHolder: num[i] });
@@ -118,6 +123,10 @@ export default class AddSubOperation extends React.Component {
         for (let i = 0; i < num.length; i++) {
 
             sum = sum + num[i];
+        }
+
+        if(sum<0){
+            sum = -sum
         }
 
         this.setState({ answer: sum });
@@ -194,7 +203,6 @@ export default class AddSubOperation extends React.Component {
                                 placeholder="Enter Your answer"
                                 placeholderTextColor="#003f5c"
                                 keyboardType="number-pad"
-                                maxLength={9}
                                 onChangeText={(userAns) => this.setState({ userAns })}
                                 value={this.setState.userAns}
                             />
@@ -214,7 +222,9 @@ export default class AddSubOperation extends React.Component {
                     </TouchableOpacity> : null}
 
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+                    />
                 </View>
             </TouchableWithoutFeedback>
         );

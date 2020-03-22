@@ -40,15 +40,15 @@ export default class MixAddSubParam extends React.Component {
   GoToNextScreen() {
     if (this.state.enterToDigit == '') {
 
-      this.refs.toast.show('Enter To Digit',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter To Digit', DURATION.LENGTH_LONG);
     } else if (this.state.enterFromDigit == '') {
-      this.refs.toast.show('Enter From Digit',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter From Digit', DURATION.LENGTH_LONG);
 
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter Number of Sum',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
 
     } else if (this.state.timeInSeconds == '') {
-      this.refs.toast.show('Enter Time ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
 
     } else {
       this.props.navigation.navigate({
@@ -78,7 +78,7 @@ export default class MixAddSubParam extends React.Component {
               placeholder="Enter from digit"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={1}
               onChangeText={enterFromDigit => this.setState({ enterFromDigit })}
               value={this.state.enterFromDigit}
 
@@ -91,7 +91,7 @@ export default class MixAddSubParam extends React.Component {
               placeholder="Enter to digit"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={1}
               onChangeText={enterToDigit => this.setState({ enterToDigit })}
               value={this.state.enterToDigit}
 
@@ -102,7 +102,7 @@ export default class MixAddSubParam extends React.Component {
               placeholder="Number of Sum"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfSum => this.setState({ numOfSum })}
               value={this.state.numOfSum}
             />
@@ -113,8 +113,8 @@ export default class MixAddSubParam extends React.Component {
               style={styles.inputText}
               placeholder="Time in Seconds"
               placeholderTextColor="#003f5c"
-              keyboardType="number-pad"
-              maxLength={6}
+              keyboardType="numeric"
+              maxLength={9}
               onChangeText={timeInSeconds => this.setState({ timeInSeconds })}
               value={this.state.timeInSeconds}
             />
@@ -128,7 +128,9 @@ export default class MixAddSubParam extends React.Component {
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
 
-          <Toast ref="toast" />
+          <Toast ref="toast"
+            position='center'
+          />
 
         </View>
       </TouchableWithoutFeedback>
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
 
   startBtn: {
 
-    backgroundColor: Colors.bgColor ,
+    backgroundColor: Colors.bgColor,
     borderRadius: 5,
     height: 50,
     alignItems: "center",

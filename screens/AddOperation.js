@@ -32,15 +32,11 @@ export default class AddOperation extends React.Component {
         if (this.state.showAnswer == false) {
             this.setState({ showAnswer: true })
         }
-        // this.setState(previousState => ({ showAnswer: !previousState.showAnswer }))
     }
 
     dispContent() {
 
-        // if (this.state.showContent == false) {
-        //     this.setState({ showContent: true })
-        // }
-        // 
+       
 
         setTimeout(() => {
 
@@ -195,7 +191,6 @@ export default class AddOperation extends React.Component {
                                 placeholder="Enter Your answer"
                                 placeholderTextColor="#003f5c"
                                 keyboardType="number-pad"
-                                maxLength={9}
                                 onChangeText={(userAns) => this.setState({ userAns })}
                                 value={this.setState.userAns}
                             />
@@ -226,7 +221,9 @@ export default class AddOperation extends React.Component {
 
 
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                                position='center'
+                                />
 
                 </View>
             </TouchableWithoutFeedback>

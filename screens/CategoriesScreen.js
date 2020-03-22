@@ -220,7 +220,7 @@ const CategoriesScreen = props => {
         }}>
           <View style={styles.grid} >
             <Text style={styles.title}>Stopwatch</Text>
-            <Image source={require('../assets/browser.png')} style={styles.categoryImg} />
+            <Image source={require('../assets/timer.png')} style={styles.categoryImg} />
 
           </View>
         </TouchableCmp>
@@ -237,7 +237,7 @@ const CategoriesScreen = props => {
         >
           <View style={styles.grid} >
             <Text style={styles.title}>Calculator</Text>
-            <Image source={require('../assets/browser.png')} style={styles.categoryImg} />
+            <Image source={require('../assets/calculator.png')} style={styles.categoryImg} />
 
           </View>
 

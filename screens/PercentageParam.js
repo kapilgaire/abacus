@@ -38,21 +38,21 @@ export default class MulticationParam extends React.Component {
   GoToNextScreen() {
     if (this.state.lowNoToPer == '') {
 
-      this.refs.toast.show('Enter lowest no. to Percentage',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter lowest no. to Percentage', DURATION.LENGTH_LONG);
     } else if (this.state.highNoToPer == '') {
-      this.refs.toast.show('Enter highest no. to Percentage',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter highest no. to Percentage', DURATION.LENGTH_LONG);
 
     } else if (this.state.lowNoPerBy == '') {
-      this.refs.toast.show('Enter Lowest no. to Percentage by ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Lowest no. to Percentage by ', DURATION.LENGTH_LONG);
 
     } else if (this.state.highNoPerBy == '') {
-      this.refs.toast.show('Enter Highest no. to Percentage by ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Highest no. to Percentage by ', DURATION.LENGTH_LONG);
 
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter no. of sum',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter no. of sum', DURATION.LENGTH_LONG);
 
     } else if (this.state.timeToFinish == '') {
-      this.refs.toast.show('Enter Time to finish',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time to finish', DURATION.LENGTH_LONG);
 
     } else {
       this.props.navigation.navigate({
@@ -83,7 +83,7 @@ export default class MulticationParam extends React.Component {
               placeholder="Enter lowest no. to Percentage"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={lowNoToPer => this.setState({ lowNoToPer })}
               value={this.state.lowNoToPer}
 
@@ -95,7 +95,7 @@ export default class MulticationParam extends React.Component {
               placeholder="Enter highest value to Percentage"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={highNoToPer => this.setState({ highNoToPer })}
               value={this.state.highNoToPer}
 
@@ -108,7 +108,7 @@ export default class MulticationParam extends React.Component {
               placeholder="Enter lowest value to Percentage by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={lowNoPerBy => this.setState({ lowNoPerBy })}
               value={this.state.lowNoPerBy}
             />
@@ -119,7 +119,7 @@ export default class MulticationParam extends React.Component {
               placeholder="Enter highest value to multiply by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={highNoPerBy => this.setState({ highNoPerBy })}
               value={this.state.highNoPerBy}
 
@@ -131,7 +131,7 @@ export default class MulticationParam extends React.Component {
               placeholder="No. of sum"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfSum => this.setState({ numOfSum })}
               value={this.state.numOfSum}
             />
@@ -141,8 +141,8 @@ export default class MulticationParam extends React.Component {
               style={styles.inputText}
               placeholder="Second to finish task"
               placeholderTextColor="#003f5c"
-              keyboardType="number-pad"
-              maxLength={6}
+              keyboardType="numeric"
+              maxLength={9}
               onChangeText={timeToFinish => this.setState({ timeToFinish })}
               value={this.state.timeToFinish}
             />
@@ -156,7 +156,9 @@ export default class MulticationParam extends React.Component {
           >
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
-          <Toast ref="toast" />
+          <Toast ref="toast"
+            position='center'
+          />
 
         </View>
       </TouchableWithoutFeedback>

@@ -39,21 +39,21 @@ export default class DivisionParam extends React.Component {
   GoToNextScreen() {
     if (this.state.lowNoToDiv == '') {
 
-      this.refs.toast.show('Enter lowest no. to Divide',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter lowest no. to Divide', DURATION.LENGTH_LONG);
     } else if (this.state.highNoToDiv == '') {
-      this.refs.toast.show('Enter highest no. to Divide',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter highest no. to Divide', DURATION.LENGTH_LONG);
 
     } else if (this.state.lowNoDivBy == '') {
-      this.refs.toast.show('Enter Lowest no. to divide vy ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Lowest no. to divide vy ', DURATION.LENGTH_LONG);
 
     } else if (this.state.highNoDivBy == '') {
-      this.refs.toast.show('Enter Highest no. to divide by ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Highest no. to divide by ', DURATION.LENGTH_LONG);
 
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter no. of sum',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter no. of sum', DURATION.LENGTH_LONG);
 
     } else if (this.state.timeToFinish == '') {
-      this.refs.toast.show('Enter Time to finish',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time to finish', DURATION.LENGTH_LONG);
 
     } else {
       this.props.navigation.navigate({
@@ -83,7 +83,7 @@ export default class DivisionParam extends React.Component {
               placeholder="Enter max answer"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={highNoToDiv => this.setState({ highNoToDiv })}
               value={this.state.highNoToDiv}
             />
@@ -94,7 +94,7 @@ export default class DivisionParam extends React.Component {
               placeholder="Enter min answer"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={lowNoToDiv => this.setState({ lowNoToDiv })}
               value={this.state.lowNoToDiv}
             />
@@ -106,7 +106,7 @@ export default class DivisionParam extends React.Component {
               placeholder="Enter max value to divide by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={highNoDivBy => this.setState({ highNoDivBy })}
               value={this.state.highNoDivBy}
             />
@@ -117,7 +117,7 @@ export default class DivisionParam extends React.Component {
               placeholder="Enter min value to divide by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={lowNoDivBy => this.setState({ lowNoDivBy })}
               value={this.state.lowNoDivBy}
             />
@@ -128,7 +128,7 @@ export default class DivisionParam extends React.Component {
               placeholder="No. of Sum"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfSum => this.setState({ numOfSum })}
               value={this.state.numOfSum}
             />
@@ -138,8 +138,8 @@ export default class DivisionParam extends React.Component {
               style={styles.inputText}
               placeholder="Second to finish task"
               placeholderTextColor="#003f5c"
-              keyboardType="number-pad"
-              maxLength={6}
+              keyboardType="numeric"
+              maxLength={9}
               onChangeText={timeToFinish => this.setState({ timeToFinish })}
               value={this.state.timeToFinish}
             />
@@ -149,12 +149,14 @@ export default class DivisionParam extends React.Component {
 
             onPress={() => {
 
-             this.GoToNextScreen();
+              this.GoToNextScreen();
             }}
           >
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
-          <Toast ref="toast" />
+          <Toast ref="toast"
+            position='center'
+          />
 
         </View></TouchableWithoutFeedback>
     );

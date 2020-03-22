@@ -30,14 +30,15 @@ export default class MultiplicationOperation extends React.Component {
             prevQues: '',
             textInputStatus: true,
             restartFlag: false,
-            btnStatus: false
+            btnStatus: false,
 
         };
     }
 
     startTimer() {
+        
         for (let i = 0; i <= this.params.TimeToFinish; i++) {
-            setTimeout(() => {
+           setTimeout(() => {
 
                 this.setState({ timer: i });
 
@@ -64,6 +65,13 @@ export default class MultiplicationOperation extends React.Component {
 
         }, this.params.TimeToFinish * 1000);
 
+
+
+    }
+
+    disable(){
+        this.setState({ textInputStatus: false });
+        this.setState({ restartFlag: true });
 
 
     }
@@ -123,6 +131,9 @@ export default class MultiplicationOperation extends React.Component {
             this.generateRandomNo();
         } else {
             this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+
+            this.disable()
+
 
         }
     }
@@ -195,7 +206,6 @@ export default class MultiplicationOperation extends React.Component {
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
                             editable={this.state.textInputStatus}
-                            maxLength={9}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
                         />
@@ -228,7 +238,9 @@ export default class MultiplicationOperation extends React.Component {
                         </TouchableOpacity> : null
                     }
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+                    />
 
                 </View>
             </TouchableWithoutFeedback>

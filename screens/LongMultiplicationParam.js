@@ -39,21 +39,21 @@ export default class LongMulticationParam extends React.Component {
   GoToNextScreen() {
     if (this.state.lowNoToMul == '') {
 
-      this.refs.toast.show('Enter lowest no. to Multiply',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter lowest no. to Multiply', DURATION.LENGTH_LONG);
     } else if (this.state.highNoToMul == '') {
-      this.refs.toast.show('Enter highest no. to Multiply',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter highest no. to Multiply', DURATION.LENGTH_LONG);
 
     } else if (this.state.lowNoMulBy == '') {
-      this.refs.toast.show('Enter Lowest no. to Multiply by ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Lowest no. to Multiply by ', DURATION.LENGTH_LONG);
 
     } else if (this.state.highNoMulBy == '') {
-      this.refs.toast.show('Enter Highest no. to Multiply by ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Highest no. to Multiply by ', DURATION.LENGTH_LONG);
 
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter no. of sum',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter no. of sum', DURATION.LENGTH_LONG);
 
     } else if (this.state.timeToFinish == '') {
-      this.refs.toast.show('Enter Time to finish',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time to finish', DURATION.LENGTH_LONG);
 
     } else {
       this.props.navigation.navigate({
@@ -84,7 +84,7 @@ export default class LongMulticationParam extends React.Component {
               placeholder="Enter lowest no. to multiply"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={lowNoToMul => this.setState({ lowNoToMul })}
               value={this.state.lowNoToMul}
 
@@ -96,7 +96,7 @@ export default class LongMulticationParam extends React.Component {
               placeholder="Enter highest value to multiply"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={highNoToMul => this.setState({ highNoToMul })}
               value={this.state.highNoToMul}
 
@@ -109,7 +109,7 @@ export default class LongMulticationParam extends React.Component {
               placeholder="Enter lowest value to multiply by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={lowNoMulBy => this.setState({ lowNoMulBy })}
               value={this.state.lowNoMulBy}
             />
@@ -120,7 +120,7 @@ export default class LongMulticationParam extends React.Component {
               placeholder="Enter highest value to multiply by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={highNoMulBy => this.setState({ highNoMulBy })}
               value={this.state.highNoMulBy}
 
@@ -132,7 +132,7 @@ export default class LongMulticationParam extends React.Component {
               placeholder="No. of sum"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfSum => this.setState({ numOfSum })}
               value={this.state.numOfSum}
             />
@@ -142,8 +142,8 @@ export default class LongMulticationParam extends React.Component {
               style={styles.inputText}
               placeholder="Second to finish task"
               placeholderTextColor="#003f5c"
-              keyboardType="number-pad"
-              maxLength={6}
+              keyboardType="numeric"
+              maxLength={9}
               onChangeText={timeToFinish => this.setState({ timeToFinish })}
               value={this.state.timeToFinish}
             />
@@ -157,7 +157,9 @@ export default class LongMulticationParam extends React.Component {
           >
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
-          <Toast ref="toast" />
+          <Toast ref="toast"
+            position='center'
+          />
 
         </View>
       </TouchableWithoutFeedback>

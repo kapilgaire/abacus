@@ -59,7 +59,9 @@ export default class DivisionOperation extends React.Component {
 
         let secondRandom = Math.floor(Math.random() * (+max2 - +min2) + +min2);
 
-        this.setState({ firstNo: firstRandom });
+        let thirdNum = firstRandom *secondRandom
+
+        this.setState({ firstNo: thirdNum });
 
         this.setState({ secondNo: secondRandom });
 
@@ -106,7 +108,7 @@ export default class DivisionOperation extends React.Component {
 
             let ans = this.state.firstNo / this.state.secondNo;
 
-            this.setState({ prevQues: this.state.firstNo + " / " + this.state.secondNo + "=" + ans })
+            this.setState({ prevQues: this.state.firstNo + " ÷ " + this.state.secondNo + "=" + ans })
 
             if (ans == this.state.userAns) {
                 righCounter++;
@@ -122,7 +124,15 @@ export default class DivisionOperation extends React.Component {
         } else {
             this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
 
+            this.disable()
         }
+    }
+
+    disable(){
+        this.setState({ textInputStatus: false });
+        this.setState({ restartFlag: true });
+
+
     }
 
 
@@ -165,7 +175,7 @@ export default class DivisionOperation extends React.Component {
 
     render() {
 
-        console.log(" time" + this.params.TimeToFinish);
+        // console.log(" time" + this.params.TimeToFinish);
 
 
         return (
@@ -192,7 +202,6 @@ export default class DivisionOperation extends React.Component {
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
-                            maxLength={9}
                             editable={this.state.textInputStatus}
 
                             onChangeText={(userAns) => this.setState({ userAns })}
@@ -223,7 +232,10 @@ export default class DivisionOperation extends React.Component {
                         </TouchableOpacity> : null
                     }
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+
+                    />
 
                 </View>
             </TouchableWithoutFeedback>

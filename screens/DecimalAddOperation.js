@@ -50,7 +50,7 @@ export default class DecimalAddOperation extends React.Component {
 
 
             //console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-              //  + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
+            //  + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
 
 
 
@@ -88,7 +88,7 @@ export default class DecimalAddOperation extends React.Component {
                 max = 999999999;
             }
 
-            random = Math.floor(Math.random() * (+max - +min) + +min);
+            random = Math.floor(Math.random() * (+max - +min) + +min)/10;
 
             return random;
 
@@ -100,7 +100,13 @@ export default class DecimalAddOperation extends React.Component {
 
         num.length = this.params.NumOfSum;
         for (let i = 0; i < this.params.NumOfSum; i++) {
-            num[i] = this.generateRandomNumber();
+
+            if (i % 2 == 0) {
+                num[i] = this.generateRandomNumber()* -1;
+            } else {
+                num[i] = this.generateRandomNumber();
+
+            }
             setTimeout(() => {
 
                 this.setState({ NumberHolder: num[i] });
@@ -120,9 +126,15 @@ export default class DecimalAddOperation extends React.Component {
             sum = sum + num[i];
         }
 
-        this.setState({ answer: sum });
+        if(sum<0){
+            sum = -sum
+        }
+        var rounded = Math.round(sum * 10) / 10
 
-        return sum;
+
+        this.setState({ answer: rounded });
+
+        return rounded;
     }
 
     checkAnswer() {
@@ -189,7 +201,6 @@ export default class DecimalAddOperation extends React.Component {
                                 placeholder="Enter Your answer"
                                 placeholderTextColor="#003f5c"
                                 keyboardType="number-pad"
-                                maxLength={9}
                                 onChangeText={(userAns) => this.setState({ userAns })}
                                 value={this.setState.userAns}
                             />
@@ -204,12 +215,15 @@ export default class DecimalAddOperation extends React.Component {
                     {this.state.showAnswer ? <Text style={styles.randumNum}>{this.state.answer}</Text> : null}
 
 
-                    {this.state.showContent ? <TouchableOpacity  onPress={()=>{ this.restart()}} style={styles.startBtn}>
+                    {this.state.showContent ? <TouchableOpacity onPress={() => { this.restart() }} style={styles.startBtn}>
                         <Text style={styles.startText}>START AGAIN</Text>
                     </TouchableOpacity> : null}
 
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+
+                    />
                 </View>
             </TouchableWithoutFeedback>
         );

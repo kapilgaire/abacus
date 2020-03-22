@@ -46,15 +46,70 @@ export default class MixAddSubOperation extends React.Component {
     }
     generateRandomNumber
         = () => {
-            // console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-            //     + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
+           
 
-
-
-            let max = this.params.EnterFromDigit;
-            let min = this.params.EnterToDigit;
+            let max = 0;
+            let min = 0;
             let random = 0;
 
+            if( this.params.EnterFromDigit==1){
+
+                min=9
+            }else  if(this.params.EnterFromDigit==2){
+
+                min=99
+            }else  if(this.params.EnterFromDigit==3){
+
+                min=999
+            }else  if(this.params.EnterFromDigit==4){
+
+                min=9999
+            }else  if( this.params.EnterFromDigit==5){
+
+                min=99999
+            }else  if( this.params.EnterFromDigit==6){
+
+                min=999999
+            }else  if(this.params.EnterFromDigit==7){
+
+                min=9999999
+            }else  if(this.params.EnterFromDigit==8){
+
+                min=99999999
+            }else  if(this.params.EnterFromDigit==9){
+
+                max=999999999
+            }
+
+
+            if( this.params.EnterToDigit==1){
+
+                max=9
+            }else  if(this.params.EnterToDigit==2){
+
+                max=99
+            }else  if(this.params.EnterToDigit==3){
+
+                max=999
+            }else  if(this.params.EnterToDigit==4){
+
+                max=9999
+            }else  if( this.params.EnterToDigit==5){
+
+                max=99999
+            }else  if( this.params.EnterToDigit==6){
+
+                max=999999
+            }else  if(this.params.EnterToDigit==7){
+
+                max=9999999
+            }else  if(this.params.EnterToDigit==8){
+
+                max=99999999
+            }else  if(this.params.EnterToDigit==9){
+
+                max=999999999
+            }
 
 
 
@@ -164,7 +219,6 @@ export default class MixAddSubOperation extends React.Component {
                                 placeholder="Enter Your answer"
                                 placeholderTextColor="#003f5c"
                                 keyboardType="number-pad"
-                                maxLength={9}
                                 onChangeText={(userAns) => this.setState({ userAns })}
                                 value={this.setState.userAns}
                             />

@@ -68,7 +68,7 @@ export default class DecimalAddParam extends React.Component {
               placeholder="Number of digit"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfDigigt => this.setState({ numOfDigigt })}
               value={this.state.numOfDigigt}
             />
@@ -79,7 +79,7 @@ export default class DecimalAddParam extends React.Component {
               placeholder="Number of Sum"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfSum => this.setState({ numOfSum })}
               value={this.state.numOfSum}
             />
@@ -90,8 +90,8 @@ export default class DecimalAddParam extends React.Component {
               style={styles.inputText}
               placeholder="Time in Seconds"
               placeholderTextColor="#003f5c"
-              keyboardType="number-pad"
-              maxLength={6}
+              keyboardType="numeric"
+              maxLength={9}
               onChangeText={timeInSeconds => this.setState({ timeInSeconds })}
               value={this.state.timeInSeconds}
             />
@@ -103,7 +103,9 @@ export default class DecimalAddParam extends React.Component {
           }}>
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
-          <Toast ref="toast" />
+          <Toast ref="toast"
+            position='center'
+          />
 
         </View>
       </TouchableWithoutFeedback>

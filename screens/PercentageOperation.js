@@ -125,7 +125,15 @@ export default class PercentageOperation extends React.Component {
         } else {
             this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
 
+            this.disable()
         }
+    }
+
+    disable(){
+        this.setState({ textInputStatus: false });
+        this.setState({ restartFlag: true });
+
+
     }
     restart() {
         wrongCounter = 0;
@@ -192,7 +200,6 @@ export default class PercentageOperation extends React.Component {
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
-                            maxLength={9}
                             editable={this.state.textInputStatus}
 
                             onChangeText={(userAns) => this.setState({ userAns })}
@@ -223,7 +230,9 @@ export default class PercentageOperation extends React.Component {
                         </TouchableOpacity> : null
                     }
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+                    />
                 </View>
             </TouchableWithoutFeedback>
         );

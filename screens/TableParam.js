@@ -39,12 +39,12 @@ export default class TableParam extends React.Component {
   GoToNextScreen() {
     if (this.state.mulTable == '') {
 
-      this.refs.toast.show('Enter Table of',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Table of', DURATION.LENGTH_LONG);
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter Number of Sum',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
 
     } else if (this.state.timeInSeconds == '') {
-      this.refs.toast.show('Enter Time ',DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
 
     } else {
       this.props.navigation.navigate({
@@ -73,7 +73,7 @@ export default class TableParam extends React.Component {
               placeholder="Enter Table Of"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={mulTable => this.setState({ mulTable })}
               value={this.state.mulTable}
 
@@ -85,7 +85,7 @@ export default class TableParam extends React.Component {
               placeholder="Number of Sum"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
-              maxLength={6}
+              maxLength={9}
               onChangeText={numOfSum => this.setState({ numOfSum })}
               value={this.state.numOfSum}
             />
@@ -96,7 +96,7 @@ export default class TableParam extends React.Component {
               style={styles.inputText}
               placeholder="Time in Seconds"
               placeholderTextColor="#003f5c"
-              keyboardType="number-pad"
+              keyboardType="numeric"
               maxLength={6}
               onChangeText={timeInSeconds => this.setState({ timeInSeconds })}
               value={this.state.timeInSeconds}
@@ -111,7 +111,9 @@ export default class TableParam extends React.Component {
             <Text style={styles.startText}>START</Text>
           </TouchableOpacity>
 
-          <Toast ref="toast" />
+          <Toast ref="toast"
+            position='center'
+          />
 
         </View>
       </TouchableWithoutFeedback>

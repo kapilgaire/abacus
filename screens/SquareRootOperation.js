@@ -149,9 +149,16 @@ export default class SquareRootOperation extends React.Component {
         } else {
             this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
 
+            this.disable()
         }
     }
 
+    disable(){
+        this.setState({ textInputStatus: false });
+        this.setState({ restartFlag: true });
+
+
+    }
 
     static navigationOptions = {
         headerTitle: 'Square Root',
@@ -218,7 +225,6 @@ export default class SquareRootOperation extends React.Component {
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
-                            maxLength={9}
                             editable={this.state.textInputStatus}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
@@ -248,7 +254,9 @@ export default class SquareRootOperation extends React.Component {
                         </TouchableOpacity> : null
                     }
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+                    />
 
                 </View>
             </TouchableWithoutFeedback>

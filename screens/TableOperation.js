@@ -141,7 +141,9 @@ export default class TableOperation extends React.Component {
                         </TouchableOpacity> : null
                     }
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+                    />
 
                 </View>
             </TouchableWithoutFeedback>

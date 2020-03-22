@@ -52,8 +52,7 @@ export default class CubeRootOperation extends React.Component {
         let random = 0;
 
 
-        if (_numOfSum != this.params.NumOfSum) {
-            _numOfSum++;
+      
             if (this.params.NumOfDigit == 1) {
                 min = 1;
                 max = 9;
@@ -82,11 +81,7 @@ export default class CubeRootOperation extends React.Component {
                 min = 100000000;
                 max = 999999999;
             }
-        } else {
-            this.refs.toast.show('Number of step is complted', DURATION.LENGTH_LONG);
-
-
-        }
+        
         random = Math.floor(Math.random() * (+max - +min) + +min);
 
         let sqr = Math.pow(random, 3);
@@ -135,34 +130,39 @@ export default class CubeRootOperation extends React.Component {
         if (this.params.NumOfSum != sumCounter) {
 
             sumCounter++
-        let ans = Math.cbrt(this.state.square) ;
+            let ans = Math.cbrt(this.state.square);
 
 
-        this.setState({ prevQues: "\u221A "+this.state.square + " = " + ans })
+            this.setState({ prevQues: "\u221A " + this.state.square + " = " + ans })
 
-        if (ans == this.state.userAns) {
-            righCounter++;
-            this.setState({ right: righCounter });
+            if (ans == this.state.userAns) {
+                righCounter++;
+                this.setState({ right: righCounter });
+            } else {
+                wrongCounter++;
+                this.setState({ wrong: wrongCounter });
+            }
+
+
+
+            this.generateRandomNo();
+
+
         } else {
-            wrongCounter++;
-            this.setState({ wrong: wrongCounter });
+            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+
+            this.disable()
         }
+    }
+    disable(){
+        this.setState({ textInputStatus: false });
+        this.setState({ restartFlag: true });
 
-
-
-        this.generateRandomNo();
-
-
-        this.generateRandomNo();
-    } else {
-        this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
 
     }
-    }
-
 
     static navigationOptions = {
-        headerTitle: 'Square Root',
+        headerTitle: 'Cube Root',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor
@@ -199,7 +199,6 @@ export default class CubeRootOperation extends React.Component {
     }
     render() {
 
-        console.log(" time" + this.params.TimeToFinish);
 
 
         return (
@@ -228,7 +227,6 @@ export default class CubeRootOperation extends React.Component {
                             keyboardType="number-pad"
                             editable={this.state.textInputStatus}
 
-                            maxLength={9}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.setState.userAns}
                         />
@@ -257,7 +255,9 @@ export default class CubeRootOperation extends React.Component {
                         </TouchableOpacity> : null
                     }
 
-                    <Toast ref="toast" />
+                    <Toast ref="toast"
+                        position='center'
+                    />
 
                 </View>
             </TouchableWithoutFeedback>
