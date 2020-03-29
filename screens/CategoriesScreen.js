@@ -11,7 +11,7 @@ import {
   Linking,
   Share
 } from 'react-native';
-
+import Constants from 'expo-constants';
 import Colors from '../constants/Colors';
 
 
@@ -229,7 +229,7 @@ const CategoriesScreen = props => {
           onPress={() => {
 
             props.navigation.navigate({
-              routeName:'MyCalculator'
+              routeName: 'MyCalculator'
             });
 
           }}
@@ -263,10 +263,20 @@ const CategoriesScreen = props => {
         <TouchableCmp
           onPress={() => {
 
+            let packageName
 
+            if (Platform.OS === 'android') {
+
+              packageName = 'Check out this awesome app on Play Store & Enhance Your Calculation skill by practising. For more details visit www.abacuschampsacademy.com/. For app '
+                + Constants.manifest.android.package;
+            } else {
+              packageName = 'Check out this awesome app on App Store & Enhance Your Calculation skill by practising. For more details visit www.abacuschampsacademy.com/. For app ios';
+            }
             Share.share({
 
-              message: 'Check this new app'
+              message: packageName
+
+              
             })
 
           }}
@@ -294,7 +304,7 @@ CategoriesScreen.navigationOptions = navData => {
       backgroundColor: Colors.primaryColor
     },
     headerTintColor: 'white',
-    headerLeft: (
+    headerLeft: () =>
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
@@ -306,7 +316,7 @@ CategoriesScreen.navigationOptions = navData => {
         />
 
       </HeaderButtons>
-    )
+
   };
 };
 

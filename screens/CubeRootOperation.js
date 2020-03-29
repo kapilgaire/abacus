@@ -149,7 +149,7 @@ export default class CubeRootOperation extends React.Component {
 
 
         } else {
-            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Number of steps are completed', 2000);
 
             this.disable()
         }
@@ -221,7 +221,6 @@ export default class CubeRootOperation extends React.Component {
 
                     <View style={styles.inputView} >
                         <TextInput
-                            style={styles.inputText}
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
@@ -281,7 +280,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 8,
         borderRadius: 5,
-        marginBottom: 5
+        marginBottom: 5,
+        marginTop:10
+
 
     },
 
@@ -290,6 +291,9 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
+        borderWidth:3,
+        borderColor:Colors.whiteColor,
+
         alignItems: "center",
         justifyContent: "center",
         marginTop: 8,

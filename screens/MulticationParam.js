@@ -39,21 +39,21 @@ export default class MulticationParam extends React.Component {
   GoToNextScreen() {
     if (this.state.lowNoToMul == '') {
 
-      this.refs.toast.show('Enter lowest no. to Multiply', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter lowest no. to Multiply', 2000);
     } else if (this.state.highNoToMul == '') {
-      this.refs.toast.show('Enter highest no. to Multiply', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter highest no. to Multiply', 2000);
 
     } else if (this.state.lowNoMulBy == '') {
-      this.refs.toast.show('Enter Lowest no. to Multiply by ', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Lowest no. to Multiply by ', 2000);
 
     } else if (this.state.highNoMulBy == '') {
-      this.refs.toast.show('Enter Highest no. to Multiply by ', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Highest no. to Multiply by ', 2000);
 
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter no. of sum', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter no. of sum', 2000);
 
     } else if (this.state.timeToFinish == '') {
-      this.refs.toast.show('Enter Time to finish', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time to finish', 2000);
 
     } else {
       this.props.navigation.navigate({
@@ -190,6 +190,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bgColor,
     borderRadius: 5,
     height: 50,
+    borderWidth:3,
+    borderColor:Colors.whiteColor,
+
     alignItems: "center",
     justifyContent: "center",
     marginTop: 8,

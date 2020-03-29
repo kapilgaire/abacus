@@ -58,7 +58,7 @@ export default class TableOperation extends React.Component {
             this.setState({ tableAns: this.params.MulTable * sumCounter })
 
         } else {
-            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Number of steps are completed', 2000);
 
         }
     }
@@ -162,14 +162,6 @@ const styles = StyleSheet.create({
         padding: 8
 
     },
-    inputView: {
-        backgroundColor: "#FAFAFA",
-        justifyContent: "center",
-        padding: 8,
-        borderRadius: 5,
-        marginBottom: 5
-
-    },
 
     startBtn: {
 
@@ -179,6 +171,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 8,
+        borderWidth:3,
+        borderColor:Colors.whiteColor,
+
         marginBottom: 8
     },
 

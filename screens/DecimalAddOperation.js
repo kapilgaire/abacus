@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     Keyboard,
-    ToastAndroid
+    // Animated
 } from 'react-native';
 import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
@@ -24,10 +24,25 @@ export default class DecimalAddOperation extends React.Component {
             answer: 0,
             userAns: '',
             showAnswer: false,
-            showContent: false
+            showContent: false,
+            // animation: new Animated.Value(0)
+
 
         };
     }
+
+    // startAnimation = () => {
+
+    //     Animated.timing(this.state.animation, {
+    //         toValue: 0,
+    //         timing: 10
+    //     }).start(() => {
+    //         Animated.timing(this.state.animation, {
+    //             toValue: 1,
+    //             duration: 10
+    //         }).start();
+    //     })
+    // }
     dispAnswer() {
 
         if (this.state.showAnswer == false) {
@@ -88,7 +103,7 @@ export default class DecimalAddOperation extends React.Component {
                 max = 999999999;
             }
 
-            random = Math.floor(Math.random() * (+max - +min) + +min)/10;
+            random = Math.floor(Math.random() * (+max - +min) + +min) / 10;
 
             return random;
 
@@ -102,13 +117,16 @@ export default class DecimalAddOperation extends React.Component {
         for (let i = 0; i < this.params.NumOfSum; i++) {
 
             if (i % 2 == 0) {
-                num[i] = this.generateRandomNumber()* -1;
+                num[i] = this.generateRandomNumber() * -1;
             } else {
                 num[i] = this.generateRandomNumber();
 
             }
+
             setTimeout(() => {
 
+
+                // this.startAnimation()
                 this.setState({ NumberHolder: num[i] });
 
             }, i * this.params.TimeInSeconds * 1000);
@@ -126,7 +144,7 @@ export default class DecimalAddOperation extends React.Component {
             sum = sum + num[i];
         }
 
-        if(sum<0){
+        if (sum < 0) {
             sum = -sum
         }
         var rounded = Math.round(sum * 10) / 10
@@ -142,15 +160,15 @@ export default class DecimalAddOperation extends React.Component {
 
 
         if (this.state.userAns == '') {
-            this.refs.toast.show('Empty', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Empty', 2000);
 
         } else if (this.state.answer == this.state.userAns) {
-            this.refs.toast.show('True', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Right', 2000);
 
 
         } else {
 
-            this.refs.toast.show('False', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Wrong', 2000);
 
         }
     }
@@ -186,13 +204,18 @@ export default class DecimalAddOperation extends React.Component {
 
     render() {
 
+        const animatedStyle = {
+            opacity: this.state.animation
+        }
         return (
             <TouchableWithoutFeedback onPress={() => {
                 Keyboard.dismiss();
             }}>
                 <View style={styles.screen}>
 
-                    <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    {/* <Animated.View style={animatedStyle} > */}
+                        <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    {/* </Animated.View> */}
 
                     {this.state.showContent ?
                         <View style={styles.inputView} >
@@ -255,6 +278,9 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
+        borderColor:Colors.whiteColor,
+        borderWidth:3,
+
         alignItems: "center",
         justifyContent: "center",
         marginTop: 8,

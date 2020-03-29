@@ -360,7 +360,8 @@ const styles = StyleSheet.create({
     },
     calculationText: {
         fontSize: 30,
-        color: 'white'
+        color: 'white',
+        paddingRight:10
     },
     btn: {
 
@@ -382,7 +383,8 @@ const styles = StyleSheet.create({
     resultText: {
 
         fontSize: 25,
-        color: 'white'
+        color: 'white',
+        paddingRight:10
 
     },
     row: {

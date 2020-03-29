@@ -39,12 +39,12 @@ export default class TableParam extends React.Component {
   GoToNextScreen() {
     if (this.state.mulTable == '') {
 
-      this.refs.toast.show('Enter Table of', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Table of', 2000);
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Sum', 2000);
 
     } else if (this.state.timeInSeconds == '') {
-      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time ', 2000);
 
     } else {
       this.props.navigation.navigate({
@@ -147,6 +147,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 8,
+    borderWidth: 4,
+    borderColor:Colors.whiteColor,
+
     marginBottom: 8
   },
 

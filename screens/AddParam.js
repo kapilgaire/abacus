@@ -39,12 +39,12 @@ export default class AddParam extends React.Component {
   GoToNextScreen() {
     if (this.state.numOfDigigt == '') {
 
-      this.refs.toast.show('Enter Number of Digit', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Digit', 2000);
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Sum', 2000);
 
     } else if (this.state.timeInSeconds == '') {
-      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time ', 2000);
 
     } else {
       this.props.navigation.navigate({
@@ -59,12 +59,7 @@ export default class AddParam extends React.Component {
       });
     }
   }
-  handleInputChange = (text) => {
-    this.setState({
-      text: text.replace(/[^\d.-]/g, '')
-    });
-
-  }
+ 
   render() {
 
     return (
@@ -80,7 +75,6 @@ export default class AddParam extends React.Component {
               keyboardType="number-pad"
               maxLength={1}
               onChangeText={numOfDigigt => this.setState({ numOfDigigt })}
-              // onChangeText={this.handleInputChange}
 
               value={this.state.numOfDigigt}
 
@@ -148,7 +142,9 @@ const styles = StyleSheet.create({
 
   startBtn: {
 
-    backgroundColor: Colors.bgColor,
+    backgroundColor: Colors.btnColor,
+    borderWidth:3,
+    borderColor:Colors.whiteColor,
     borderRadius: 5,
     height: 50,
     alignItems: "center",

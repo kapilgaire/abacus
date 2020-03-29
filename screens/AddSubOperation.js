@@ -6,7 +6,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    // Animated
+
 } from 'react-native';
 import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
@@ -23,10 +25,26 @@ export default class AddSubOperation extends React.Component {
             answer: 0,
             userAns: '',
             showAnswer: false,
-            showContent: false
+            showContent: false,
+            // animation: new Animated.Value(0)
+
 
         };
     }
+
+    // startAnimation = () => {
+
+    //     Animated.timing(this.state.animation, {
+    //         toValue: 0,
+    //         timing: 10
+    //     }).start(() => {
+    //         Animated.timing(this.state.animation, {
+    //             toValue: 1,
+    //             duration: 10
+    //         }).start();
+    //     })
+    // }
+
 
     dispAnswer() {
 
@@ -99,20 +117,41 @@ export default class AddSubOperation extends React.Component {
         let num = [];
 
         num.length = this.params.NumOfSum;
+
+
         for (let i = 0; i < this.params.NumOfSum; i++) {
+
             if (i % 2 == 0) {
-                num[i] = this.generateRandomNumber()* -1;
+                num[i] = this.generateRandomNumber() * -1;
             } else {
                 num[i] = this.generateRandomNumber();
 
             }
+        }
+                // console.log('before'+num);
+
+        for (let i = 0; i < this.params.NumOfSum; i++) {
+
+            if(num[i-1] == num[i]) {
+                var j = i;
+                while(j < num.length && num[j] == num[i]) {
+                    j++;
+                }
+                var el = num[j];
+                num[j] = num[i];
+                num[i] = el;  
+            }
             setTimeout(() => {
+
+                // this.startAnimation()
 
                 this.setState({ NumberHolder: num[i] });
 
             }, i * this.params.TimeInSeconds * 1000);
 
         }
+        // console.log('after'+num);
+
 
         this.doSum(num)
     }
@@ -125,7 +164,7 @@ export default class AddSubOperation extends React.Component {
             sum = sum + num[i];
         }
 
-        if(sum<0){
+        if (sum < 0) {
             sum = -sum
         }
 
@@ -143,15 +182,15 @@ export default class AddSubOperation extends React.Component {
 
 
         if (this.state.userAns == '') {
-            this.refs.toast.show('Empty', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Empty', 2000);
 
         } else if (this.state.answer == this.state.userAns) {
-            this.refs.toast.show('True', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Right', 2000);
 
 
         } else {
 
-            this.refs.toast.show('False', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Wrong', 2000);
 
         }
     }
@@ -187,14 +226,18 @@ export default class AddSubOperation extends React.Component {
     };
 
     render() {
-
+        // 
+        // const animatedStyle = {
+        //     opacity: this.state.animation
+        // }
         return (
             <TouchableWithoutFeedback onPress={() => {
                 Keyboard.dismiss();
             }}>
                 <View style={styles.screen}>
-
-                    <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    {/* <Animated.View style={animatedStyle} > */}
+                        <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    {/* </Animated.View> */}
 
                     {this.state.showContent ?
                         <View style={styles.inputView} >
@@ -255,6 +298,8 @@ const styles = StyleSheet.create({
 
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
+        borderWidth:3,
+        borderColor:Colors.whiteColor,
         height: 50,
         alignItems: "center",
         justifyContent: "center",

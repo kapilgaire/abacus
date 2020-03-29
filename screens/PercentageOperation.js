@@ -123,7 +123,7 @@ export default class PercentageOperation extends React.Component {
 
             this.generateRandomNo();
         } else {
-            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Number of steps are completed', 2000);
 
             this.disable()
         }
@@ -196,7 +196,6 @@ export default class PercentageOperation extends React.Component {
 
                     <View style={styles.inputView} >
                         <TextInput
-                            style={styles.inputText}
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
@@ -255,7 +254,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 8,
         borderRadius: 5,
-        marginBottom: 5
+        marginBottom: 5,
+        marginTop:10
+
 
     },
 
@@ -267,6 +268,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 8,
+        borderWidth:3,
+        borderColor:Colors.whiteColor,
+
         marginBottom: 8
     },
 

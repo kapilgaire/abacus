@@ -122,7 +122,7 @@ export default class DivisionOperation extends React.Component {
 
             this.generateRandomNo();
         } else {
-            this.refs.toast.show('Number of steps is completed', DURATION.LENGTH_LONG);
+            this.refs.toast.show('Number of steps are completed', 2000);
 
             this.disable()
         }
@@ -198,7 +198,6 @@ export default class DivisionOperation extends React.Component {
 
                     <View style={styles.inputView} >
                         <TextInput
-                            style={styles.inputText}
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
@@ -258,6 +257,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#FAFAFA",
         justifyContent: "center",
         padding: 8,
+        marginTop:10,
+
         borderRadius: 5,
         marginBottom: 5
 
@@ -268,6 +269,9 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
+        borderWidth:3,
+        borderColor:Colors.whiteColor,
+
         alignItems: "center",
         justifyContent: "center",
         marginTop: 6,

@@ -38,12 +38,12 @@ export default class SquareRootParam extends React.Component {
   GoToNextScreen() {
     if (this.state.numOfDigigt == '') {
 
-      this.refs.toast.show('Enter Lenght of Root', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Lenght of Root', 2000);
     } else if (this.state.numOfSum == '') {
-      this.refs.toast.show('Enter Number of Sum', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Number of Sum', 2000);
 
     } else if (this.state.timeInSeconds == '') {
-      this.refs.toast.show('Enter Time ', DURATION.LENGTH_LONG);
+      this.refs.toast.show('Enter Time ', 2000);
 
     } else {
       this.props.navigation.navigate({
@@ -143,6 +143,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bgColor,
     borderRadius: 5,
     height: 50,
+    borderWidth:3,
+    borderColor:Colors.whiteColor,
+
     alignItems: "center",
     justifyContent: "center",
     marginTop: 8,
