@@ -103,6 +103,22 @@ const CategoriesScreen = props => {
           </View>
         </TouchableCmp>
 
+
+        <TouchableCmp
+          onPress={() => {
+
+            props.navigation.navigate({
+              routeName: 'NegativeAddSubParam'
+            });
+          }}>
+
+          <View style={styles.grid} >
+            <Text style={styles.title}>Negative Add/Sub</Text>
+            <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
+
+          </View>
+        </TouchableCmp>
+
         <TouchableCmp
 
           onPress={() => {
@@ -112,6 +128,21 @@ const CategoriesScreen = props => {
           }}>
           <View style={styles.grid} >
             <Text style={styles.title}>Multiply</Text>
+            <Image source={require('../assets/multiply.png')} style={styles.categoryImg} />
+
+          </View>
+        </TouchableCmp>
+
+        <TouchableCmp
+          onPress={() => {
+            props.navigation.navigate({
+              routeName: 'DecimalMulticationParam'
+
+            });
+          }}
+        >
+          <View style={styles.grid} >
+            <Text style={styles.title}>Decimal Multiplication</Text>
             <Image source={require('../assets/multiply.png')} style={styles.categoryImg} />
 
           </View>
@@ -149,6 +180,24 @@ const CategoriesScreen = props => {
           </View>
         </TouchableCmp>
 
+
+        <TouchableCmp
+
+          onPress={() => {
+
+            props.navigation.navigate({
+              routeName: 'DecimalDivisionParam'
+            });
+          }}
+
+        >
+          <View style={styles.grid} >
+            <Text style={styles.title}>Decimal Division</Text>
+            <Image source={require('../assets/division.png')} style={styles.categoryImg} />
+
+          </View>
+        </TouchableCmp>
+
         <TouchableCmp
           onPress={() => {
 
@@ -161,6 +210,42 @@ const CategoriesScreen = props => {
         >
           <View style={styles.grid} >
             <Text style={styles.title}>Square Root</Text>
+            <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
+
+          </View>
+        </TouchableCmp>
+
+
+        <TouchableCmp
+          onPress={() => {
+
+            props.navigation.navigate({
+              routeName: 'SquareRootPractiseParam'
+            });
+          }}
+
+
+        >
+          <View style={styles.grid} >
+            <Text style={styles.title}>Square Practise</Text>
+            <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
+
+          </View>
+        </TouchableCmp>
+
+
+        <TouchableCmp
+          onPress={() => {
+
+            props.navigation.navigate({
+              routeName: 'CubeRootPractiseParam'
+            });
+          }}
+
+
+        >
+          <View style={styles.grid} >
+            <Text style={styles.title}>Cube Practise</Text>
             <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
 
           </View>
@@ -263,6 +348,21 @@ const CategoriesScreen = props => {
         <TouchableCmp
           onPress={() => {
 
+            Linking.openURL('https://abacuschampsacademy.com/tables.aspx')
+
+          }}
+
+        >
+          <View style={styles.grid} >
+            <Text style={styles.title}>Go to Sheet Generator</Text>
+            <Image source={require('../assets/browser.png')} style={styles.categoryImg} />
+
+          </View>
+        </TouchableCmp>
+
+        <TouchableCmp
+          onPress={() => {
+
             let packageName
 
             if (Platform.OS === 'android') {
@@ -276,7 +376,7 @@ const CategoriesScreen = props => {
 
               message: packageName
 
-              
+
             })
 
           }}
@@ -288,6 +388,9 @@ const CategoriesScreen = props => {
 
           </View>
         </TouchableCmp>
+
+
+
 
       </View>
     </ScrollView >
@@ -345,7 +448,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'open-sans-bold',
     fontSize: 18,
-    textAlign: 'right'
+    textAlign: 'center'
   }
 
 

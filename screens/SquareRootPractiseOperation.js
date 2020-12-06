@@ -12,7 +12,7 @@ import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
 
 
-export default class DivisionOperation extends React.Component {
+export default class CubeRootPractiseParam extends React.Component {
 
     constructor(props) {
         super(props);
@@ -25,20 +25,18 @@ export default class DivisionOperation extends React.Component {
             timer: 0,
             right: 0,
             wrong: 0,
-            firstNo: 0,
-            secondNo: 0,
+            square: 0,
             userAns: 0,
             prevQues: '',
             textInputStatus: true,
             restartFlag: false,
             btnStatus: false
 
-
         };
     }
 
     startTimer() {
-        for (let i = 0; i <= this.params.TimeToFinish; i++) {
+        for (let i = 0; i <= this.params.TimeInSeconds; i++) {
             setTimeout(() => {
 
                 this.setState({ timer: i });
@@ -49,43 +47,70 @@ export default class DivisionOperation extends React.Component {
 
     generateRandomNo() {
 
-        let max1 = this.params.HighNoToDiv;
-        let min1 = this.params.LowNoToDiv;
+        let max = 0;
+        let min = 0;
+        let random = 0;
 
-        let max2 = this.params.HighNoDivBy;
-        let min2 = this.params.LowNoDivBy;
 
-        let firstRandom = Math.floor(Math.random() * (+max1 - +min1) + +min1);
+        if (this.params.NumOfDigit == 1) {
+            min = 1;
+            max = 9;
+        } else if (this.params.NumOfDigit == 2) {
+            min = 10;
+            max = 99;
+        } else if (this.params.NumOfDigit == 3) {
+            min = 100;
+            max = 999;
+        } else if (this.params.NumOfDigit == 4) {
+            min = 1000;
+            max = 9999;
+        } else if (this.params.NumOfDigit == 5) {
+            min = 10000;
+            max = 99999;
+        } else if (this.params.NumOfDigit == 6) {
+            min = 100000;
+            max = 999999;
+        } else if (this.params.NumOfDigit == 7) {
+            min = 1000000;
+            max = 9999999;
+        } else if (this.params.NumOfDigit == 8) {
+            min = 10000000;
+            max = 99999999;
+        } else if (this.params.NumOfDigit == 9) {
+            min = 100000000;
+            max = 999999999;
+        }
 
-        let secondRandom = Math.floor(Math.random() * (+max2 - +min2) + +min2);
+        random = Math.floor(Math.random() * (+max - +min) + +min);
 
-        let thirdNum = firstRandom *secondRandom
+        // let sqr = Math.pow(random, 2);
 
-        this.setState({ firstNo: thirdNum });
+        this.setState({ square: random });
 
-        this.setState({ secondNo: secondRandom });
+        return random;
 
 
 
     }
+
     disableTask() {
         setTimeout(() => {
 
             this.setState({ textInputStatus: false });
 
-        }, this.params.TimeToFinish * 1000);
+        }, this.params.TimeInSeconds * 1000);
 
         setTimeout(() => {
 
             this.setState({ restartFlag: true });
 
-        }, this.params.TimeToFinish * 1000);
+        }, this.params.TimeInSeconds * 1000);
 
         setTimeout(() => {
 
             this.setState({ btnStatus: true });
 
-        }, this.params.TimeToFinish * 1000);
+        }, this.params.TimeInSeconds * 1000);
 
 
 
@@ -101,24 +126,27 @@ export default class DivisionOperation extends React.Component {
     }
 
     checkAnswer() {
+
         if (this.params.NumOfSum != sumCounter) {
 
             sumCounter++
+            let ans = (this.state.square * this.state.square);
 
 
-            let ans = this.state.firstNo / this.state.secondNo;
-
-            this.setState({ prevQues: this.state.firstNo + " ÷ " + this.state.secondNo + "=" + ans })
+            this.setState({
+                prevQues: "(" + this.state.square + ")" + "\u00B2"
+                    + " = " + ans
+            })
 
             if (ans == this.state.userAns) {
                 righCounter++;
                 this.setState({ right: righCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' });
 
             } else {
                 wrongCounter++;
                 this.setState({ wrong: wrongCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' });
 
             }
 
@@ -132,16 +160,15 @@ export default class DivisionOperation extends React.Component {
         }
     }
 
-    disable(){
+    disable() {
         this.setState({ textInputStatus: false });
         this.setState({ restartFlag: true });
 
 
     }
 
-
     static navigationOptions = {
-        headerTitle: 'Division',
+        headerTitle: 'Square Practise',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor
@@ -176,10 +203,9 @@ export default class DivisionOperation extends React.Component {
         this.disableTask();
 
     }
-
     render() {
 
-        // console.log(" time" + this.params.TimeToFinish);
+        console.log(" time" + this.params.TimeToFinish);
 
 
         return (
@@ -188,7 +214,7 @@ export default class DivisionOperation extends React.Component {
             }}>
                 <View style={styles.screen}>
 
-                    <Text style={styles.textStyle}>{this.state.timer + '/' + this.params.TimeToFinish}</Text>
+                    <Text style={styles.textStyle}>{this.state.timer + '/' + this.params.TimeInSeconds}</Text>
 
                     <Text style={styles.textStyle}>{'Right :' + this.state.right}</Text>
 
@@ -196,7 +222,11 @@ export default class DivisionOperation extends React.Component {
 
                     <Text style={styles.textStyle}>{this.state.prevQues}</Text>
 
-                    <Text style={styles.textStyle}>{this.state.firstNo + ' / ' + this.state.secondNo}</Text>
+                    <Text style={styles.textStyle}>{
+                        //  this.state.square +" * "+ this.state.square
+                        "(" + this.state.square + ")" + "\u00B2"
+
+                    }</Text>
 
 
 
@@ -206,7 +236,6 @@ export default class DivisionOperation extends React.Component {
                             placeholderTextColor="#003f5c"
                             keyboardType="number-pad"
                             editable={this.state.textInputStatus}
-
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.state.userAns}
                         />
@@ -237,7 +266,6 @@ export default class DivisionOperation extends React.Component {
 
                     <Toast ref="toast"
                         position='center'
-
                     />
 
                 </View>
@@ -261,10 +289,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#FAFAFA",
         justifyContent: "center",
         padding: 8,
-        marginTop:10,
-
         borderRadius: 5,
-        marginBottom: 5
+        marginBottom: 5,
+        marginTop: 10
+
 
     },
 
@@ -273,13 +301,13 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
-        borderWidth:3,
-        borderColor:Colors.whiteColor,
-
         alignItems: "center",
+        borderWidth: 3,
+        borderColor: Colors.whiteColor,
+
         justifyContent: "center",
-        marginTop: 6,
-        marginBottom: 6
+        marginTop: 40,
+        marginBottom: 10
     },
 
 

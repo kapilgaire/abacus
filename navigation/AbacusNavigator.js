@@ -35,6 +35,21 @@ import TableOperation from '../screens/TableOperation';
 import PercentageOperation from '../screens/PercentageOperation';
 import MyStopwatch from '../screens/MyStopwatch';
 import MyCalculator from '../screens/MyCalculator';
+import DecimalMultiplicationOperation from '../screens/DecimalMultiplicationOperation';
+import DecimalMulticationParam from '../screens/DecimalMulticationParam';
+import DecimalDivisionOperation from '../screens/DecimalDivisionOperation';
+import DecimalDivisionParam from '../screens/DecimalDivisionParam';
+import NegativeAddSubOperation from '../screens/NegativeAddSubOperation';
+import NegativeAddSubParam from '../screens/NegativeAddSubParam';
+
+
+import SquareRootPractiseOperation from '../screens/SquareRootPractiseOperation';
+import SquareRootPractiseParam from '../screens/SquareRootPractiseParam';
+import CubeRootPractiseParam from '../screens/CubeRootPractiseParam';
+import CubeRootPractiseOperation from '../screens/CubeRootPractiseOperation';
+
+
+
 
 
 
@@ -66,7 +81,21 @@ const AbacusNavigator = createStackNavigator({
   TableOperation: TableOperation,
   PercentageOperation: PercentageOperation,
   MyStopwatch: MyStopwatch,
-  MyCalculator:MyCalculator
+  MyCalculator: MyCalculator,
+  DecimalMulticationParam: DecimalMulticationParam,
+  DecimalMultiplicationOperation: DecimalMultiplicationOperation,
+  DecimalDivisionOperation: DecimalDivisionOperation,
+  DecimalDivisionParam: DecimalDivisionParam,
+  NegativeAddSubOperation: NegativeAddSubOperation,
+  NegativeAddSubParam: NegativeAddSubParam,
+  SquareRootPractiseOperation: SquareRootPractiseOperation,
+  SquareRootPractiseParam: SquareRootPractiseParam,
+  CubeRootPractiseParam: CubeRootPractiseParam,
+  CubeRootPractiseOperation, CubeRootPractiseOperation
+
+
+
+
 
 
 });
@@ -80,7 +109,7 @@ const MainNavigator = createDrawerNavigator(
       }
     },
 
-  
+
 
   },
   {

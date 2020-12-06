@@ -25,6 +25,8 @@ export default class DecimalAddOperation extends React.Component {
             userAns: '',
             showAnswer: false,
             showContent: false,
+            genratedNumbers: [],
+
             // animation: new Animated.Value(0)
 
 
@@ -115,13 +117,30 @@ export default class DecimalAddOperation extends React.Component {
 
         num.length = this.params.NumOfSum;
         for (let i = 0; i < this.params.NumOfSum; i++) {
+            let digit = Math.floor(Math.random() * (+this.params.NumOfSum - +1) + +1);
 
-            if (i % 2 == 0) {
+            if (digit == i) {
+
                 num[i] = this.generateRandomNumber() * -1;
+
             } else {
+
                 num[i] = this.generateRandomNumber();
 
             }
+
+            console.log(i + ' numbers ' + num[i])
+
+
+            // if (i % 2 == 0) {
+            //     num[i] = this.generateRandomNumber();
+
+            // } else {
+
+            //     num[i] = this.generateRandomNumber() * -1;
+
+
+            // }
 
             setTimeout(() => {
 
@@ -133,15 +152,19 @@ export default class DecimalAddOperation extends React.Component {
 
         }
 
-        this.doSum(num)
+        this.setState({ genratedNumbers: num })
+
+
     }
 
-    doSum = (num) => {
+    doSum = () => {
 
         let sum = 0;
-        for (let i = 0; i < num.length; i++) {
+        for (let i = 0; i < this.state.genratedNumbers.length; i++) {
 
-            sum = sum + num[i];
+            sum = sum + this.state.genratedNumbers[i];
+            console.log('number' + this.state.genratedNumbers[i])
+
         }
 
         if (sum < 0) {
@@ -156,6 +179,11 @@ export default class DecimalAddOperation extends React.Component {
     }
 
     checkAnswer() {
+
+        this.setState({ NumberHolder: '' });
+
+        this.doSum();
+
         this.dispAnswer();
 
 
@@ -214,7 +242,7 @@ export default class DecimalAddOperation extends React.Component {
                 <View style={styles.screen}>
 
                     {/* <Animated.View style={animatedStyle} > */}
-                        <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
                     {/* </Animated.View> */}
 
                     {this.state.showContent ?
@@ -278,8 +306,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
-        borderColor:Colors.whiteColor,
-        borderWidth:3,
+        borderColor: Colors.whiteColor,
+        borderWidth: 3,
 
         alignItems: "center",
         justifyContent: "center",

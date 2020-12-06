@@ -26,6 +26,7 @@ export default class AddSubOperation extends React.Component {
             userAns: '',
             showAnswer: false,
             showContent: false,
+            genratedNumbers: [],
             // animation: new Animated.Value(0)
 
 
@@ -119,28 +120,50 @@ export default class AddSubOperation extends React.Component {
         num.length = this.params.NumOfSum;
 
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 1; i <= this.params.NumOfSum; i++) {
 
-            if (i % 2 == 0) {
+
+            let digit = Math.floor(Math.random() * (+this.params.NumOfSum - +1) + +1);
+
+
+            // console.log('digit' + digit)
+
+            if (digit == i) {
+
                 num[i] = this.generateRandomNumber() * -1;
+
             } else {
+
                 num[i] = this.generateRandomNumber();
 
             }
+
+            console.log(i + ' numbers ex' + num[i])
+
+            // if (i % 2 == 0) {
+            //     num[i] = this.generateRandomNumber();
+
+            // } else {
+            //     num[i] = this.generateRandomNumber() * -1;
+
+
+            // }
         }
-                // console.log('before'+num);
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        this.setState({ genratedNumbers: num })
+        // console.log('before'+num);
 
-            if(num[i-1] == num[i]) {
-                var j = i;
-                while(j < num.length && num[j] == num[i]) {
-                    j++;
-                }
-                var el = num[j];
-                num[j] = num[i];
-                num[i] = el;  
-            }
+        for (let i = 1; i <= this.params.NumOfSum; i++) {
+
+            // if (num[i - 1] == num[i]) {
+            //     var j = i;
+            //     while (j < num.length && num[j] == num[i]) {
+            //         j++;
+            //     }
+            //     var el = num[j];
+            //     num[j] = num[i];
+            //     num[i] = el;
+            // }
             setTimeout(() => {
 
                 // this.startAnimation()
@@ -153,15 +176,16 @@ export default class AddSubOperation extends React.Component {
         // console.log('after'+num);
 
 
-        this.doSum(num)
+        // this.doSum(num)
     }
 
-    doSum = (num) => {
+    doSum = () => {
 
         let sum = 0;
-        for (let i = 0; i < num.length; i++) {
+        for (let i = 1; i < this.state.genratedNumbers.length; i++) {
 
-            sum = sum + num[i];
+            sum = sum + this.state.genratedNumbers[i];
+            console.log('number' + this.state.genratedNumbers[i])
         }
 
         if (sum < 0) {
@@ -178,6 +202,9 @@ export default class AddSubOperation extends React.Component {
         //console.log("user ans" + this.state.userAns);
 
 
+        this.setState({ NumberHolder: '' });
+
+        this.doSum();
         this.dispAnswer();
 
 
@@ -236,7 +263,7 @@ export default class AddSubOperation extends React.Component {
             }}>
                 <View style={styles.screen}>
                     {/* <Animated.View style={animatedStyle} > */}
-                        <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
                     {/* </Animated.View> */}
 
                     {this.state.showContent ?
@@ -298,8 +325,8 @@ const styles = StyleSheet.create({
 
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
-        borderWidth:3,
-        borderColor:Colors.whiteColor,
+        borderWidth: 3,
+        borderColor: Colors.whiteColor,
         height: 50,
         alignItems: "center",
         justifyContent: "center",

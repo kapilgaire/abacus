@@ -8,12 +8,14 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
     // Animated
+
 } from 'react-native';
 import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
 
 
-export default class MixAddSubOperation extends React.Component {
+
+export default class NegativeAddSubOperation extends React.Component {
 
     constructor(props) {
         super(props);
@@ -25,12 +27,25 @@ export default class MixAddSubOperation extends React.Component {
             showAnswer: false,
             showContent: false,
             genratedNumbers: [],
-
             // animation: new Animated.Value(0)
 
 
         };
     }
+
+    // startAnimation = () => {
+
+    //     Animated.timing(this.state.animation, {
+    //         toValue: 0,
+    //         timing: 10
+    //     }).start(() => {
+    //         Animated.timing(this.state.animation, {
+    //             toValue: 1,
+    //             duration: 10
+    //         }).start();
+    //     })
+    // }
+
 
     dispAnswer() {
 
@@ -38,7 +53,6 @@ export default class MixAddSubOperation extends React.Component {
             this.setState({ showAnswer: true })
         }
     }
-
     dispContent() {
 
 
@@ -49,8 +63,14 @@ export default class MixAddSubOperation extends React.Component {
 
         }, this.params.NumOfSum * this.params.TimeInSeconds * 1000);
     }
+
     generateRandomNumber
         = () => {
+
+
+            //console.log("num of digit" + this.params.NumOfDigit + " num of sum "
+            //  + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
+
 
 
             let max = 0;
@@ -58,59 +78,38 @@ export default class MixAddSubOperation extends React.Component {
             let random = 0;
 
 
-
-
-            let from = this.params.EnterFromDigit
-            let to = this.params.EnterToDigit
-
-            // console.log('from '+from)
-            // console.log('to '+to)
-
-
-            // let digit = Math.floor(Math.random() * (+to - +from) + +from);
-            
-
-          let digit =Math.floor(Math.random() * (to) + +from);
-
-            // console.log('digitttt '+digit  )
-
-            if (digit == 1) {
+            if (this.params.NumOfDigit == 1) {
                 min = 1;
                 max = 9;
-            } else if (digit == 2) {
+            } else if (this.params.NumOfDigit == 2) {
                 min = 10;
                 max = 99;
-            } else if (digit == 3) {
+            } else if (this.params.NumOfDigit == 3) {
                 min = 100;
                 max = 999;
-            } else if (digit == 4) {
+            } else if (this.params.NumOfDigit == 4) {
                 min = 1000;
                 max = 9999;
-            } else if (digit == 5) {
+            } else if (this.params.NumOfDigit == 5) {
                 min = 10000;
                 max = 99999;
-            } else if (digit == 6) {
+            } else if (this.params.NumOfDigit == 6) {
                 min = 100000;
                 max = 999999;
-            } else if (digit == 7) {
+            } else if (this.params.NumOfDigit == 7) {
                 min = 1000000;
                 max = 9999999;
-            } else if (digit == 8) {
+            } else if (this.params.NumOfDigit == 8) {
                 min = 10000000;
                 max = 99999999;
-            } else if (digit == 9) {
+            } else if (this.params.NumOfDigit == 9) {
                 min = 100000000;
                 max = 999999999;
             }
 
-
-
-
-
             random = Math.floor(Math.random() * (+max - +min) + +min);
 
             return random;
-
 
         }
 
@@ -120,14 +119,14 @@ export default class MixAddSubOperation extends React.Component {
 
         num.length = this.params.NumOfSum;
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+
+        for (let i = 1; i <= this.params.NumOfSum; i++) {
 
 
-            num[i] = this.generateRandomNumber();
+            let digit = Math.floor(Math.random() * (+this.params.NumOfSum - +i) + +i);
 
-            let digit = Math.floor(Math.random() * (+this.params.NumOfSum - +1) + +1);
 
-            // console.log('digit '+ digit)
+            // console.log('digit' + digit)
 
             if (digit == i) {
 
@@ -139,44 +138,43 @@ export default class MixAddSubOperation extends React.Component {
 
             }
 
-            console.log(i + ' numbers ' + num[i])
+            console.log(i + ' numbers ex' + num[i])
 
-            
+            // if (i % 2 == 0) {
+            //     num[i] = this.generateRandomNumber();
 
+            // } else {
+            //     num[i] = this.generateRandomNumber() * -1;
+
+
+            // }
         }
 
         this.setState({ genratedNumbers: num })
-
         // console.log('before'+num);
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 1; i <= this.params.NumOfSum; i++) {
 
-
-            // if(num[i-1] == num[i]) {
+            // if (num[i - 1] == num[i]) {
             //     var j = i;
-            //     while(j < num.length && num[j] == num[i]) {
+            //     while (j < num.length && num[j] == num[i]) {
             //         j++;
             //     }
             //     var el = num[j];
             //     num[j] = num[i];
-            //     num[i] = el;  
+            //     num[i] = el;
             // }
-
             setTimeout(() => {
 
                 // this.startAnimation()
+
                 this.setState({ NumberHolder: num[i] });
 
             }, i * this.params.TimeInSeconds * 1000);
 
-
-
         }
-
-
-
         // console.log('after'+num);
-        
+
 
         // this.doSum(num)
     }
@@ -184,12 +182,13 @@ export default class MixAddSubOperation extends React.Component {
     doSum = () => {
 
         let sum = 0;
-        for (let i = 0; i < this.state.genratedNumbers.length; i++) {
+        for (let i = 1; i < this.state.genratedNumbers.length; i++) {
 
             sum = sum + this.state.genratedNumbers[i];
             console.log('number' + this.state.genratedNumbers[i])
-
         }
+
+       
 
         this.setState({ answer: sum });
 
@@ -200,12 +199,11 @@ export default class MixAddSubOperation extends React.Component {
         //console.log("ans " + this.state.answer);
         //console.log("user ans" + this.state.userAns);
 
+
         this.setState({ NumberHolder: '' });
 
         this.doSum();
-
         this.dispAnswer();
-
 
 
         if (this.state.userAns == '') {
@@ -222,6 +220,13 @@ export default class MixAddSubOperation extends React.Component {
         }
     }
 
+    componentDidMount() {
+
+        this.showRandomNumber();
+
+        this.dispContent();
+
+    }
     restart() {
         this.setState({ showContent: false });
 
@@ -234,53 +239,33 @@ export default class MixAddSubOperation extends React.Component {
 
 
     }
-    // startAnimation = () => {
-
-    //     Animated.timing(this.state.animation, {
-    //         toValue: 0,
-    //         timing: 10
-    //     }).start(() => {
-    //         Animated.timing(this.state.animation, {
-    //             toValue: 1,
-    //             duration: 10
-    //         }).start();
-    //     })
-    // }
-
-    componentDidMount() {
-
-        this.showRandomNumber();
-
-        this.dispContent();
-    }
 
 
     static navigationOptions = {
-        headerTitle: 'Mix Add/Sub',
+        headerTitle: 'Negative Add/Sub',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor
         },
         headerTintColor: 'white'
     };
-    render() {
 
+    render() {
+        // 
         // const animatedStyle = {
         //     opacity: this.state.animation
         // }
-
         return (
             <TouchableWithoutFeedback onPress={() => {
                 Keyboard.dismiss();
             }}>
                 <View style={styles.screen}>
-
                     {/* <Animated.View style={animatedStyle} > */}
-                        <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
                     {/* </Animated.View> */}
 
-                    {
-                        this.state.showContent ? <View style={styles.inputView} >
+                    {this.state.showContent ?
+                        <View style={styles.inputView} >
                             <TextInput
                                 style={styles.inputText}
                                 placeholder="Enter Your answer"
@@ -289,36 +274,25 @@ export default class MixAddSubOperation extends React.Component {
                                 onChangeText={(userAns) => this.setState({ userAns })}
                                 value={this.setState.userAns}
                             />
-                        </View> : null
-                    }
-
-                    {
-                        this.state.showContent ? <TouchableOpacity style={styles.startBtn}
-
-                            onPress={() => {
-                                this.checkAnswer()
-
-                            }}
-                        >
-                            <Text style={styles.startText}>CHECK ANS</Text>
-                        </TouchableOpacity> : null
-                    }
-
-                    {
-                        this.state.showAnswer ? <Text style={styles.randumNum}>{this.state.answer}</Text> : null
-                    }
-
-                    {
-                        this.state.showContent ? <TouchableOpacity onPress={() => { this.restart() }}
-                            style={styles.startBtn}  >
-                            <Text style={styles.startText}>START AGAIN</Text>
-                        </TouchableOpacity> : null
-                    }
+                        </View> : null}
 
 
 
-                    <Toast ref="toast" />
+                    {this.state.showContent ? <TouchableOpacity style={styles.startBtn} onPress={() => { this.checkAnswer() }}>
+                        <Text style={styles.startText}>CHECK ANS</Text>
+                    </TouchableOpacity> : null}
 
+                    {this.state.showAnswer ? <Text style={styles.randumNum}>{this.state.answer}</Text> : null}
+
+
+                    {this.state.showContent ? <TouchableOpacity onPress={() => { this.restart() }} style={styles.startBtn}>
+                        <Text style={styles.startText}>START AGAIN</Text>
+                    </TouchableOpacity> : null}
+
+
+                    <Toast ref="toast"
+                        position='center'
+                    />
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -334,6 +308,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         backgroundColor: Colors.bgColor,
         padding: 8
+
     },
     inputView: {
         backgroundColor: "#FAFAFA",
@@ -348,10 +323,9 @@ const styles = StyleSheet.create({
 
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
-        height: 50,
         borderWidth: 3,
         borderColor: Colors.whiteColor,
-
+        height: 50,
         alignItems: "center",
         justifyContent: "center",
         marginTop: 8,

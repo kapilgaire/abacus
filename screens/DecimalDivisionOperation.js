@@ -12,7 +12,7 @@ import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
 
 
-export default class DivisionOperation extends React.Component {
+export default class DecimalDivisionOperation extends React.Component {
 
     constructor(props) {
         super(props);
@@ -59,9 +59,9 @@ export default class DivisionOperation extends React.Component {
 
         let secondRandom = Math.floor(Math.random() * (+max2 - +min2) + +min2);
 
-        let thirdNum = firstRandom *secondRandom
+        // let thirdNum = firstRandom * secondRandom
 
-        this.setState({ firstNo: thirdNum });
+        this.setState({ firstNo: firstRandom });
 
         this.setState({ secondNo: secondRandom });
 
@@ -106,19 +106,19 @@ export default class DivisionOperation extends React.Component {
             sumCounter++
 
 
-            let ans = this.state.firstNo / this.state.secondNo;
+            let ans = (this.state.firstNo / this.state.secondNo).toFixed(2);
 
             this.setState({ prevQues: this.state.firstNo + " ÷ " + this.state.secondNo + "=" + ans })
 
             if (ans == this.state.userAns) {
                 righCounter++;
                 this.setState({ right: righCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' })
 
             } else {
                 wrongCounter++;
                 this.setState({ wrong: wrongCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' })
 
             }
 
@@ -132,7 +132,7 @@ export default class DivisionOperation extends React.Component {
         }
     }
 
-    disable(){
+    disable() {
         this.setState({ textInputStatus: false });
         this.setState({ restartFlag: true });
 
@@ -141,7 +141,7 @@ export default class DivisionOperation extends React.Component {
 
 
     static navigationOptions = {
-        headerTitle: 'Division',
+        headerTitle: 'Decimal Division',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FAFAFA",
         justifyContent: "center",
         padding: 8,
-        marginTop:10,
+        marginTop: 10,
 
         borderRadius: 5,
         marginBottom: 5
@@ -273,8 +273,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
-        borderWidth:3,
-        borderColor:Colors.whiteColor,
+        borderWidth: 3,
+        borderColor: Colors.whiteColor,
 
         alignItems: "center",
         justifyContent: "center",

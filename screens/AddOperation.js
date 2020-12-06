@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Colors from '../constants/Colors'
 
+import ShakingText from '../screens/ShakingText';
 import Toast, { DURATION } from 'react-native-easy-toast';
 
 
@@ -26,6 +27,8 @@ export default class AddOperation extends React.Component {
             userAns: '',
             showAnswer: false,
             showContent: false,
+            genratedNumbers: [],
+
             // animation: new Animated.Value(0)
 
         };
@@ -121,52 +124,65 @@ export default class AddOperation extends React.Component {
 
 
             num[i] = this.generateRandomNumber();
-            
+
 
         }
         // console.log('before'+num);
 
+        this.setState({ genratedNumbers: num })
+        console.log('num------- ')
+
         for (let i = 0; i < this.params.NumOfSum; i++) {
 
+            console.log('num ' + num[i])
 
-            if(num[i-1] == num[i]) {
-                var j = i;
-                while(j < num.length && num[j] == num[i]) {
-                    j++;
-                }
-                var el = num[j];
-                num[j] = num[i];
-                num[i] = el;  
-            }
+
+            // if(num[i-1] == num[i]) {
+            //     var j = i;
+            //     while(j < num.length && num[j] == num[i]) {
+            //         j++;
+            //     }
+            //     var el = num[j];
+            //     num[j] = num[i];
+            //     num[i] = el;  
+            // }
+
+
+
+
 
             setTimeout(() => {
 
 
-                // this.startAnimation()
+
+
                 this.setState({ NumberHolder: num[i] });
+
+
 
             }, i * this.params.TimeInSeconds * 1000);
 
 
+
+
         }
 
-        // console.log('after'+num);
-        
+       
 
 
-        this.doSum(num)
     }
 
+   
 
 
 
 
-    doSum = (num) => {
+    doSum = () => {
 
         let sum = 0;
-        for (let i = 0; i < num.length; i++) {
+        for (let i = 0; i < this.state.genratedNumbers.length; i++) {
 
-            sum = sum + num[i];
+            sum = sum + this.state.genratedNumbers[i];
         }
 
         this.setState({ answer: sum });
@@ -175,8 +191,11 @@ export default class AddOperation extends React.Component {
     }
 
     checkAnswer() {
-        //console.log("ans " + this.state.answer);
-        //console.log("user ans" + this.state.userAns);
+
+        this.setState({ NumberHolder: '' });
+
+      
+        this.doSum();
 
         this.dispAnswer();
 
@@ -216,7 +235,7 @@ export default class AddOperation extends React.Component {
 
     }
 
-     
+
     componentWillUnmount() {
     }
 
@@ -231,10 +250,7 @@ export default class AddOperation extends React.Component {
     };
     render() {
 
-        // 
-        // const animatedStyle = {
-        //     opacity: this.state.animation
-        // }
+
 
         return (
             <TouchableWithoutFeedback onPress={() => {
@@ -242,10 +258,17 @@ export default class AddOperation extends React.Component {
             }}>
                 <View style={styles.screen}>
 
-                    {/* <Animated.View style={animatedStyle} > */}
-                        <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
 
-                    {/* </Animated.View> */}
+
+                    <View style={{
+                        justifyContent: 'center', alignItems: 'center'
+                    }}>
+                        <ShakingText>
+                            <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                        </ShakingText>
+                    </View>
+
+
 
 
 

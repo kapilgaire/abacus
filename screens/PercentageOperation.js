@@ -105,16 +105,23 @@ export default class PercentageOperation extends React.Component {
             sumCounter++
 
 
-            let ans = this.state.firstNo / 100 * this.state.secondNo;
+            let ans = (this.state.firstNo / 100 * this.state.secondNo).toFixed(3);
+
+            // let ans = (this.state.firstNo / 100 * this.state.secondNo);
+
 
             this.setState({ prevQues: this.state.firstNo + " % " + this.state.secondNo + " = " + ans })
 
             if (ans == this.state.userAns) {
                 righCounter++;
                 this.setState({ right: righCounter });
+                this.setState({userAns:''})
+
             } else {
                 wrongCounter++;
                 this.setState({ wrong: wrongCounter });
+                this.setState({userAns:''})
+
             }
 
 
@@ -202,7 +209,7 @@ export default class PercentageOperation extends React.Component {
                             editable={this.state.textInputStatus}
 
                             onChangeText={(userAns) => this.setState({ userAns })}
-                            value={this.setState.userAns}
+                            value={this.state.userAns}
                         />
                     </View>
 
