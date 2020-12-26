@@ -58,19 +58,14 @@ export default class DecimalAddOperation extends React.Component {
         setTimeout(() => {
 
             this.setState({ showContent: true });
+            this.setState({ NumberHolder: '' });
 
-        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000);
+
+        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000 + 1000);
     }
 
     generateRandomNumber
         = () => {
-
-
-            //console.log("num of digit" + this.params.NumOfDigit + " num of sum "
-            //  + this.params.NumOfSum + " Time in sec" + this.params.TimeInSeconds);
-
-
-
             let max = 0;
             let min = 0;
             let random = 0;
@@ -105,7 +100,9 @@ export default class DecimalAddOperation extends React.Component {
                 max = 999999999;
             }
 
-            random = Math.floor(Math.random() * (+max - +min) + +min) / 10;
+            // random = Math.floor(Math.random() * (+max - +min) + +min) / 10;
+
+            random = (Math.random() * (+max - +min) + +min).toFixed(2);
 
             return random;
 
@@ -116,73 +113,79 @@ export default class DecimalAddOperation extends React.Component {
         let num = [];
 
         num.length = this.params.NumOfSum;
-        for (let i = 0; i < this.params.NumOfSum; i++) {
-            let digit = Math.floor(Math.random() * (+this.params.NumOfSum - +1) + +1);
-
-            if (digit == i) {
-
-                num[i] = this.generateRandomNumber() * -1;
-
-            } else {
+        for (let i = 0; i <num.length ; i++) {
 
                 num[i] = this.generateRandomNumber();
+          
+        }
 
+        num.sort((a, b) => b - a)
+
+        console.log('numbers ' + num)
+
+        for (let i = 0; i <num.length  ; i++) {
+
+
+
+            // console.log(num[i])
+            if ((i+1) % 3 == 0  ) {
+                num[i] = num[i] * (-1)
             }
 
-            console.log(i + ' numbers ' + num[i])
+
+        }
+
+        console.log('before'+num);
 
 
-            // if (i % 2 == 0) {
-            //     num[i] = this.generateRandomNumber();
+        this.setState({ genratedNumbers: num })
 
-            // } else {
+        for (let i = 0; i < num.length; i++) {
 
-            //     num[i] = this.generateRandomNumber() * -1;
-
-
-            // }
 
             setTimeout(() => {
 
-
-                // this.startAnimation()
                 this.setState({ NumberHolder: num[i] });
 
             }, i * this.params.TimeInSeconds * 1000);
 
+
+
         }
 
-        this.setState({ genratedNumbers: num })
 
 
     }
 
     doSum = () => {
 
-        let sum = 0;
-        for (let i = 0; i < this.state.genratedNumbers.length; i++) {
+        var sum = 0;
+        for (let i = 0; i < this.state.genratedNumbers.length ; i++) {
 
-            sum = sum + this.state.genratedNumbers[i];
-            console.log('number' + this.state.genratedNumbers[i])
+            sum = sum + parseFloat(this.state.genratedNumbers[i]);
+            // console.log(sum+' number '+i+' ' + this.state.genratedNumbers[i])
 
         }
 
         if (sum < 0) {
             sum = -sum
         }
-        var rounded = Math.round(sum * 10) / 10
+        // var rounded = sum 
+
+        return sum.toFixed(2)
 
 
-        this.setState({ answer: rounded });
-
-        return rounded;
     }
 
     checkAnswer() {
 
-        this.setState({ NumberHolder: '' });
+        // this.setState({ NumberHolder: '' });
 
-        this.doSum();
+
+        let ans = this.doSum();
+
+        this.setState({ answer: ans });
+
 
         this.dispAnswer();
 
@@ -190,7 +193,7 @@ export default class DecimalAddOperation extends React.Component {
         if (this.state.userAns == '') {
             this.refs.toast.show('Empty', 2000);
 
-        } else if (this.state.answer == this.state.userAns) {
+        } else if (ans == this.state.userAns) {
             this.refs.toast.show('Right', 2000);
 
 
@@ -242,7 +245,7 @@ export default class DecimalAddOperation extends React.Component {
                 <View style={styles.screen}>
 
                     {/* <Animated.View style={animatedStyle} > */}
-                    <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    <Text style={styles.randumNum}>{this.state.NumberHolder == 0 ? '' : this.state.NumberHolder}</Text>
                     {/* </Animated.View> */}
 
                     {this.state.showContent ?

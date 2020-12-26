@@ -32,6 +32,8 @@ export default class AddOperation extends React.Component {
             // animation: new Animated.Value(0)
 
         };
+        this.interval = null;
+
     }
 
     // startAnimation = () => {
@@ -63,8 +65,10 @@ export default class AddOperation extends React.Component {
         setTimeout(() => {
 
             this.setState({ showContent: true });
+            this.setState({ NumberHolder: '' });
 
-        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000);
+
+        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000 + 1000);
     }
     generateRandomNumber
         = () => {
@@ -120,59 +124,56 @@ export default class AddOperation extends React.Component {
 
         num.length = this.params.NumOfSum;
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 0; i < num.length; i++) {
 
 
             num[i] = this.generateRandomNumber();
 
 
         }
-        // console.log('before'+num);
 
         this.setState({ genratedNumbers: num })
-        console.log('num------- ')
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 0; i < num.length; i++) {
 
-            console.log('num ' + num[i])
-
-
-            // if(num[i-1] == num[i]) {
-            //     var j = i;
-            //     while(j < num.length && num[j] == num[i]) {
-            //         j++;
-            //     }
-            //     var el = num[j];
-            //     num[j] = num[i];
-            //     num[i] = el;  
-            // }
-
-
-
+            // console.log('num ' + num[i])
 
 
             setTimeout(() => {
 
-
-
-
                 this.setState({ NumberHolder: num[i] });
-
-
 
             }, i * this.params.TimeInSeconds * 1000);
 
 
 
-
         }
 
-       
+
+        // var numberOfSum = 0;
+
+        // this.interval = setInterval(() => {
+
+
+        //     if (numberOfSum === parseInt(this.params.NumOfSum)){
+        //         clearInterval(this.interval)
+        //     }
+        //     this.setState({ NumberHolder: num[numberOfSum] })
+        //     numberOfSum += 1;
+        //     // this.setState({ NumberHolder: '' })
+
+
+
+        // }, this.params.TimeInSeconds * 1000);
+
+
+
+
 
 
     }
 
-   
+
 
 
 
@@ -180,30 +181,35 @@ export default class AddOperation extends React.Component {
     doSum = () => {
 
         let sum = 0;
-        for (let i = 0; i < this.state.genratedNumbers.length; i++) {
+        for (let i = 0; i < this.state.genratedNumbers.length ; i++) {
 
-            sum = sum + this.state.genratedNumbers[i];
+            // console.log('sum ' + this.state.genratedNumbers[i])
+
+            sum = sum + parseInt(this.state.genratedNumbers[i]);
+            console.log(i)
+
         }
 
-        this.setState({ answer: sum });
+        return sum
 
-        return sum;
+
     }
 
     checkAnswer() {
 
-        this.setState({ NumberHolder: '' });
 
-      
-        this.doSum();
+
+        let ans = this.doSum()
 
         this.dispAnswer();
+
+        this.setState({ answer: ans })
 
 
         if (this.state.userAns == '') {
             this.refs.toast.show('Empty', 2000);
 
-        } else if (this.state.answer == this.state.userAns) {
+        } else if (parseInt(ans) === parseInt(this.state.userAns)) {
             this.refs.toast.show('Right', 2000);
 
 
@@ -263,15 +269,10 @@ export default class AddOperation extends React.Component {
                     <View style={{
                         justifyContent: 'center', alignItems: 'center'
                     }}>
-                        <ShakingText>
-                            <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
-                        </ShakingText>
+                        {/* <ShakingText> */}
+                        <Text style={styles.randumNum}>{this.state.NumberHolder == 0 ? '' : this.state.NumberHolder}</Text>
+                        {/* </ShakingText> */}
                     </View>
-
-
-
-
-
 
                     {
                         this.state.showContent ? <View style={styles.inputView} >

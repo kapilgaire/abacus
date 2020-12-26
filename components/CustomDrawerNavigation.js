@@ -103,6 +103,36 @@ export default class CustomDrawerNavigation extends React.Component {
                                 <Text style={styles.navItemStyle} >Mix Add/sub</Text>
                             </View>
                         </TouchableCmp>
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'NegativeAddSubParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Negative Add/Sub</Text>
+                            </View>
+                        </TouchableCmp>
+
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'ReCallNumberParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Recall Numbers</Text>
+                            </View>
+                        </TouchableCmp>
+
                         <TouchableCmp
                             onPress={() => {
 
@@ -172,6 +202,35 @@ export default class CustomDrawerNavigation extends React.Component {
                                 <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
 
                                 <Text style={styles.navItemStyle} >Cube Root</Text>
+                            </View>
+                        </TouchableCmp>
+
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'SquareRootPractiseParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Square Practise</Text>
+                            </View>
+                        </TouchableCmp>
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'CubeRootPractiseParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Square Practise</Text>
                             </View>
                         </TouchableCmp>
 
@@ -263,6 +322,24 @@ export default class CustomDrawerNavigation extends React.Component {
                                 <Text style={styles.navItemStyle} >Share</Text>
 
                             </View>
+                        </TouchableCmp>
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                Linking.openURL('https://abacuschampsacademy.com/tables.aspx')
+
+                            }}
+
+                        >
+
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/share.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Go to Sheet Generator</Text>
+
+                            </View>
+
                         </TouchableCmp>
 
                     </View>

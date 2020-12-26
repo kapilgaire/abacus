@@ -36,9 +36,9 @@ export default class DecimalMultiplicationOperation extends React.Component {
     }
 
     startTimer() {
-        
+
         for (let i = 0; i <= this.params.TimeToFinish; i++) {
-           setTimeout(() => {
+            setTimeout(() => {
 
                 this.setState({ timer: i });
 
@@ -69,7 +69,7 @@ export default class DecimalMultiplicationOperation extends React.Component {
 
     }
 
-    disable(){
+    disable() {
         this.setState({ textInputStatus: false });
         this.setState({ restartFlag: true });
 
@@ -84,7 +84,7 @@ export default class DecimalMultiplicationOperation extends React.Component {
         let max2 = this.params.HighNoMulBy;
         let min2 = this.params.LowNoMulBy;
 
-        let firstRandom = (Math.random() * (+max1- +min1) + +min1).toFixed(2);
+        let firstRandom = (Math.random() * (+max1 - +min1) + +min1).toFixed(2);
 
         let secondRandom = (Math.random() * (+max2 - +min2) + +min2).toFixed(2);
 
@@ -108,25 +108,31 @@ export default class DecimalMultiplicationOperation extends React.Component {
 
 
 
+
+
     checkAnswer() {
 
         if (this.params.NumOfSum != sumCounter) {
 
             sumCounter++
 
-            let ans = (this.state.firstNo * this.state.secondNo).toFixed(2);
+
+
+            let temp = this.state.firstNo * this.state.secondNo
+
+            let ans = temp.toString().substring(0, temp.toString().indexOf(".") + 5)
 
             this.setState({ prevQues: this.state.firstNo + " X " + this.state.secondNo + "=" + ans })
 
             if (ans == this.state.userAns) {
                 righCounter++;
                 this.setState({ right: righCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' })
 
             } else {
                 wrongCounter++;
                 this.setState({ wrong: wrongCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' })
 
             }
 
@@ -212,7 +218,7 @@ export default class DecimalMultiplicationOperation extends React.Component {
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.state.userAns}
 
-                            // ref={input => { this.textInput = input }} 
+                        // ref={input => { this.textInput = input }} 
                         />
                     </View>
 
@@ -270,7 +276,7 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 5,
         marginBottom: 5,
-        marginTop:10
+        marginTop: 10
 
     },
 
@@ -279,8 +285,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.bgColor,
         borderRadius: 5,
         height: 50,
-        borderWidth:3,
-        borderColor:Colors.whiteColor,
+        borderWidth: 3,
+        borderColor: Colors.whiteColor,
 
         alignItems: "center",
         justifyContent: "center",

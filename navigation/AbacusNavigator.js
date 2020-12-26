@@ -1,5 +1,5 @@
 import {
-  createAppContainer
+  createAppContainer,createSwitchNavigator
 
 } from 'react-navigation';
 import CustomDrawerNavigation from '../components/CustomDrawerNavigation'
@@ -8,6 +8,7 @@ import {
   createStackNavigator
 
 } from 'react-navigation-stack';
+
 
 import CategoriesScreen from '../screens/CategoriesScreen';
 import AddSubParam from '../screens/AddSubParam';
@@ -47,17 +48,13 @@ import SquareRootPractiseOperation from '../screens/SquareRootPractiseOperation'
 import SquareRootPractiseParam from '../screens/SquareRootPractiseParam';
 import CubeRootPractiseParam from '../screens/CubeRootPractiseParam';
 import CubeRootPractiseOperation from '../screens/CubeRootPractiseOperation';
-
-
-
-
-
-
-
-
+import ReCallNumberParam from '../screens/ReCallNumberParam';
+import ReCallNumberOperation from '../screens/ReCallNumberOperation';
+import Splash from '../screens/Splash';
 
 const AbacusNavigator = createStackNavigator({
   Home: CategoriesScreen,
+  Splash: Splash,
   AddParam: AddParam,
   DecimalAddParam: DecimalAddParam,
   LongMulticationParam: LongMulticationParam,
@@ -91,7 +88,10 @@ const AbacusNavigator = createStackNavigator({
   SquareRootPractiseOperation: SquareRootPractiseOperation,
   SquareRootPractiseParam: SquareRootPractiseParam,
   CubeRootPractiseParam: CubeRootPractiseParam,
-  CubeRootPractiseOperation, CubeRootPractiseOperation
+  CubeRootPractiseOperation, CubeRootPractiseOperation,
+  ReCallNumberParam, ReCallNumberParam,
+  ReCallNumberOperation, ReCallNumberOperation
+
 
 
 
@@ -99,14 +99,22 @@ const AbacusNavigator = createStackNavigator({
 
 
 });
-const MainNavigator = createDrawerNavigator(
+
+
+
+const DrawerNavigationRoutes = createDrawerNavigator(
   {
 
-    Home: {
+    // Home: {
+    //   screen: AbacusNavigator,
+    //   navigationOptions: {
+    //     title: 'Home'
+    //   }
+    // },
+
+    AbacusNavigator: {
       screen: AbacusNavigator,
-      navigationOptions: {
-        title: 'Home'
-      }
+
     },
 
 
@@ -121,4 +129,15 @@ const MainNavigator = createDrawerNavigator(
   }
 );
 
+const MainNavigator = createSwitchNavigator({
+
+  SplashScreen: {
+    screen: Splash
+  },
+
+  DrawerNavigationRoutes: {
+    screen: DrawerNavigationRoutes,
+  }
+
+});
 export default createAppContainer(MainNavigator);

@@ -27,7 +27,7 @@ export default class SquareRootPractiseParam extends React.Component {
 
 
   static navigationOptions = {
-    headerTitle: 'Square Root',
+    headerTitle: 'Square practice',
     headerStyle: {
 
       backgroundColor: Colors.primaryColor
@@ -69,7 +69,7 @@ export default class SquareRootPractiseParam extends React.Component {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Length of square root"
+              placeholder="Number of digit"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
               maxLength={1}

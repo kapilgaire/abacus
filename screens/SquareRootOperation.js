@@ -138,9 +138,13 @@ export default class SquareRootOperation extends React.Component {
             if (ans == this.state.userAns) {
                 righCounter++;
                 this.setState({ right: righCounter });
+                this.setState({userAns:''})
+
             } else {
                 wrongCounter++;
                 this.setState({ wrong: wrongCounter });
+                this.setState({userAns:''})
+
             }
 
 
@@ -226,7 +230,7 @@ export default class SquareRootOperation extends React.Component {
                             keyboardType="number-pad"
                             editable={this.state.textInputStatus}
                             onChangeText={(userAns) => this.setState({ userAns })}
-                            value={this.setState.userAns}
+                            value={this.state.userAns}
                         />
                     </View>
 

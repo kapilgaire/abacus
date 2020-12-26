@@ -172,7 +172,7 @@ export default class CubeRootPractiseOperation extends React.Component {
     }
 
     static navigationOptions = {
-        headerTitle: 'Cube Practise',
+        headerTitle: 'Cube Practice',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor

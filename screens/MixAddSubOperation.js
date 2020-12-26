@@ -46,8 +46,10 @@ export default class MixAddSubOperation extends React.Component {
         setTimeout(() => {
 
             this.setState({ showContent: true });
+            this.setState({ NumberHolder: '' });
 
-        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000);
+
+        }, this.params.NumOfSum * this.params.TimeInSeconds * 1000 + 1000);
     }
     generateRandomNumber
         = () => {
@@ -60,19 +62,30 @@ export default class MixAddSubOperation extends React.Component {
 
 
 
-            let from = this.params.EnterFromDigit
-            let to = this.params.EnterToDigit
+            let from = parseInt(this.params.EnterFromDigit)
+            let to = parseInt(this.params.EnterToDigit)
 
-            // console.log('from '+from)
-            // console.log('to '+to)
+            // console.log('from ' + from)
+            // console.log('to ' + to)
 
 
             // let digit = Math.floor(Math.random() * (+to - +from) + +from);
-            
 
-          let digit =Math.floor(Math.random() * (to) + +from);
 
-            // console.log('digitttt '+digit  )
+            // let digit = Math.floor(Math.random() * (to) + +from);
+
+            // let digit = Math.floor(Math.random() * (+to - +from) + +from);
+
+            var digit = Math.floor((Math.random() * to) + from)
+
+            // console.log('digitttt ' + digit)
+
+
+            if (digit > to) {
+                digit = to;
+            }
+
+
 
             if (digit == 1) {
                 min = 1;
@@ -120,51 +133,45 @@ export default class MixAddSubOperation extends React.Component {
 
         num.length = this.params.NumOfSum;
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 0; i < num.length; i++) {
 
 
             num[i] = this.generateRandomNumber();
 
-            let digit = Math.floor(Math.random() * (+this.params.NumOfSum - +1) + +1);
-
-            // console.log('digit '+ digit)
-
-            if (digit == i) {
-
-                num[i] = this.generateRandomNumber() * -1;
-
-            } else {
-
-                num[i] = this.generateRandomNumber();
-
-            }
-
-            console.log(i + ' numbers ' + num[i])
-
-            
 
         }
+
+
+        num.sort((a, b) => b - a)
+
+        // console.log('numbers ' + num)
+
+        for (let i = 0; i < num.length; i++) {
+
+
+
+            // console.log(num[i])
+            if ((i + 1) % 3 == 0) {
+                num[i] = num[i] * (-1)
+            }
+
+
+        }
+
+        // console.log('after numbers ' + num)
+
+
+
 
         this.setState({ genratedNumbers: num })
 
         // console.log('before'+num);
 
-        for (let i = 0; i < this.params.NumOfSum; i++) {
+        for (let i = 0; i < num.length; i++) {
 
-
-            // if(num[i-1] == num[i]) {
-            //     var j = i;
-            //     while(j < num.length && num[j] == num[i]) {
-            //         j++;
-            //     }
-            //     var el = num[j];
-            //     num[j] = num[i];
-            //     num[i] = el;  
-            // }
 
             setTimeout(() => {
 
-                // this.startAnimation()
                 this.setState({ NumberHolder: num[i] });
 
             }, i * this.params.TimeInSeconds * 1000);
@@ -175,34 +182,33 @@ export default class MixAddSubOperation extends React.Component {
 
 
 
-        // console.log('after'+num);
-        
 
-        // this.doSum(num)
     }
 
     doSum = () => {
 
         let sum = 0;
         for (let i = 0; i < this.state.genratedNumbers.length; i++) {
+            // console.log(i)
 
             sum = sum + this.state.genratedNumbers[i];
-            console.log('number' + this.state.genratedNumbers[i])
+            // console.log('number' + this.state.genratedNumbers[i])
 
         }
 
-        this.setState({ answer: sum });
+        if (sum < 0) {
+            sum = -sum
+        }
 
         return sum;
     }
 
     checkAnswer() {
-        //console.log("ans " + this.state.answer);
-        //console.log("user ans" + this.state.userAns);
 
-        this.setState({ NumberHolder: '' });
+        let ans = this.doSum();
 
-        this.doSum();
+        this.setState({ answer: ans });
+
 
         this.dispAnswer();
 
@@ -211,7 +217,7 @@ export default class MixAddSubOperation extends React.Component {
         if (this.state.userAns == '') {
             this.refs.toast.show('Empty', 2000);
 
-        } else if (this.state.answer == this.state.userAns) {
+        } else if (ans == this.state.userAns) {
             this.refs.toast.show('Right', 2000);
 
 
@@ -276,7 +282,7 @@ export default class MixAddSubOperation extends React.Component {
                 <View style={styles.screen}>
 
                     {/* <Animated.View style={animatedStyle} > */}
-                        <Text style={styles.randumNum}>{this.state.NumberHolder}</Text>
+                    <Text style={styles.randumNum}>{this.state.NumberHolder == 0 ? '' : this.state.NumberHolder}</Text>
                     {/* </Animated.View> */}
 
                     {

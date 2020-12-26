@@ -1,9 +1,9 @@
 export default {
-    primaryColor: '#FF5722',
-    accentColor: '#ff6f00',
-    bgColor:'#2196f3',
+    primaryColor: '#65acfc',
+    accentColor: '#65acfc',
+    bgColor:'#5EA3F3',
     whiteColor:'#FFFFFF',
-    btnColor:"#2196f3"
+    btnColor:"#5EA3F3"
 
 
 };

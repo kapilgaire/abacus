@@ -38,7 +38,7 @@ export default class SquareRootParam extends React.Component {
   GoToNextScreen() {
     if (this.state.numOfDigigt == '') {
 
-      this.refs.toast.show('Enter Lenght of Root', 2000);
+      this.refs.toast.show('Enter number of digit', 2000);
     } else if (this.state.numOfSum == '') {
       this.refs.toast.show('Enter Number of Sum', 2000);
 
@@ -69,7 +69,7 @@ export default class SquareRootParam extends React.Component {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Length of square root"
+              placeholder="Number of digit"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
               maxLength={1}

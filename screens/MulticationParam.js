@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard
-} from 'react-native'; import Colors from '../constants/Colors'
+} from 'react-native'; 
+import Colors from '../constants/Colors'
 import Toast, { DURATION } from 'react-native-easy-toast';
 
 export default class MulticationParam extends React.Component {

@@ -105,7 +105,15 @@ export default class PercentageOperation extends React.Component {
             sumCounter++
 
 
-            let ans = (this.state.firstNo / 100 * this.state.secondNo).toFixed(3);
+
+
+            // let ans = (this.state.firstNo / 100 * this.state.secondNo).toFixed(3);
+
+
+            let temp = this.state.firstNo / 100 * this.state.secondNo
+
+            let ans = temp.toString().substring(0, temp.toString().indexOf(".") + 4)
+
 
             // let ans = (this.state.firstNo / 100 * this.state.secondNo);
 
@@ -115,12 +123,12 @@ export default class PercentageOperation extends React.Component {
             if (ans == this.state.userAns) {
                 righCounter++;
                 this.setState({ right: righCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' })
 
             } else {
                 wrongCounter++;
                 this.setState({ wrong: wrongCounter });
-                this.setState({userAns:''})
+                this.setState({ userAns: '' })
 
             }
 
@@ -136,7 +144,7 @@ export default class PercentageOperation extends React.Component {
         }
     }
 
-    disable(){
+    disable() {
         this.setState({ textInputStatus: false });
         this.setState({ restartFlag: true });
 
@@ -262,7 +270,7 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 5,
         marginBottom: 5,
-        marginTop:10
+        marginTop: 10
 
 
     },
@@ -275,8 +283,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 8,
-        borderWidth:3,
-        borderColor:Colors.whiteColor,
+        borderWidth: 3,
+        borderColor: Colors.whiteColor,
 
         marginBottom: 8
     },

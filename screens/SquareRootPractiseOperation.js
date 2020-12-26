@@ -168,7 +168,7 @@ export default class CubeRootPractiseParam extends React.Component {
     }
 
     static navigationOptions = {
-        headerTitle: 'Square Practise',
+        headerTitle: 'Square Practice',
         headerStyle: {
 
             backgroundColor: Colors.primaryColor

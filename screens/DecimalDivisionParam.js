@@ -80,7 +80,7 @@ export default class DecimalDivisionParam extends React.Component {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Enter max answer"
+              placeholder="Enter min answer"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
               maxLength={9}
@@ -91,7 +91,7 @@ export default class DecimalDivisionParam extends React.Component {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Enter min answer"
+              placeholder="Enter max answer"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
               maxLength={9}
@@ -103,7 +103,7 @@ export default class DecimalDivisionParam extends React.Component {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Enter max value to divide by"
+              placeholder="Enter min value to divide by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
               maxLength={9}
@@ -114,7 +114,7 @@ export default class DecimalDivisionParam extends React.Component {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Enter min value to divide by"
+              placeholder="Enter max value to divide by"
               placeholderTextColor="#003f5c"
               keyboardType="number-pad"
               maxLength={9}

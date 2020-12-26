@@ -106,7 +106,10 @@ export default class DecimalDivisionOperation extends React.Component {
             sumCounter++
 
 
-            let ans = (this.state.firstNo / this.state.secondNo).toFixed(2);
+            let temp = this.state.firstNo / this.state.secondNo
+
+            let ans = temp.toString().substring(0, temp.toString().indexOf(".") + 5)
+
 
             this.setState({ prevQues: this.state.firstNo + " ÷ " + this.state.secondNo + "=" + ans })
 
