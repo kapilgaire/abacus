@@ -213,7 +213,7 @@ export default class DecimalMultiplicationOperation extends React.Component {
                         <TextInput
                             placeholder="Enter Your answer"
                             placeholderTextColor="#003f5c"
-                            keyboardType="number-pad"
+                            keyboardType="numeric"
                             editable={this.state.textInputStatus}
                             onChangeText={(userAns) => this.setState({ userAns })}
                             value={this.state.userAns}

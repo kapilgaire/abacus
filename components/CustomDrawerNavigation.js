@@ -108,35 +108,6 @@ export default class CustomDrawerNavigation extends React.Component {
                             onPress={() => {
 
                                 this.props.navigation.navigate({
-                                    routeName: 'NegativeAddSubParam'
-                                });
-                            }}>
-                            <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
-
-                                <Text style={styles.navItemStyle} >Negative Add/Sub</Text>
-                            </View>
-                        </TouchableCmp>
-
-
-                        <TouchableCmp
-                            onPress={() => {
-
-                                this.props.navigation.navigate({
-                                    routeName: 'ReCallNumberParam'
-                                });
-                            }}>
-                            <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
-
-                                <Text style={styles.navItemStyle} >Recall Numbers</Text>
-                            </View>
-                        </TouchableCmp>
-
-                        <TouchableCmp
-                            onPress={() => {
-
-                                this.props.navigation.navigate({
                                     routeName: 'MulticationParam'
                                 });
                             }}>
@@ -176,6 +147,59 @@ export default class CustomDrawerNavigation extends React.Component {
                             </View>
                         </TouchableCmp>
 
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'DecimalDivisionParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/division.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Decimal Division</Text>
+                            </View>
+                        </TouchableCmp>
+
+                        
+                      
+
+                       
+
+                       
+
+                       
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'SquareRootPractiseParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/square_practise.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Square Practise</Text>
+                            </View>
+                        </TouchableCmp>
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'CubeRootPractiseParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/cube_practise.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Cube Practise</Text>
+                            </View>
+                        </TouchableCmp>
+
+
                         <TouchableCmp
                             onPress={() => {
 
@@ -199,40 +223,74 @@ export default class CustomDrawerNavigation extends React.Component {
                                 });
                             }}>
                             <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
+                                <Image source={require('../assets/cube_root.png')} style={styles.categoryImg} />
 
                                 <Text style={styles.navItemStyle} >Cube Root</Text>
                             </View>
                         </TouchableCmp>
 
 
+                      
                         <TouchableCmp
                             onPress={() => {
 
                                 this.props.navigation.navigate({
-                                    routeName: 'SquareRootPractiseParam'
+                                    routeName: 'PercentageParam'
                                 });
                             }}>
                             <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
+                                <Image source={require('../assets/percentage.png')} style={styles.categoryImg} />
 
-                                <Text style={styles.navItemStyle} >Square Practise</Text>
+
+                                <Text style={styles.navItemStyle} >Percentage</Text>
                             </View>
                         </TouchableCmp>
+
 
                         <TouchableCmp
                             onPress={() => {
 
                                 this.props.navigation.navigate({
-                                    routeName: 'CubeRootPractiseParam'
+                                    routeName: 'DecimalMulticationParam'
                                 });
                             }}>
                             <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/square_root.png')} style={styles.categoryImg} />
+                                <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
 
-                                <Text style={styles.navItemStyle} >Square Practise</Text>
+                                <Text style={styles.navItemStyle} >Decimal Multiplication</Text>
                             </View>
                         </TouchableCmp>
+
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'NegativeAddSubParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Negative Add/Sub</Text>
+                            </View>
+                        </TouchableCmp>
+
+
+                        <TouchableCmp
+                            onPress={() => {
+
+                                this.props.navigation.navigate({
+                                    routeName: 'ReCallNumberParam'
+                                });
+                            }}>
+                            <View style={styles.navSectionStyle}>
+                                <Image source={require('../assets/addition_subtraction.png')} style={styles.categoryImg} />
+
+                                <Text style={styles.navItemStyle} >Recall Numbers</Text>
+                            </View>
+                        </TouchableCmp>
+
 
                         <TouchableCmp
                             onPress={() => {
@@ -248,20 +306,6 @@ export default class CustomDrawerNavigation extends React.Component {
                             </View>
                         </TouchableCmp>
 
-                        <TouchableCmp
-                            onPress={() => {
-
-                                this.props.navigation.navigate({
-                                    routeName: 'PercentageParam'
-                                });
-                            }}>
-                            <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/percentage.png')} style={styles.categoryImg} />
-
-
-                                <Text style={styles.navItemStyle} >Percentage</Text>
-                            </View>
-                        </TouchableCmp>
 
 
                         <TouchableCmp
@@ -299,7 +343,7 @@ export default class CustomDrawerNavigation extends React.Component {
 
                             }}>
                             <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/browser.png')} style={styles.categoryImg} />
+                                <Image source={require('../assets/website_link.png')} style={styles.categoryImg} />
 
                                 <Text style={styles.navItemStyle} >Go to website</Text>
                             </View>
@@ -317,7 +361,7 @@ export default class CustomDrawerNavigation extends React.Component {
 
                             }}>
                             <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/share.png')} style={styles.categoryImg} />
+                                <Image source={require('../assets/share_app.png')} style={styles.categoryImg} />
 
                                 <Text style={styles.navItemStyle} >Share</Text>
 
@@ -334,7 +378,7 @@ export default class CustomDrawerNavigation extends React.Component {
                         >
 
                             <View style={styles.navSectionStyle}>
-                                <Image source={require('../assets/share.png')} style={styles.categoryImg} />
+                                <Image source={require('../assets/sheet_generator.png')} style={styles.categoryImg} />
 
                                 <Text style={styles.navItemStyle} >Go to Sheet Generator</Text>
 
@@ -377,6 +421,7 @@ const styles = StyleSheet.create({
     },
     categoryImg: {
         width: 30,
-        height: 30
+        height: 30,
+        borderRadius:30
     },
 });

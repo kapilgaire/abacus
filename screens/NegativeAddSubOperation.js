@@ -135,7 +135,28 @@ export default class NegativeAddSubOperation extends React.Component {
 
 
         }
+
+        if(parseInt(this.params.NumOfSum) %2 ==0){
+
+        
         num.sort((a, b) => a - b)
+
+        console.log('after sort' + num)
+
+        for (let i = 0; i < num.length; i++) {
+
+
+
+            // console.log(num[i])
+            if (i % 2 != 0) {
+                num[i] = num[i] * (-1)
+            }
+
+
+        }
+    }else{
+
+        num.sort((a, b) => b - a)
 
         console.log('after sort' + num)
 
@@ -150,6 +171,7 @@ export default class NegativeAddSubOperation extends React.Component {
 
 
         }
+    }
 
 
         this.setState({ genratedNumbers: num })

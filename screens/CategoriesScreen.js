@@ -363,6 +363,9 @@ const CategoriesScreen = props => {
                 routeName: 'MyCalculator'
               });
 
+              // Linking.openURL('facebook://app')
+
+
             }}
 
           >
@@ -436,6 +439,28 @@ const CategoriesScreen = props => {
           </TouchableCmp>
 
 
+          <TouchableCmp
+
+          >
+            <View style={styles.grid} >
+              <Text style={styles.title}>App Tutorial</Text>
+              <Image source={require('../assets/app_tutorial.png')} style={styles.categoryImg} />
+
+            </View>
+          </TouchableCmp>
+
+
+          <TouchableCmp
+
+          >
+            <View style={styles.grid} >
+              <Text style={styles.title}>Youtube Link</Text>
+              <Image source={require('../assets/youtube_link.png')} style={styles.categoryImg} />
+
+            </View>
+          </TouchableCmp>
+
+
 
 
         </View>
@@ -452,7 +477,7 @@ CategoriesScreen.navigationOptions = navData => {
     title: 'Abacus Champs Academy',
     headerStyle: {
 
-      backgroundColor: Colors.primaryColor
+      backgroundColor: '#6E3515'
     },
     headerTintColor: 'white',
     headerLeft: () =>
@@ -484,8 +509,8 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor:'#ffe2b0',
-    borderWidth:2,
+    borderColor: '#ffe2b0',
+    borderWidth: 2,
     height: 150,
     margin: 5,
     width: width / 2 - 10

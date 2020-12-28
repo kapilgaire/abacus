@@ -254,7 +254,8 @@ export default class DecimalAddOperation extends React.Component {
                                 style={styles.inputText}
                                 placeholder="Enter Your answer"
                                 placeholderTextColor="#003f5c"
-                                keyboardType="number-pad"
+                                keyboardType="numeric"
+                                
                                 onChangeText={(userAns) => this.setState({ userAns })}
                                 value={this.setState.userAns}
                             />
