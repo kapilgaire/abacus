@@ -3,7 +3,7 @@
     "name": "abacus",
     "slug": "abacus",
     "privacy": "public",
-    "sdkVersion": "37.0.0",
+    "sdkVersion": "38.0.0",
     "platforms": [
       "ios",
       "android",
@@ -26,7 +26,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.abacusacademy.abacus"
+      "package": "com.abacuschampsacademy.abacusChamp",
+      "versionCode": 1
     },
     "description": ""
   }

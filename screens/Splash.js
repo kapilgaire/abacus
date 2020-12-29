@@ -38,7 +38,7 @@ const SplashScreen = props => {
                 }
             />
 
-            <Text style={{ fontSize: 20, color: '#000000', textAlign: 'center' }}> 
+            <Text style={{ fontSize: 20, color: '#FFFFFF', textAlign: 'center' }}> 
             ABACUS CHAMPS ACADEMY,
             65 WORLD RECORDS 72 NATIONAL RECORDS
             IN LIMCA BOOK OF RECOREDS (IN DIFFRENT
@@ -56,5 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: Colors.bgColor,
+
     },
 });

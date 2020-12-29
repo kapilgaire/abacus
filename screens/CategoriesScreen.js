@@ -452,6 +452,11 @@ const CategoriesScreen = props => {
 
           <TouchableCmp
 
+            onPress={() => {
+
+              Linking.openURL('https://www.youtube.com/user/abacuschamps')
+
+            }}
           >
             <View style={styles.grid} >
               <Text style={styles.title}>Youtube Link</Text>
