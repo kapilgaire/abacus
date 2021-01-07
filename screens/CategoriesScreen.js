@@ -416,10 +416,10 @@ const CategoriesScreen = props => {
 
               if (Platform.OS === 'android') {
 
-                packageName = 'Check out this awesome app on Play Store & Enhance Your Calculation skill by practising. For more details visit www.abacuschampsacademy.com/. For app '
+                packageName = 'Check out this awesome app on Play Store & Enhance Your Calculation skill by practising. For more details visit www.abacuschampsacademy.com/. For app https://play.google.com/store/apps/details?id='
                   + Constants.manifest.android.package;
               } else {
-                packageName = 'Check out this awesome app on App Store & Enhance Your Calculation skill by practising. For more details visit www.abacuschampsacademy.com/. For app ios';
+                packageName = 'Check out this awesome app on App Store & Enhance Your Calculation skill by practising. For more details visit www.abacuschampsacademy.com/. For app ios'
               }
               Share.share({
 
@@ -440,6 +440,11 @@ const CategoriesScreen = props => {
 
 
           <TouchableCmp
+           onPress={() => {
+
+            Linking.openURL('https://www.youtube.com/watch?v=X9hXwfFk0Jw')
+
+          }}
 
           >
             <View style={styles.grid} >

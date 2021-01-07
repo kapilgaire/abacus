@@ -3,7 +3,7 @@
     "name": "abacus",
     "slug": "abacus",
     "privacy": "public",
-    "sdkVersion": "38.0.0",
+    "sdkVersion": "37.0.0",
     "platforms": [
       "ios",
       "android",
@@ -13,7 +13,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -23,7 +22,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.abacuschampsacademy.abacusChamp",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "package": "com.abacuschampsacademy.abacusChamp",

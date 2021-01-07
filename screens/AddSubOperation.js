@@ -133,7 +133,7 @@ export default class AddSubOperation extends React.Component {
 
         }
 
-        num.sort((a, b) => b - a)
+        // num.sort((a, b) => b - a)
 
         console.log('numbers ' + num)
 
